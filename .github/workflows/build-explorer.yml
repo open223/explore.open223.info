@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-run:
@@ -37,11 +47,12 @@ jobs:
         working-directory: rdf-toolkit/explorer
         run: npx rdf make site
 
-      - name: Commit Built Files
-        run: |
-          cp -r rdf-toolkit/explorer/public html.explorer
-          git config user.name "GitHub Action"
-          git config user.email "github-action@example.com"
-          git add html.explorer
-          git commit -m "Commit built files"
-          git push
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'html.explorer/'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
