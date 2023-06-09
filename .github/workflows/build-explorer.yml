@@ -32,8 +32,9 @@ jobs:
         run: cp ontologies/*.ttl rdf-toolkit/explorer/vocab
 
       - name: Build site
-        working-directory: explorer
+        working-directory: rdf-toolkit/explorer
         run: npx rdf make site
+
       - name: Commit Built Files
         run: |
           cp -r rdf-toolkit/explorer/public html.explorer
