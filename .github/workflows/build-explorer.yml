@@ -45,7 +45,9 @@ jobs:
 
       - name: Build site
         working-directory: rdf-toolkit/explorer
-        run: npx rdf make site
+        run: |
+          npx rdf add file "http://data.ashrae.org/standard223#" vocab/223p.ttl
+          npx rdf make site
 
       - name: Commit Built Files
         run: |
