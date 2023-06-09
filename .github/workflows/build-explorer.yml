@@ -51,12 +51,12 @@ jobs:
 
       - name: Commit Built Files
         run: |
-          cp -r rdf-toolkit/explorer/public html.explorer
+          rm -rf html.explorer
+          mv rdf-toolkit/explorer/public html.explorer
           git config user.name "GitHub Action"
           git config user.email "github-action@example.com"
           git add html.explorer
-          git commit -m "Commit built files"
-          git push
+          git diff --quiet --exit-code || git commit -m "Commit built files" && git push
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
