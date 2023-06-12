@@ -47,6 +47,7 @@ jobs:
         working-directory: rdf-toolkit/explorer
         run: |
           npx rdf add file "http://data.ashrae.org/standard223#" vocab/223p.ttl
+          npx rdf add file "https://brickschema.org/schema/Brick#" vocab/Brick.ttl
           npx rdf make site
 
       - name: Commit Built Files
