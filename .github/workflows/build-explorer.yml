@@ -48,6 +48,10 @@ jobs:
         run: |
           npx rdf add file "http://data.ashrae.org/standard223#" vocab/223p.ttl
           npx rdf add file "https://brickschema.org/schema/Brick#" vocab/Brick.ttl
+          npx rdf add file "http://qudt.org/2.1/schema/shacl/qudt" vocab/SCHEMA_QUDT_NoOWL-v2.1.ttl
+          npx rdf add file "http://qudt.org/2.1/vocab/unit" vocab/VOCAB_QUDT-UNITS-ALL-v2.1.ttl
+          npx rdf add file "http://qudt.org/2.1/vocab/quantitykind" vocab/VOCAB_QUDT-QUANTITY-KINDS-ALL-v2.1.ttl
+          npx rdf add file "http://www.w3.org/ns/shacl#" vocab/shacl.ttl
           npx rdf make site
 
       - name: Commit Built Files
