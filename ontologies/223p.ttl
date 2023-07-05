@@ -549,12 +549,12 @@ s223:Actuator a s223:Class,
     rdfs:label "Actuator" ;
     rdfs:comment "A device, either electrically, pneumatically, or hydraulically operated, that acts as a motor to change the position of movable devices such as valves or dampers." ;
     rdfs:subClassOf s223:Equipment ;
-    sh:property [ sh:class s223:Equipment ;
-            sh:path s223:actuates ],
-        [ rdfs:comment "An instance of Actuator must be associated with at least 1 actuatable property instance using the relation 'commanded by Property'." ;
+    sh:property [ rdfs:comment "An instance of Actuator must be associated with at least 1 actuatable property instance using the relation 'commanded by Property'." ;
             sh:class s223:ActuatableProperty ;
             sh:minCount 1 ;
-            sh:path s223:commandedByProperty ] .
+            sh:path s223:commandedByProperty ],
+        [ sh:class s223:Equipment ;
+            sh:path s223:actuates ] .
 
 s223:AirFilter a s223:Class,
         sh:NodeShape ;
@@ -1628,34 +1628,40 @@ s223:OccupantCounter a s223:Class,
         sh:NodeShape ;
     rdfs:label "Occupant counter" ;
     rdfs:subClassOf s223:OccupancySensor ;
-    sh:property [ rdfs:comment "A OccupantCounter will always observe a Property that has a QuantityKind of Population." ;
-            sh:path s223:observes ;
-            sh:qualifiedMinCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:Property ;
-                    sh:node [ sh:property [ sh:hasValue quantitykind:Population ;
-                                    sh:path qudt:hasQuantityKind ] ] ] ] .
+    sh:property [ rdfs:comment "A OccupantCounter will always observe a QuantifiableObservableProperty that has a QuantityKind of Population and a Unit of unit:NUM." ;
+            sh:class s223:QuantifiableObservableProperty ;
+            sh:minCount 1 ;
+            sh:node [ sh:property [ sh:hasValue quantitykind:Population ;
+                            sh:maxCount 1 ;
+                            sh:path qudt:hasQuantityKind ],
+                        [ sh:hasValue unit:NUM ;
+                            sh:maxCount 1 ;
+                            sh:path qudt:hasUnit ] ] ;
+            sh:path s223:observes ] .
 
 s223:OccupantMotionSensor a s223:Class,
         sh:NodeShape ;
     rdfs:label "Occupant motion sensor" ;
     rdfs:subClassOf s223:OccupancySensor ;
-    sh:property [ rdfs:comment "A OccupantMotionSensor will always observe a Property that has an EnumerationKind of Occupancy-Motion." ;
-            sh:path s223:observes ;
-            sh:qualifiedMinCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:Property ;
-                    sh:node [ sh:property [ sh:hasValue s223:Occupancy-Motion ;
-                                    sh:path s223:hasEnumerationKind ] ] ] ] .
+    sh:property [ rdfs:comment "A OccupantMotionSensor will always observe an EnumeratedObservableProperty that has an EnumerationKind of Occupancy-Motion." ;
+            sh:class s223:EnumeratedObservableProperty ;
+            sh:minCount 1 ;
+            sh:node [ sh:property [ sh:class s223:Occupancy-Motion ;
+                            sh:maxCount 1 ;
+                            sh:path s223:hasEnumerationKind ] ] ;
+            sh:path s223:observes ] .
 
 s223:OccupantPresenceSensor a s223:Class,
         sh:NodeShape ;
     rdfs:label "Occupant presence sensor" ;
     rdfs:subClassOf s223:OccupancySensor ;
-    sh:property [ rdfs:comment "A OccupantPresenceSensor will always observe a Property that has an EnumerationKind of Occupancy-Presence." ;
-            sh:path s223:observes ;
-            sh:qualifiedMinCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:Property ;
-                    sh:node [ sh:property [ sh:hasValue s223:Occupancy-Presence ;
-                                    sh:path s223:hasEnumerationKind ] ] ] ] .
+    sh:property [ rdfs:comment "A OccupantPresenceSensor will always observe an EnumeratedObservableProperty that has an EnumerationKind of Occupancy-Presence." ;
+            sh:class s223:EnumeratedObservableProperty ;
+            sh:minCount 1 ;
+            sh:node [ sh:property [ sh:class s223:Occupancy-Presence ;
+                            sh:maxCount 1 ;
+                            sh:path s223:hasEnumerationKind ] ] ;
+            sh:path s223:observes ] .
 
 s223:OnOff-Off a s223:EnumerationKind-OnOff ;
     rdfs:label "Off" .
@@ -2136,21 +2142,9 @@ $scp  ^s223:systemConnected+/s223:systemConnected+ ?others .
 GROUP BY $scp
   """ .
 
-s223:hasFrequency a rdf:Property ;
-    rdfs:label "has frequency" ;
-    rdfs:comment "The relation hasFrequency is used to identify the frequency of an AC electricity enumeration kind. " .
-
-s223:hasNumberOfElectricalPhases a rdf:Property ;
-    rdfs:label "has number of electrical phases" ;
-    rdfs:comment "The relation hasNumberOfElectricalPhases is used to identify the number of electrical phases in an AC electricity enumeration kind. " .
-
 s223:hasTemperature a rdf:Property ;
     rdfs:label "hasTemperature" ;
     rdfs:subPropertyOf s223:hasProperty .
-
-s223:hasVoltage a rdf:Property ;
-    rdfs:label "hasVoltage" ;
-    rdfs:comment "The relation hasVoltage is used to identify the voltage of an electricity enumeration kind. " .
 
 s223:inverseOf a rdf:Property ;
     rdfs:label "inverse of" .
@@ -2290,9 +2284,7 @@ g36:VAV_4-2 a s223:Class,
 For access to magic properties and other SPIN functions - http://data.ashraw.org/standard223/1.0/function/spin.  
 For validation of the schema, model, or data - http://data.ashrae.org/standard223/1.0/validation/schema (or model or data).  
 For inferred properties - http://data.ashrae.org/standard223/1.0/inference/model-rules (and/or schema-rules, data-rules)""" ;
-    owl:imports <http://data.ashrae.org/standard223/1.0/extension/equipments>,
-        <http://data.ashrae.org/standard223/1.0/extension/equipments-extensions-rules>,
-        <http://data.ashrae.org/standard223/1.0/extension/g36>,
+    owl:imports <http://data.ashrae.org/standard223/1.0/extension/g36>,
         <http://data.ashrae.org/standard223/1.0/inference/data-rules>,
         <http://data.ashrae.org/standard223/1.0/inference/model-rules>,
         <http://data.ashrae.org/standard223/1.0/inference/owl-subset>,
@@ -2375,16 +2367,16 @@ s223:FunctionOutput a s223:Class,
     rdfs:label "Output" ;
     rdfs:comment "A Function Output is an output from a Function Block and represents the action the function block has on the value its Function Input propert(ies). It is related to a property by s223:produces." ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ sh:class s223:FunctionBlock ;
-            sh:maxCount 1 ;
-            sh:message "This Output must be associated with exactly one FunctionBlock." ;
-            sh:minCount 1 ;
-            sh:path [ sh:inversePath s223:hasOutput ] ],
-        [ rdfs:comment "An instance of Output must be associated with any number of Property instances using the relation 'produces'." ;
+    sh:property [ rdfs:comment "An instance of Output must be associated with any number of Property instances using the relation 'produces'." ;
             sh:class s223:Property ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path s223:produces ] .
+            sh:path s223:produces ],
+        [ sh:class s223:FunctionBlock ;
+            sh:maxCount 1 ;
+            sh:message "This Output must be associated with exactly one FunctionBlock." ;
+            sh:minCount 1 ;
+            sh:path [ sh:inversePath s223:hasOutput ] ] .
 
 s223:HeatExchanger a s223:Class,
         sh:NodeShape ;
@@ -2670,12 +2662,20 @@ s223:hasConstant a rdf:Property ;
 s223:hasDeadband a rdf:Property ;
     rdfs:label "has deadband" .
 
+s223:hasFrequency a rdf:Property ;
+    rdfs:label "has frequency" ;
+    rdfs:comment "The relation hasFrequency is used to identify the frequency of an AC electricity enumeration kind. " .
+
 s223:hasMeasurementResolution a rdf:Property ;
     rdfs:label "has measurement resolution" ;
     rdfs:comment "The hasMeasurementResolution relation is used to link to a numerical property whose value indicates the smallest recognizable change in engineering units that the sensor can indicate. " .
 
 s223:hasMember a rdf:Property ;
     rdfs:label "has member" .
+
+s223:hasNumberOfElectricalPhases a rdf:Property ;
+    rdfs:label "has number of electrical phases" ;
+    rdfs:comment "The relation hasNumberOfElectricalPhases is used to identify the number of electrical phases in an AC electricity enumeration kind. " .
 
 s223:hasPhase a rdf:Property ;
     rdfs:label "has phase" ;
@@ -2688,6 +2688,10 @@ s223:hasPhysicalLocation a rdf:Property ;
 s223:hasSetpoint a rdf:Property ;
     rdfs:label "has setpoint" ;
     rdfs:comment "This relation binds a control setpoint to the quantifiable property indicating the desired value which the control process is trying to maintain." .
+
+s223:hasVoltage a rdf:Property ;
+    rdfs:label "hasVoltage" ;
+    rdfs:comment "The relation hasVoltage is used to identify the voltage of an electricity enumeration kind. " .
 
 s223:ofMedium a rdf:Property ;
     rdfs:label "of medium" .
@@ -2959,13 +2963,6 @@ $this s223:hasEnumerationKind ?kind .
 FILTER (NOT EXISTS {?value a/rdfs:subClassOf* ?kind}) .
 }
 """ ] ] .
-
-s223:EnumeratedObservableProperty a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Enumerated observable property" ;
-    rdfs:comment "An EnumeratedActuatableProperty is a property with an enumerated (fixed) set of possible values that can only be observed (not changed)" ;
-    rdfs:subClassOf s223:EnumerableProperty,
-        s223:ObservableProperty .
 
 s223:Fan a s223:Class,
         sh:NodeShape ;
@@ -3265,18 +3262,6 @@ s223:DayOfWeek-Weekend a s223:Class,
     rdfs:comment "This class defines the EnumerationKind values of Saturday and Sunday" ;
     rdfs:subClassOf s223:Attribute-DayOfWeek .
 
-s223:Dimensioned-Frequency a s223:Class,
-        s223:Dimensioned-Frequency,
-        sh:NodeShape ;
-    rdfs:label "Dimensioned Frequency" ;
-    rdfs:subClassOf s223:Context-Dimensioned .
-
-s223:Dimensionless-NumberOfElectricalPhases a s223:Class,
-        s223:Dimensionless-NumberOfElectricalPhases,
-        sh:NodeShape ;
-    rdfs:label "Dimensionless Number of Electrical Phases" ;
-    rdfs:subClassOf s223:Context-Dimensionless .
-
 s223:LightSensor a s223:Class,
         sh:NodeShape ;
     rdfs:label "Light sensor" ;
@@ -3350,13 +3335,6 @@ s223:OccupancySensor a s223:Class,
     rdfs:label "Occupancy sensor" ;
     rdfs:comment "An OccuppancySensor is a specialization of a Sensor that observes a Property that represents measurement of occupancy in a space." ;
     rdfs:subClassOf s223:Sensor .
-
-s223:QuantifiableObservableProperty a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Quantifiable Observable Property" ;
-    rdfs:comment "This class is for quantifiable properties of which numerical values cannot be modified by a user or a machine outside of the model, but only observed, like a temperature reading or a voltage measure." ;
-    rdfs:subClassOf s223:ObservableProperty,
-        s223:QuantifiableProperty .
 
 s223:Signal-Modulated a s223:Class,
         s223:Signal-Modulated,
@@ -3447,13 +3425,18 @@ g36:Zone a s223:Class,
     rdfs:subClassOf s223:Zone ;
     sh:node g36:ZoneRule .
 
-qudt:hasUnit rdfs:comment "A reference to the unit of measure of a QuantifiableProperty of interest." .
-
 s223:ActuatableProperty a s223:Class,
         sh:NodeShape ;
     rdfs:label "Actuatable Property" ;
     rdfs:comment "This class describes non-numeric properties of which real-time value can be modified by a user or a machine outside of the model." ;
     rdfs:subClassOf s223:Property .
+
+s223:EnumeratedObservableProperty a s223:Class,
+        sh:NodeShape ;
+    rdfs:label "Enumerated observable property" ;
+    rdfs:comment "An EnumeratedActuatableProperty is a property with an enumerated (fixed) set of possible values that can only be observed (not changed)" ;
+    rdfs:subClassOf s223:EnumerableProperty,
+        s223:ObservableProperty .
 
 s223:EnumerationKind-Binary a s223:Class,
         s223:EnumerationKind-Binary,
@@ -3499,15 +3482,16 @@ s223:FunctionBlock a s223:Class,
     rdfs:label "Function block" ;
     rdfs:comment "A FunctionBlock is used to model transfer and/or transformation of information (i.e. Property). It has relations to input properties and output properties. The actual algorithms that perform the transformations are described in CDL and are out of scope of the 223 standard." ;
     rdfs:subClassOf s223:Concept ;
+    sh:or ( [ sh:property [ rdfs:comment "An instance of Function block can be associated with any number of Input instances using the relation 'has function input'." ;
+                        sh:class s223:FunctionInput ;
+                        sh:minCount 1 ;
+                        sh:path s223:hasInput ] ] [ sh:property [ rdfs:comment "An instance of Function block can be associated with any number of Output instances using the relation 'has function output'." ;
+                        sh:class s223:FunctionOutput ;
+                        sh:minCount 1 ;
+                        sh:path s223:hasOutput ] ] ) ;
     sh:property [ rdfs:comment "An instance of Function block can be associated with any number of Constant instances using the relation 'has constant'." ;
             sh:class s223:Constant ;
             sh:path s223:hasConstant ],
-        [ rdfs:comment "An instance of Function block can be associated with any number of Input instances using the relation 'has function input'." ;
-            sh:class s223:FunctionInput ;
-            sh:path s223:hasInput ],
-        [ rdfs:comment "An instance of Function block can be associated with any number of Output instances using the relation 'has function output'." ;
-            sh:class s223:FunctionOutput ;
-            sh:path s223:hasOutput ],
         [ rdfs:comment "An instance of Function block can be associated with any number of Parameter instances using the relation 'has parameter'." ;
             sh:class s223:Parameter ;
             sh:path s223:hasParameter ] .
@@ -3588,6 +3572,13 @@ s223:Occupancy-Presence a s223:Class,
         sh:NodeShape ;
     rdfs:label "Occupancy Presence" ;
     rdfs:subClassOf s223:EnumerationKind-Occupancy .
+
+s223:QuantifiableObservableProperty a s223:Class,
+        sh:NodeShape ;
+    rdfs:label "Quantifiable Observable Property" ;
+    rdfs:comment "This class is for quantifiable properties of which numerical values cannot be modified by a user or a machine outside of the model, but only observed, like a temperature reading or a voltage measure." ;
+    rdfs:subClassOf s223:ObservableProperty,
+        s223:QuantifiableProperty .
 
 s223:Role-Cooling a s223:EnumerationKind-Role ;
     rdfs:label "Role-Cooling" .
@@ -3690,6 +3681,20 @@ g36:VAV a s223:Class,
     rdfs:label "VAV" ;
     rdfs:subClassOf s223:SingleDuctTerminal ;
     sh:node g36:VAVRule .
+
+qudt:hasUnit rdfs:comment "A reference to the unit of measure of a QuantifiableProperty of interest." .
+
+s223:Dimensioned-Frequency a s223:Class,
+        s223:Dimensioned-Frequency,
+        sh:NodeShape ;
+    rdfs:label "Dimensioned Frequency" ;
+    rdfs:subClassOf s223:Context-Dimensioned .
+
+s223:Dimensionless-NumberOfElectricalPhases a s223:Class,
+        s223:Dimensionless-NumberOfElectricalPhases,
+        sh:NodeShape ;
+    rdfs:label "Dimensionless Number of Electrical Phases" ;
+    rdfs:subClassOf s223:Context-Dimensionless .
 
 s223:EnumerationKind-ThreeSpeedSetting a s223:Class,
         s223:EnumerationKind-ThreeSpeedSetting,
@@ -4191,6 +4196,57 @@ s223:EnumerationKind-Domain a s223:Class,
     rdfs:label "EnumerationKind Domain" ;
     rdfs:subClassOf s223:EnumerationKind .
 
+s223:Property a s223:Class,
+        sh:NodeShape ;
+    rdfs:label "Property" ;
+    rdfs:comment """An attribute, quality, or characteristic of a feature of interest.
+
+The Property class is the parent of all variations of a property, which are:
+ActuatableProperty - parent of subclass of properties that can be modified by user or machine outside of the model (typically command)
+ObservableProperty - parent of subclass of properties that can not be modified by user or machine outside of the model (typically measures)
+EnumerableProperty - parent of subclass of properties defined by EnumerationKind
+QuantifiableProperty - parent of subclass of properties defined by numerical values
+
+And their different associations :
+QuantifiableActuatableProperty
+QuantifiableObservableProperty
+EnumeratedObservableProperty
+EnumeratedActuatableProperty
+
+A QuantifiableProperty (or subClass thereof) must always be associated with a Unit and a QuantityKind, either explicitly from the Property, or through the associated Value. If the Unit is defined, the SHACL reasoner (if invoked) will figure out and assert the QuantityKind (the most general version).
+
+Enumerable properties must be associated with an EnumerationKind.
+""" ;
+    rdfs:subClassOf s223:Concept ;
+    sh:property [ rdfs:comment "A Property can be associated with any number of EnumerationKinds using the relation hasAspect" ;
+            sh:class s223:EnumerationKind ;
+            sh:path s223:hasAspect ],
+        [ rdfs:comment "A Property can use at most one relation hasValue if it is required to provide a static value in the model. It is not meant for real-time value (see ref:hasExternalReference)" ;
+            sh:maxCount 1 ;
+            sh:path s223:hasValue ],
+        [ rdfs:comment "A Property can be associated with at most one EnumerationKind-Medium using the relation ofMedium" ;
+            sh:class s223:EnumerationKind-Medium ;
+            sh:maxCount 1 ;
+            sh:path s223:ofMedium ],
+        [ rdfs:comment "A Property can be associated with at most one EnumerationKind-Substance using the relation ofSubstance" ;
+            sh:class s223:EnumerationKind-Substance ;
+            sh:maxCount 1 ;
+            sh:path s223:ofSubstance ],
+        [ rdfs:comment "A Property can be associated with any number of ExternalReferences using the relation hasExternalReference" ;
+            sh:class ref:ExternalReference ;
+            sh:path ref:hasExternalReference ] ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            rdfs:comment "A Property instance cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
+            sh:message "{$this} cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
+            sh:prefixes s223: ;
+            sh:select """
+SELECT $this
+WHERE {
+$this a/rdfs:subClassOf* s223:ActuatableProperty .
+$this a/rdfs:subClassOf* s223:ObservableProperty .
+}
+""" ] .
+
 s223:Sensor a s223:Class,
         sh:NodeShape ;
     rdfs:label "Sensor" ;
@@ -4245,57 +4301,6 @@ s223:hasRole a rdf:Property ;
 s223:observes a rdf:Property ;
     rdfs:label "observes" ;
     rdfs:comment "The relation observes binds a sensor to one `s223:ObservableProperty` which is used by the sensor to generate a measurement value (ex. a temperature) or a simple observation of a stimulus causing a reaction (a current binary switch that closes a dry contact when a fan is powered on)." .
-
-s223:Property a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Property" ;
-    rdfs:comment """An attribute, quality, or characteristic of a feature of interest.
-
-The Property class is the parent of all variations of a property, which are:
-ActuatableProperty - parent of subclass of properties that can be modified by user or machine outside of the model (typically command)
-ObservableProperty - parent of subclass of properties that can not be modified by user or machine outside of the model (typically measures)
-EnumerableProperty - parent of subclass of properties defined by EnumerationKind
-QuantifiableProperty - parent of subclass of properties defined by numerical values
-
-And their different associations :
-QuantifiableActuatableProperty
-QuantifiableObservableProperty
-EnumeratedObservableProperty
-EnumeratedActuatableProperty
-
-A QuantifiableProperty (or subClass thereof) must always be associated with a Unit and a QuantityKind, either explicitly from the Property, or through the associated Value. If the Unit is defined, the SHACL reasoner (if invoked) will figure out and assert the QuantityKind (the most general version).
-
-Enumerable properties must be associated with an EnumerationKind.
-""" ;
-    rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A Property can be associated with any number of EnumerationKinds using the relation hasAspect" ;
-            sh:class s223:EnumerationKind ;
-            sh:path s223:hasAspect ],
-        [ rdfs:comment "A Property can use at most one relation hasValue if it is required to provide a static value in the model. It is not meant for real-time value (see ref:hasExternalReference)" ;
-            sh:maxCount 1 ;
-            sh:path s223:hasValue ],
-        [ rdfs:comment "A Property can be associated with at most one EnumerationKind-Medium using the relation ofMedium" ;
-            sh:class s223:EnumerationKind-Medium ;
-            sh:maxCount 1 ;
-            sh:path s223:ofMedium ],
-        [ rdfs:comment "A Property can be associated with at most one EnumerationKind-Substance using the relation ofSubstance" ;
-            sh:class s223:EnumerationKind-Substance ;
-            sh:maxCount 1 ;
-            sh:path s223:ofSubstance ],
-        [ rdfs:comment "A Property can be associated with any number of ExternalReferences using the relation hasExternalReference" ;
-            sh:class ref:ExternalReference ;
-            sh:path ref:hasExternalReference ] ;
-    sh:sparql [ a sh:SPARQLConstraint ;
-            rdfs:comment "A Property instance cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
-            sh:message "{$this} cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
-            sh:prefixes s223: ;
-            sh:select """
-SELECT $this
-WHERE {
-$this a/rdfs:subClassOf* s223:ActuatableProperty .
-$this a/rdfs:subClassOf* s223:ObservableProperty .
-}
-""" ] .
 
 s223:Concept a s223:Class,
         sh:NodeShape ;
@@ -4398,32 +4403,19 @@ s223:Dimensioned-Voltage a s223:Class,
 s223:NumberOfElectricalPhases-ThreePhase a s223:Dimensionless-NumberOfElectricalPhases ;
     rdfs:label "Three Phase AC Electricity" .
 
-s223:Dimensioned-LineNeutralVoltage a s223:Class,
-        s223:Context-Dimensioned,
-        s223:Dimensioned-LineNeutralVoltage,
-        sh:NodeShape ;
-    rdfs:label "Dimensioned Line-Neutral Voltage",
-        "Dimensioned-Line Neutral Voltage" ;
-    rdfs:comment "The value of the associated Property identifies the Line-to-neutral voltage of the medium" ;
-    rdfs:subClassOf s223:Context-Dimensioned .
-
 s223: a owl:Ontology ;
     sh:declare [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
         [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
             sh:prefix "rdfs" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
         [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
             sh:prefix "qudt" ],
         [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
             sh:prefix "quantitykind" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
         [ sh:namespace "http://data.ashrae.org/standard223/1.0/vocab/role#"^^xsd:anyURI ;
@@ -4432,6 +4424,12 @@ s223: a owl:Ontology ;
             sh:prefix "qudtqk" ],
         [ sh:namespace "http://qudt.org/vocab/unit/"^^xsd:anyURI ;
             sh:prefix "unit" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
         [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
             sh:prefix "rdfs" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
@@ -4447,9 +4445,16 @@ s223: a owl:Ontology ;
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
         [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ] .
+            sh:prefix "rdfs" ] .
+
+s223:Dimensioned-LineNeutralVoltage a s223:Class,
+        s223:Context-Dimensioned,
+        s223:Dimensioned-LineNeutralVoltage,
+        sh:NodeShape ;
+    rdfs:label "Dimensioned Line-Neutral Voltage",
+        "Dimensioned-Line Neutral Voltage" ;
+    rdfs:comment "The value of the associated Property identifies the Line-to-neutral voltage of the medium" ;
+    rdfs:subClassOf s223:Context-Dimensioned .
 
 s223:InletConnectionPoint a s223:Class,
         sh:NodeShape ;
@@ -4756,7 +4761,22 @@ s223:Electricity-AC a s223:Class,
         s223:Electricity-AC,
         sh:NodeShape ;
     rdfs:label "Electricity AC" ;
-    rdfs:subClassOf s223:Medium-Electricity .
+    s223:hasFrequency s223:Dimensioned-Frequency ;
+    s223:hasNumberOfElectricalPhases s223:Dimensionless-NumberOfElectricalPhases ;
+    s223:hasVoltage s223:Dimensioned-Voltage ;
+    rdfs:subClassOf s223:Medium-Electricity ;
+    sh:property [ rdfs:comment "An electricity AC medium must have a frequency" ;
+            sh:class s223:Dimensioned-Frequency ;
+            sh:minCount 1 ;
+            sh:path s223:hasFrequency ],
+        [ rdfs:comment "An electricity AC medium must have a number of electrical phases." ;
+            sh:class s223:Dimensionless-NumberOfElectricalPhases ;
+            sh:minCount 1 ;
+            sh:path s223:hasNumberOfElectricalPhases ],
+        [ rdfs:comment "An electricity AC medium must have a voltage." ;
+            sh:minCount 1 ;
+            sh:or ( [ sh:class s223:Dimensioned-LineLineVoltage ] [ sh:class s223:Dimensioned-LineNeutralVoltage ] [ sh:class s223:Dimensioned-Voltage ] ) ;
+            sh:path s223:hasVoltage ] .
 
 s223:hasConnectionPoint a rdf:Property ;
     rdfs:label "has connection point" ;
