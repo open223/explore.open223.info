@@ -27501,37 +27501,36 @@ s223:HeatExchanger a s223:Class,
             sh:class s223:EnumerationKind-Role ;
             sh:path s223:hasRole ],
         [ rdfs:comment "Heat Exchangers should have the same number of non-electrical inlet and outlet connection points." ;
-            sh:path s223:contains ;
+            sh:path s223:hasConnectionPoint ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     sh:message "Number of inlets {?incount} are not equivalent with number of outlets {?outcount}." ;
                     sh:prefixes s223: ;
                     sh:select """
-SELECT DISTINCT ?s ?incount ?outcount
+SELECT DISTINCT $this ?incount ?outcount
 WHERE {
 {
-SELECT ?s (COUNT (?cpin) AS ?incount)
+SELECT $this (COUNT (?cpin) AS ?incount)
 WHERE {
 ?cpin a/rdfs:subClassOf* s223:InletConnectionPoint .
-?s s223:hasConnectionPoint ?cpin .
+$this s223:hasConnectionPoint ?cpin .
 ?cpin s223:hasMedium ?inmedium .
 FILTER NOT EXISTS {
     ?inmedium a/rdfs:subClassOf* s223:Medium-Electricity .
   }
 }
-GROUP BY ?s
+GROUP BY $this
 }
 {
-SELECT ?s (COUNT (?cpout) AS ?outcount)
+SELECT $this (COUNT (?cpout) AS ?outcount)
 WHERE {
 ?cpout a/rdfs:subClassOf* s223:OutletConnectionPoint .
-?s s223:hasConnectionPoint ?cpout .
+$this s223:hasConnectionPoint ?cpout .
 ?cpout s223:hasMedium ?outmedium .
 FILTER NOT EXISTS {
-    ?medium a/rdfs:subClassOf* s223:Medium-Electricity .
+    ?outmedium a/rdfs:subClassOf* s223:Medium-Electricity .
   }
 }
-}
-GROUP BY ?s
+GROUP BY $this
 }
 FILTER (?incount != ?outcount)
 }
@@ -36145,12 +36144,7 @@ s223:EnumerableProperty a s223:Class,
         sh:NodeShape ;
     rdfs:label "Enumerable Property" ;
     rdfs:subClassOf s223:Property ;
-    sh:property [ rdfs:comment "An EnumerableProperty must be associated with one EnumerationKind using the relation hasEnumerationKind" ;
-            sh:class s223:EnumerationKind ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasEnumerationKind ],
-        [ rdfs:comment "Checks for valid enumeration value" ;
+    sh:property [ rdfs:comment "Checks for valid enumeration value" ;
             sh:path s223:hasValue ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     sh:message "{$this} has an enumeration value of {?value} which is not a valid {?kind}." ;
@@ -36162,7 +36156,12 @@ $this s223:hasValue ?value .
 $this s223:hasEnumerationKind ?kind .
 FILTER (NOT EXISTS {?value a/rdfs:subClassOf* ?kind}) .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "An EnumerableProperty must be associated with one EnumerationKind using the relation hasEnumerationKind" ;
+            sh:class s223:EnumerationKind ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasEnumerationKind ] .
 
 s223:Filter a s223:Class,
         sh:NodeShape ;
@@ -44922,6 +44921,27 @@ ref:BACnetReference a owl:Class,
     skos:definition "A reference to the BACnet object represented by this entity." ;
     sh:or ( [ sh:property [ a sh:PropertyShape ;
                         sh:datatype xsd:string ;
+                        sh:minLength 1 ;
+                        sh:path bacnet:object-name ],
+                    [ a sh:PropertyShape ;
+                        sh:datatype xsd:string ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:object-identifier ],
+                    [ a sh:PropertyShape ;
+                        sh:datatype xsd:string ;
+                        sh:defaultValue "present-value" ;
+                        sh:path ref:read-property ],
+                    [ a sh:PropertyShape ;
+                        sh:datatype xsd:string ;
+                        sh:path bacnet:object-type ],
+                    [ a sh:PropertyShape ;
+                        sh:datatype xsd:string ;
+                        sh:path bacnet:description ] ] [ sh:property [ a sh:PropertyShape ;
+                        skos:definition "Clause Q.8 BACnet URI scheme: bacnet:// <device> / <object> [ / <property> [ / <index> ]]" ;
+                        sh:datatype xsd:string ;
+                        sh:path ref:BACnetURI ] ] ),
+        ( [ sh:property [ a sh:PropertyShape ;
+                        sh:datatype xsd:string ;
                         sh:path bacnet:object-type ],
                     [ a sh:PropertyShape ;
                         sh:datatype xsd:string ;
@@ -44943,27 +44963,6 @@ ref:BACnetReference a owl:Class,
                         sh:datatype bacnet:Property ;
                         sh:defaultValue bacnet:Present_Value ;
                         sh:path ref:bacnet-read-property ] ] [ sh:property [ a sh:PropertyShape ;
-                        skos:definition "Clause Q.8 BACnet URI scheme: bacnet:// <device> / <object> [ / <property> [ / <index> ]]" ;
-                        sh:datatype xsd:string ;
-                        sh:path ref:BACnetURI ] ] ),
-        ( [ sh:property [ a sh:PropertyShape ;
-                        sh:datatype xsd:string ;
-                        sh:minLength 1 ;
-                        sh:path bacnet:object-name ],
-                    [ a sh:PropertyShape ;
-                        sh:datatype xsd:string ;
-                        sh:minCount 1 ;
-                        sh:path bacnet:object-identifier ],
-                    [ a sh:PropertyShape ;
-                        sh:datatype xsd:string ;
-                        sh:defaultValue "present-value" ;
-                        sh:path ref:read-property ],
-                    [ a sh:PropertyShape ;
-                        sh:datatype xsd:string ;
-                        sh:path bacnet:object-type ],
-                    [ a sh:PropertyShape ;
-                        sh:datatype xsd:string ;
-                        sh:path bacnet:description ] ] [ sh:property [ a sh:PropertyShape ;
                         skos:definition "Clause Q.8 BACnet URI scheme: bacnet:// <device> / <object> [ / <property> [ / <index> ]]" ;
                         sh:datatype xsd:string ;
                         sh:path ref:BACnetURI ] ] ) ;
@@ -45301,16 +45300,16 @@ s223:DomainSpace a s223:Class,
     rdfs:label "Domain Space" ;
     rdfs:comment "A DomainSpace is a member (or component) of a Zone and is associated with a Domain such as Lighting, HVAC, PhysicalSecurity, etc. Physical spaces enclose Domain spaces." ;
     rdfs:subClassOf s223:Connectable ;
-    sh:property [ rdfs:comment "A DomainSpace must be associated with one EnumerationKind-Domain using the relation hasDomain" ;
-            sh:class s223:EnumerationKind-Domain ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomain ],
-        [ rdfs:comment "This DomainSpace must eventually be enclosed by a PhysicalSpace." ;
+    sh:property [ rdfs:comment "This DomainSpace must eventually be enclosed by a PhysicalSpace." ;
             sh:message "This DomainSpace must eventually be enclosed by a PhysicalSpace." ;
             sh:minCount 1 ;
             sh:path [ sh:inversePath s223:encloses ] ;
-            sh:severity sh:Info ] .
+            sh:severity sh:Info ],
+        [ rdfs:comment "A DomainSpace must be associated with one EnumerationKind-Domain using the relation hasDomain" ;
+            sh:class s223:EnumerationKind-Domain ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomain ] .
 
 s223:EnumerationKind-ThreeSpeedSetting a s223:Class,
         s223:EnumerationKind-ThreeSpeedSetting,
@@ -47709,35 +47708,7 @@ s223:Connection a s223:Class,
 A Connection may contain branches or intersections. These are modeled using Segments (see `s223:Segment`) and Junctions (see `s223:Junction`).
 """ ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A Connection should eventually have two or more s223:cnx relations to ConnectionPoints" ;
-            sh:class s223:ConnectionPoint ;
-            sh:message "A Connection should eventually have two or more s223:cnx relations to ConnectionPoints" ;
-            sh:minCount 2 ;
-            sh:path s223:cnx ;
-            sh:severity sh:Info ],
-        [ rdfs:comment "A Connection can be associated with any number of ConnectionPoints using the relation connectsAt" ;
-            sh:class s223:ConnectionPoint ;
-            sh:path s223:connectsAt ],
-        [ rdfs:comment "A Connection can be associated with any number of Connectables using the relation connectsFrom" ;
-            sh:class s223:Connectable ;
-            sh:name "ConnectionToUpstreamConnectableShape" ;
-            sh:path s223:connectsFrom ],
-        [ rdfs:comment "A Connection can be associated with any number of Connectables using the relation connectsTo" ;
-            sh:class s223:Connectable ;
-            sh:name "ConnectionToDownstreamConnectableShape" ;
-            sh:path s223:connectsTo ],
-        [ rdfs:comment "A Connection must be associated with one EnumerationKind-Medium using the relation hasMedium" ;
-            sh:class s223:EnumerationKind-Medium ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:name "Connection medium" ;
-            sh:path s223:hasMedium ],
-        [ sh:class s223:EnumerationKind-Phase ;
-            sh:path s223:hasPhase ],
-        [ rdfs:comment "A Connection can be associated with an EnumerationKind-Role using the relation hasRole" ;
-            sh:class s223:EnumerationKind-Role ;
-            sh:path s223:hasRole ],
-        [ sh:name "Test for compatible declared Medium" ;
+    sh:property [ sh:name "Test for compatible declared Medium" ;
             sh:path s223:hasMedium ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the associated Connection." ;
@@ -47765,7 +47736,35 @@ FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
 WHERE {
 $this s223:cnx ?something .
 FILTER NOT EXISTS {?something a/rdfs:subClassOf* s223:ConnectionPoint} .
-}""" ] ] ;
+}""" ] ],
+        [ rdfs:comment "A Connection should eventually have two or more s223:cnx relations to ConnectionPoints" ;
+            sh:class s223:ConnectionPoint ;
+            sh:message "A Connection should eventually have two or more s223:cnx relations to ConnectionPoints" ;
+            sh:minCount 2 ;
+            sh:path s223:cnx ;
+            sh:severity sh:Info ],
+        [ rdfs:comment "A Connection can be associated with any number of ConnectionPoints using the relation connectsAt" ;
+            sh:class s223:ConnectionPoint ;
+            sh:path s223:connectsAt ],
+        [ rdfs:comment "A Connection can be associated with any number of Connectables using the relation connectsFrom" ;
+            sh:class s223:Connectable ;
+            sh:name "ConnectionToUpstreamConnectableShape" ;
+            sh:path s223:connectsFrom ],
+        [ rdfs:comment "A Connection can be associated with any number of Connectables using the relation connectsTo" ;
+            sh:class s223:Connectable ;
+            sh:name "ConnectionToDownstreamConnectableShape" ;
+            sh:path s223:connectsTo ],
+        [ rdfs:comment "A Connection must be associated with one EnumerationKind-Medium using the relation hasMedium" ;
+            sh:class s223:EnumerationKind-Medium ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "Connection medium" ;
+            sh:path s223:hasMedium ],
+        [ sh:class s223:EnumerationKind-Phase ;
+            sh:path s223:hasPhase ],
+        [ rdfs:comment "A Connection can be associated with an EnumerationKind-Role using the relation hasRole" ;
+            sh:class s223:EnumerationKind-Role ;
+            sh:path s223:hasRole ] ;
     sh:rule [ a sh:SPARQLRule ;
             rdfs:comment "Infer the connectsFrom relationship" ;
             sh:construct """
@@ -48279,26 +48278,7 @@ s223:Connectable a s223:Class,
     s223:abstract true ;
     rdfs:comment "Connectable is an abstract class representing a thing (Equipment or DomainSpace) that can be connected via ConnectionPoints and Connections." ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A Connectable can be associated with any number of other Connectables using the relation connected" ;
-            sh:class s223:Connectable ;
-            sh:name "SymmetricConnectableToConnectableShape" ;
-            sh:path s223:connected ],
-        [ rdfs:comment "A Connectable can be associated with any number of other Connectables using the relation connectedFrom" ;
-            sh:class s223:Connectable ;
-            sh:path s223:connectedFrom ],
-        [ rdfs:comment "A Connectable can be associated with any number of Connections using the relation connectedThrough" ;
-            sh:class s223:Connection ;
-            sh:name "EquipmentToConnectionShape" ;
-            sh:path s223:connectedThrough ],
-        [ rdfs:comment "A Connectable can be associated with any number of other Connectables using the relation connectedTo" ;
-            sh:class s223:Connectable ;
-            sh:name "ConnectableToConnectableShape" ;
-            sh:path s223:connectedTo ],
-        [ rdfs:comment "A Connectable can be associated with any number of ConnectionPoints using the relation hasConnectionPoint" ;
-            sh:class s223:ConnectionPoint ;
-            sh:name "EquipmentToConnectionPointShape" ;
-            sh:path s223:hasConnectionPoint ],
-        [ rdfs:comment "A Connectable should only have a s223:cnx relation with a ConnectionPoint" ;
+    sh:property [ rdfs:comment "A Connectable should only have a s223:cnx relation with a ConnectionPoint" ;
             sh:path s223:cnx ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "A Connectable should only have a s223:cnx relation with a ConnectionPoint" ;
@@ -48322,7 +48302,26 @@ $this s223:connected ?otherC .
 FILTER NOT EXISTS {$this s223:cnx+ ?otherC}
 }
 """ ;
-                    sh:severity sh:Warning ] ] ;
+                    sh:severity sh:Warning ] ],
+        [ rdfs:comment "A Connectable can be associated with any number of other Connectables using the relation connected" ;
+            sh:class s223:Connectable ;
+            sh:name "SymmetricConnectableToConnectableShape" ;
+            sh:path s223:connected ],
+        [ rdfs:comment "A Connectable can be associated with any number of other Connectables using the relation connectedFrom" ;
+            sh:class s223:Connectable ;
+            sh:path s223:connectedFrom ],
+        [ rdfs:comment "A Connectable can be associated with any number of Connections using the relation connectedThrough" ;
+            sh:class s223:Connection ;
+            sh:name "EquipmentToConnectionShape" ;
+            sh:path s223:connectedThrough ],
+        [ rdfs:comment "A Connectable can be associated with any number of other Connectables using the relation connectedTo" ;
+            sh:class s223:Connectable ;
+            sh:name "ConnectableToConnectableShape" ;
+            sh:path s223:connectedTo ],
+        [ rdfs:comment "A Connectable can be associated with any number of ConnectionPoints using the relation hasConnectionPoint" ;
+            sh:class s223:ConnectionPoint ;
+            sh:name "EquipmentToConnectionPointShape" ;
+            sh:path s223:hasConnectionPoint ] ;
     sh:rule [ a sh:SPARQLRule ;
             rdfs:comment "Infer the connected relationship for BiDirectional connections" ;
             sh:construct """
@@ -48414,7 +48413,41 @@ ConnectionPoints are represented graphically in this standard by a triangle with
 
  """ ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ sh:message "This ConnectionPoint should be associated with at most one Connectable." ;
+    sh:property [ sh:name "Test for compatible declared Medium" ;
+            sh:path s223:hasMedium ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the entity identified by the mapsTo+ relation." ;
+                    sh:message "{$this} declares a Medium of {?a}, but the Medium of {?b} is declared by {?target} pointed to by the mapsTo+ relation." ;
+                    sh:prefixes s223: ;
+                    sh:select """
+SELECT DISTINCT $this ?a ?b ?target
+WHERE {
+$this s223:hasMedium ?a .
+$this s223:mapsTo+ ?target .
+?target s223:hasMedium ?b .
+?a a/rdfs:subClassOf* s223:EnumerationKind-Medium .
+?b a/rdfs:subClassOf* s223:EnumerationKind-Medium .
+FILTER (?a != ?b ) .
+FILTER (NOT EXISTS {?b a/rdfs:subClassOf* ?a}) .
+FILTER (NOT EXISTS {?a a/rdfs:subClassOf* ?b}) .
+}
+""" ] ],
+        [ s223:description "If a CP mapsTo another CP, the respective Equipment should have a contains relation." ;
+            sh:path s223:mapsTo ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "If a CP mapsTo another CP, the respective Equipment should have a contains relation." ;
+                    sh:message "{?otherEquipment} should contain {?equipment} because ConnectionPoint {$this} has a mapsTo relation." ;
+                    sh:prefixes s223: ;
+                    sh:select """
+SELECT $this ?equipment ?otherEquipment
+WHERE {
+$this s223:mapsTo ?otherCP .
+?equipment s223:hasConnectionPoint $this .
+?otherEquipment s223:hasConnectionPoint ?otherCP .
+FILTER NOT EXISTS {?otherEquipment s223:contains ?equipment}
+}
+""" ] ],
+        [ sh:message "This ConnectionPoint should be associated with at most one Connectable." ;
             sh:path s223:cnx ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:class s223:Connectable ] ;
@@ -48452,41 +48485,7 @@ ConnectionPoints are represented graphically in this standard by a triangle with
             sh:path s223:mapsTo ],
         [ rdfs:comment "A ConnectionPoint can be associated with an EnumerationKind-Role using the relation hasRole" ;
             sh:class s223:EnumerationKind-Role ;
-            sh:path s223:hasRole ],
-        [ sh:name "Test for compatible declared Medium" ;
-            sh:path s223:hasMedium ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the entity identified by the mapsTo+ relation." ;
-                    sh:message "{$this} declares a Medium of {?a}, but the Medium of {?b} is declared by {?target} pointed to by the mapsTo+ relation." ;
-                    sh:prefixes s223: ;
-                    sh:select """
-SELECT DISTINCT $this ?a ?b ?target
-WHERE {
-$this s223:hasMedium ?a .
-$this s223:mapsTo+ ?target .
-?target s223:hasMedium ?b .
-?a a/rdfs:subClassOf* s223:EnumerationKind-Medium .
-?b a/rdfs:subClassOf* s223:EnumerationKind-Medium .
-FILTER (?a != ?b ) .
-FILTER (NOT EXISTS {?b a/rdfs:subClassOf* ?a}) .
-FILTER (NOT EXISTS {?a a/rdfs:subClassOf* ?b}) .
-}
-""" ] ],
-        [ s223:description "If a CP mapsTo another CP, the respective Equipment should have a contains relation." ;
-            sh:path s223:mapsTo ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "If a CP mapsTo another CP, the respective Equipment should have a contains relation." ;
-                    sh:message "{?otherEquipment} should contain {?equipment} because ConnectionPoint {$this} has a mapsTo relation." ;
-                    sh:prefixes s223: ;
-                    sh:select """
-SELECT $this ?equipment ?otherEquipment
-WHERE {
-$this s223:mapsTo ?otherCP .
-?equipment s223:hasConnectionPoint $this .
-?otherEquipment s223:hasConnectionPoint ?otherCP .
-FILTER NOT EXISTS {?otherEquipment s223:contains ?equipment}
-}
-""" ] ] .
+            sh:path s223:hasRole ] .
 
 s223:cnx a s223:SymmetricProperty ;
     rdfs:label "cnx" ;
@@ -49348,6 +49347,9 @@ s223:NumberOfElectricalPhases-ThreePhase a s223:Dimensionless-NumberOfElectrical
 tag:Condenser a brick:Tag ;
     rdfs:label "Condenser" .
 
+s223:contains a rdf:Property ;
+    rdfs:label "contains" .
+
 brick:Command a owl:Class,
         sh:NodeShape ;
     rdfs:label "Command" ;
@@ -49436,9 +49438,6 @@ brick:Equipment a owl:Class,
 
 tag:Mode a brick:Tag ;
     rdfs:label "Mode" .
-
-s223:contains a rdf:Property ;
-    rdfs:label "contains" .
 
 brick:HVAC_Equipment a owl:Class,
         sh:NodeShape ;
@@ -49529,10 +49528,7 @@ s223:InletConnectionPoint a s223:Class,
     rdfs:label "Inlet Connection Point" ;
     rdfs:comment "An InletConnectionPoint indicates that a substance must flow into the equipment or domain space at this connection point and cannot flow the other direction. An IntletConnectionPoint is a subclass of ConnectionPoint." ;
     rdfs:subClassOf s223:ConnectionPoint ;
-    sh:property [ rdfs:comment "An InletConnectionPoint can ne associated with one other InletConnectionPoint using the relation mapsTo" ;
-            sh:class s223:InletConnectionPoint ;
-            sh:path s223:mapsTo ],
-        [ rdfs:comment "Ensure an InletCP does not mapsTo a subordinate InletCP that is part of an internal Connection" ;
+    sh:property [ rdfs:comment "Ensure an InletCP does not mapsTo a subordinate InletCP that is part of an internal Connection" ;
             sh:path s223:mapsTo ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Ensure a CP does not mapsTo a subordinate CP that is part of an internal Connection" ;
@@ -49547,7 +49543,10 @@ $this s223:mapsTo ?otherCP .
 ?otherCP s223:connectsThrough/s223:connectsFrom ?destinationDevice .
 ?destinationDevice s223:contains ?equipment .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "An InletConnectionPoint can ne associated with one other InletConnectionPoint using the relation mapsTo" ;
+            sh:class s223:InletConnectionPoint ;
+            sh:path s223:mapsTo ] .
 
 s223:QuantifiableProperty a s223:Class,
         sh:NodeShape ;
@@ -49555,22 +49554,7 @@ s223:QuantifiableProperty a s223:Class,
     rdfs:comment "This class is for quantifiable values that describe an object (System, Equipment, etc.) that are typically static (hasValue). That is, they are neither measured nor specified in the course of operations." ;
     rdfs:subClassOf s223:Property,
         qudt:Quantity ;
-    sh:property [ rdfs:comment "A QuantifiableProperty can be associated with any number of Setpoints using the relation hasSetpoint" ;
-            sh:class s223:Setpoint ;
-            sh:path s223:hasSetpoint ],
-        [ rdfs:comment "A QuantifiableProperty can be associated with a decimal value using the relation hasValue" ;
-            sh:datatype xsd:decimal ;
-            sh:path s223:hasValue ],
-        [ rdfs:comment "A QuantifiableProperty must be associated with at least one quantitykind using the relation hasQuantityKind." ;
-            sh:class qudt:QuantityKind ;
-            sh:minCount 1 ;
-            sh:path qudt:hasQuantityKind ],
-        [ rdfs:comment "A QuantifiableProperty should be associated with at least one unit using the relation hasUnit." ;
-            sh:class qudt:Unit ;
-            sh:minCount 1 ;
-            sh:path qudt:hasUnit ;
-            sh:severity sh:Info ],
-        [ rdfs:comment "This QuantifiableProperty and the Setpoint associated with it have non-commensurate QuantityKinds" ;
+    sh:property [ rdfs:comment "This QuantifiableProperty and the Setpoint associated with it have non-commensurate QuantityKinds" ;
             sh:path qudt:hasQuantityKind ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     sh:message "{$this} uses QuantityKind {?pqk} with DimensionVector {?pdv}, while Setpoint {?setpoint} uses QuantityKind {?sqk} with DimensionVector {?sdv}. These are non-commensurate" ;
@@ -49621,7 +49605,22 @@ $this s223:hasSetpoint ?setpoint .
 FILTER (?punit != ?sunit) .
 FILTER (?pdv = ?sdv) .
 }
-""" ] ] ;
+""" ] ],
+        [ rdfs:comment "A QuantifiableProperty can be associated with any number of Setpoints using the relation hasSetpoint" ;
+            sh:class s223:Setpoint ;
+            sh:path s223:hasSetpoint ],
+        [ rdfs:comment "A QuantifiableProperty can be associated with a decimal value using the relation hasValue" ;
+            sh:datatype xsd:decimal ;
+            sh:path s223:hasValue ],
+        [ rdfs:comment "A QuantifiableProperty must be associated with at least one quantitykind using the relation hasQuantityKind." ;
+            sh:class qudt:QuantityKind ;
+            sh:minCount 1 ;
+            sh:path qudt:hasQuantityKind ],
+        [ rdfs:comment "A QuantifiableProperty should be associated with at least one unit using the relation hasUnit." ;
+            sh:class qudt:Unit ;
+            sh:minCount 1 ;
+            sh:path qudt:hasUnit ;
+            sh:severity sh:Info ] ;
     sh:rule [ a sh:SPARQLRule ;
             rdfs:comment "Infer the hasQuantityKind relationship if it is unambiguous" ;
             sh:construct """
@@ -49677,10 +49676,7 @@ s223:OutletConnectionPoint a s223:Class,
     rdfs:label "Outlet Connection Point" ;
     rdfs:comment "An OutletConnectionPoint indicates that a substance must flow out of the domain space at this connection point and cannot flow in the other direction. An OutletConnectionPoint is a predefined subclass of ConnectionPoint." ;
     rdfs:subClassOf s223:ConnectionPoint ;
-    sh:property [ rdfs:comment "An OutletConnectionPoint can be associated with one other OutletConnectionPoint using the relation mapsTo" ;
-            sh:class s223:OutletConnectionPoint ;
-            sh:path s223:mapsTo ],
-        [ rdfs:comment "Ensure an OutletCP does not mapsTo a subordinate OutletCP that is part of an internal Connection" ;
+    sh:property [ rdfs:comment "Ensure an OutletCP does not mapsTo a subordinate OutletCP that is part of an internal Connection" ;
             sh:path s223:mapsTo ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Ensure a CP does not mapsTo a subordinate CP that is part of an internal Connection" ;
@@ -49695,7 +49691,10 @@ $this s223:mapsTo ?otherCP .
 ?otherCP s223:connectsThrough/s223:connectsTo ?destinationDevice .
 ?destinationDevice s223:contains ?equipment .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "An OutletConnectionPoint can be associated with one other OutletConnectionPoint using the relation mapsTo" ;
+            sh:class s223:OutletConnectionPoint ;
+            sh:path s223:mapsTo ] .
 
 brick:Air a brick:Substance ;
     rdfs:label "Air" ;
@@ -49969,28 +49968,12 @@ tag:High a brick:Tag ;
 tag:Return a brick:Tag ;
     rdfs:label "Return" .
 
-s223: sh:declare [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-            sh:prefix "sh" ],
+s223: sh:declare [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
         [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
             sh:prefix "qudt" ],
         [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
             sh:prefix "quantitykind" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-            sh:prefix "sh" ],
-        [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
-            sh:prefix "rdf" ],
-        [ sh:namespace "https://brickschema.org/schema/Brick#"^^xsd:anyURI ;
-            sh:prefix "brick" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
-            sh:prefix "owl" ],
-        [ sh:namespace "https://brickschema.org/schema/Brick/ref#"^^xsd:anyURI ;
-            sh:prefix "ref" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
         [ sh:namespace "http://data.ashrae.org/standard223/1.0/vocab/role#"^^xsd:anyURI ;
@@ -50003,16 +49986,6 @@ s223: sh:declare [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
             sh:prefix "rdfs" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
         [ sh:namespace "http://data.ashrae.org/standard223/1.0/vocab/enumeration#"^^xsd:anyURI ;
             sh:prefix "enum" ],
         [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
@@ -50020,7 +49993,33 @@ s223: sh:declare [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
         [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
             sh:prefix "rdfs" ],
         [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-            sh:prefix "sh" ] .
+            sh:prefix "sh" ],
+        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+            sh:prefix "sh" ],
+        [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+            sh:prefix "rdf" ],
+        [ sh:namespace "https://brickschema.org/schema/Brick#"^^xsd:anyURI ;
+            sh:prefix "brick" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+            sh:prefix "owl" ],
+        [ sh:namespace "https://brickschema.org/schema/Brick/ref#"^^xsd:anyURI ;
+            sh:prefix "ref" ],
+        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+            sh:prefix "sh" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ] .
 
 s223:Frequency-60Hz a s223:Dimensioned-Frequency,
         s223:QuantifiableProperty ;
