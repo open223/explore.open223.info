@@ -1,0 +1,32 @@
+{
+  "siteOptions": {
+    "title": "Explorer",
+    "icons": [
+      {
+        "type": "image/png",
+        "sizes": "32x32",
+        "asset": "favicon32.png"
+      },
+      {
+        "type": "image/png",
+        "sizes": "16x16",
+        "asset": "favicon16.png"
+      }
+    ],
+    "assets": {
+      "favicon.ico": "favicon.ico",
+      "robots.txt": "robots.txt"
+    },
+    "outDir": "public",
+    "roots": [
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://brickschema.org/schema/Brick#Class",
+      "http://data.ashrae.org/standard223#Concept",
+      "http://qudt.org/schema/qudt/Aspect",
+      "http://qudt.org/schema/qudt/Concept",
+      "https://www.w3.org/2002/07/owl#Thing",
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "https://brickschema.org/schema/Brick#EntityProperty"
+    ]
+  }
+}

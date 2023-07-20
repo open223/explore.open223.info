@@ -43,6 +43,9 @@ jobs:
       - name: Copy ontologies
         run: cp ontologies/*.ttl rdf-toolkit/explorer/vocab
 
+      - name: Copy config file
+        run: cp rdfconfig.json rdf-toolkit/explorer/
+
       - name: Build site
         working-directory: rdf-toolkit/explorer
         run: |
