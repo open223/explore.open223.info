@@ -980,11 +980,7 @@ s223:DifferentialSensor a s223:Class,
     rdfs:label "Differential sensor" ;
     rdfs:comment "A sensor that measures the difference of a quantity between any two points in the system." ;
     rdfs:subClassOf s223:AbstractSensor ;
-    sh:property [ rdfs:comment "A Differential Sensor must be defined in terms of the QuantityKind that is being measured." ;
-            sh:class qudt:QuantityKind ;
-            sh:minCount 1 ;
-            sh:path ( s223:observes qudt:hasQuantityKind ) ],
-        [ rdfs:comment "A Differential Sensor must have different values for hasObservationLocationHigh and hasObservationLocationLow." ;
+    sh:property [ rdfs:comment "A Differential Sensor must have different values for hasObservationLocationHigh and hasObservationLocationLow." ;
             sh:path s223:hasObservationLocationHigh ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Ensure that the values of hasObservationLocationHigh and hasObservationLocationLow are distinct." ;
@@ -997,7 +993,11 @@ WHERE {
     ?this s223:hasObservationLocationLow ?low .
 FILTER (?high = ?low) .
 }
-""" ] ] ;
+""" ] ],
+        [ rdfs:comment "A Differential Sensor must be defined in terms of the QuantityKind that is being measured." ;
+            sh:class qudt:QuantityKind ;
+            sh:minCount 1 ;
+            sh:path ( s223:observes qudt:hasQuantityKind ) ] ;
     sh:xone ( [ sh:property [ rdfs:comment "A DifferentialSensor must be associated with exactly 1 of Connectable, Connection, or ConnectionPoint using the relation hasObservationLocationLow." ;
                         sh:class s223:Connectable ;
                         sh:maxCount 1 ;
@@ -1482,31 +1482,31 @@ s223:Generator a s223:Class,
 
 s223:GlycolSolution-15Percent a s223:Water-GlycolSolution ;
     rdfs:label "GlycolSolution-15Percent" ;
-    s223:hasProperty [ a s223:QuantifiableProperty ;
+    s223:hasConstituent [ a s223:QuantifiableProperty ;
             rdfs:label "Glycol conc" ;
-            s223:hasAspect s223:Medium-Glycol ;
             s223:hasValue 15.0 ;
+            s223:ofSubstance s223:Medium-Glycol ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ],
         [ a s223:QuantifiableProperty ;
             rdfs:label "Water conc" ;
-            s223:hasAspect s223:Medium-Water ;
             s223:hasValue 85.0 ;
+            s223:ofSubstance s223:Medium-Water ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ] .
 
 s223:GlycolSolution-30Percent a s223:Water-GlycolSolution ;
     rdfs:label "GlycolSolution-30Percent" ;
-    s223:hasProperty [ a s223:QuantifiableProperty ;
+    s223:hasConstituent [ a s223:QuantifiableProperty ;
             rdfs:label "Glycol conc" ;
-            s223:hasAspect s223:Medium-Glycol ;
             s223:hasValue 30.0 ;
+            s223:ofSubstance s223:Medium-Glycol ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ],
         [ a s223:QuantifiableProperty ;
             rdfs:label "Water conc" ;
-            s223:hasAspect s223:Medium-Water ;
             s223:hasValue 70.0 ;
+            s223:ofSubstance s223:Medium-Water ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ] .
 
@@ -1539,15 +1539,6 @@ s223:HVACOperatingStatus-Off a s223:EnumerationKind-HVACOperatingStatus ;
 
 s223:HVACOperatingStatus-Ventilating a s223:EnumerationKind-HVACOperatingStatus ;
     rdfs:label "Ventilating" .
-
-s223:HasDomainLookingUpRule a sh:NodeShape ;
-    sh:rule [ a sh:TripleRule ;
-            rdfs:comment "Infer a hasDomain relationship by traversing the contains hierarchy up to determine the domain." ;
-            sh:object [ sh:path ( [ sh:zeroOrMorePath [ sh:inversePath s223:contains ] ] s223:hasDomain ) ] ;
-            sh:predicate s223:hasDomain ;
-            sh:subject sh:this ] ;
-    sh:targetClass s223:DomainSpace,
-        s223:Zone .
 
 s223:HeatPump a s223:Class,
         sh:NodeShape ;
@@ -1828,9 +1819,9 @@ s223:ParticulateSensor a s223:Class,
     rdfs:label "Particulate sensor" ;
     rdfs:comment "A ParticulateSensor is a specialization of a Sensor that observes a QuantifiableObservableProperty that represents a particulate concentration measurement." ;
     rdfs:subClassOf s223:Sensor ;
-    sh:property [ rdfs:comment "If the relation measuresSubstance is present it must associate the ParticulateSensor with a Substance-Particulate." ;
+    sh:property [ rdfs:comment "If the relation ofSubstance is present it must associate the ParticulateSensor with a Substance-Particulate." ;
             sh:class s223:Substance-Particulate ;
-            sh:path s223:measuresSubstance ] .
+            sh:path s223:ofSubstance ] .
 
 s223:Phase-Solid a s223:EnumerationKind-Phase ;
     rdfs:label "Phase-Solid" .
@@ -1890,25 +1881,7 @@ s223:Pump a s223:Class,
     rdfs:label "Pump" ;
     rdfs:comment "A machine for imparting energy to a fluid, drawing a fluid into itself through an entrance port, and forcing the fluid out through an exhaust port." ;
     rdfs:subClassOf s223:Equipment ;
-    sh:property [ rdfs:comment "A Pump shall have at least one inlet using the medium Water, Oil or Refrigerant." ;
-            sh:minCount 1 ;
-            sh:path s223:hasConnectionPoint ;
-            sh:qualifiedMinCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:InletConnectionPoint ;
-                    sh:node [ sh:or ( [ sh:property [ sh:class s223:Medium-Water ;
-                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Refrigerant ;
-                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Oil ;
-                                                sh:path s223:hasMedium ] ] ) ] ] ],
-        [ rdfs:comment "A Pump shall have at least one outlet using the medium Water, Oil or Refrigerant." ;
-            sh:minCount 1 ;
-            sh:path s223:hasConnectionPoint ;
-            sh:qualifiedMinCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:OutletConnectionPoint ;
-                    sh:node [ sh:or ( [ sh:property [ sh:class s223:Medium-Water ;
-                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Refrigerant ;
-                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Oil ;
-                                                sh:path s223:hasMedium ] ] ) ] ] ],
-        [ rdfs:comment "The non-electrical ConnectionPoints of a Pump must have compatible Media." ;
+    sh:property [ rdfs:comment "The non-electrical ConnectionPoints of a Pump must have compatible Media." ;
             sh:path s223:hasConnectionPoint ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "The non-electrical ConnectionPoints of a Pump must have compatible Media." ;
@@ -1928,7 +1901,25 @@ WHERE {
   FILTER (NOT EXISTS {?mediumb a/rdfs:subClassOf* ?mediuma}) .
   FILTER (NOT EXISTS {?mediuma a/rdfs:subClassOf* ?mediumb}) .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "A Pump shall have at least one inlet using the medium Water, Oil or Refrigerant." ;
+            sh:minCount 1 ;
+            sh:path s223:hasConnectionPoint ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:class s223:InletConnectionPoint ;
+                    sh:node [ sh:or ( [ sh:property [ sh:class s223:Medium-Water ;
+                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Refrigerant ;
+                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Oil ;
+                                                sh:path s223:hasMedium ] ] ) ] ] ],
+        [ rdfs:comment "A Pump shall have at least one outlet using the medium Water, Oil or Refrigerant." ;
+            sh:minCount 1 ;
+            sh:path s223:hasConnectionPoint ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:class s223:OutletConnectionPoint ;
+                    sh:node [ sh:or ( [ sh:property [ sh:class s223:Medium-Water ;
+                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Refrigerant ;
+                                                sh:path s223:hasMedium ] ] [ sh:property [ sh:class s223:Medium-Oil ;
+                                                sh:path s223:hasMedium ] ] ) ] ] ] .
 
 s223:QuantifiableActuatableProperty a s223:Class,
         sh:NodeShape ;
@@ -2423,7 +2414,12 @@ s223:ZoneGroup a s223:Class,
     sh:property [ rdfs:comment "A ZoneGroup must be associated with at least one Zone using the relation hasZone." ;
             sh:class s223:Zone ;
             sh:minCount 1 ;
-            sh:path s223:hasZone ] .
+            sh:path s223:hasZone ] ;
+    sh:rule [ a sh:TripleRule ;
+            rdfs:comment "Infer a hasDomain relation by checking any enclosed Zones to determine the domain." ;
+            sh:object [ sh:path ( s223:hasZone s223:hasDomain ) ] ;
+            sh:predicate s223:hasDomain ;
+            sh:subject sh:this ] .
 
 s223:abstract a rdf:Property ;
     rdfs:label "abstract" ;
@@ -2466,16 +2462,6 @@ array shall be referenced.  See ASHRAE 135-2020 Clause 15.5.1.1.3 and Clause 15.
 bacnet:property-identifier a rdf:Property ;
     rdfs:label "Property Identifier" ;
     rdfs:comment "The Object_Identifier property of the object being referenced.  For example, for the object identifier of an Analog Value Object, see ASHRAE 135-2020 Clause 12.4.1." .
-
-s223:Constant a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Constant" ;
-    rdfs:comment "A constant is a parameter with constant value, used by the function block to produce one or more output (ex. pi)." ;
-    rdfs:subClassOf s223:Concept,
-        s223:Parameter ;
-    sh:property [ rdfs:comment "If the relation uses is present it must associate the Constant with a Property." ;
-            sh:class s223:Property ;
-            sh:path s223:uses ] .
 
 s223:DCNegativeVoltage-190.0V a s223:Dimensioned-DCNegativeVoltage ;
     rdfs:label "DCNegativeVoltage-190.0V" ;
@@ -2537,53 +2523,12 @@ s223:DCPositiveVoltage-5.0V a s223:Dimensioned-DCPositiveVoltage ;
     s223:hasVoltage s223:Voltage-5V ;
     rdfs:comment "DCPositiveVoltage-5.0V" .
 
-s223:FunctionInput a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Input" ;
-    rdfs:comment "A Function Input is an input to a Function Block. It can be related to a property by the relation uses." ;
-    rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A FunctionInput must be associated with exactly one Property using the relation uses." ;
-            sh:class s223:Property ;
-            sh:maxCount 1 ;
-            sh:message "This Function Input must be associated with exactly one property using the relation uses." ;
-            sh:minCount 1 ;
-            sh:path s223:uses ],
-        [ rdfs:comment "A FunctionInput must be associated with exactly one FunctionBlock using the inverse relation hasInput." ;
-            sh:class s223:FunctionBlock ;
-            sh:maxCount 1 ;
-            sh:message "The FunctionInput must be associated with exactly one FunctionBlock." ;
-            sh:minCount 1 ;
-            sh:path [ sh:inversePath s223:hasInput ] ] .
-
-s223:FunctionOutput a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Output" ;
-    rdfs:comment "A Function Output is an output from a Function Block and represents the action the function block has on the value its Function Input propert(ies). It is related to a property by s223:produces." ;
-    rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A FunctionOutput must be associated with exactly one Property using the relation produces." ;
-            sh:class s223:Property ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:produces ],
-        [ rdfs:comment "A FunctionOutput must be associated with exactly one FunctionBlock using the inverse relation hasOutput." ;
-            sh:class s223:FunctionBlock ;
-            sh:maxCount 1 ;
-            sh:message "This Output must be associated with exactly one FunctionBlock." ;
-            sh:minCount 1 ;
-            sh:path [ sh:inversePath s223:hasOutput ] ] .
-
 s223:HeatExchanger a s223:Class,
         sh:NodeShape ;
     rdfs:label "Heat exchanger" ;
     rdfs:comment "A component intended to transfer heat from one medium to another while keeping the two media separate" ;
     rdfs:subClassOf s223:Equipment ;
-    sh:property [ rdfs:comment "A heat exchanger shall have at least 4 connection points." ;
-            sh:minCount 4 ;
-            sh:path s223:hasConnectionPoint ],
-        [ rdfs:comment "If the relation hasRole is present it must associate the HeatExchanger with a EnumerationKind-Role." ;
-            sh:class s223:EnumerationKind-Role ;
-            sh:path s223:hasRole ],
-        [ rdfs:comment "Heat Exchangers should have the same number of non-electrical inlet and outlet connection points." ;
+    sh:property [ rdfs:comment "Heat Exchangers should have the same number of non-electrical inlet and outlet connection points." ;
             sh:path s223:hasConnectionPoint ;
             sh:severity sh:Warning ;
             sh:sparql [ a sh:SPARQLConstraint ;
@@ -2619,7 +2564,13 @@ GROUP BY $this
 }
 FILTER (?incount != ?outcount)
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "A heat exchanger shall have at least 4 connection points." ;
+            sh:minCount 4 ;
+            sh:path s223:hasConnectionPoint ],
+        [ rdfs:comment "If the relation hasRole is present it must associate the HeatExchanger with a EnumerationKind-Role." ;
+            sh:class s223:EnumerationKind-Role ;
+            sh:path s223:hasRole ] .
 
 s223:Junction a s223:Class,
         sh:NodeShape ;
@@ -2642,7 +2593,52 @@ s223:Junction a s223:Class,
                         sh:path s223:hasConnectionPoint ;
                         sh:qualifiedMinCount 1 ;
                         sh:qualifiedValueShape [ sh:class s223:BidirectionalConnectionPoint ] ;
-                        sh:qualifiedValueShapesDisjoint true ] ] ) .
+                        sh:qualifiedValueShapesDisjoint true ] ] ) ;
+    sh:property [ rdfs:comment "A Junction must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
+            sh:class s223:Substance-Medium ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasMedium ],
+        [ rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the associated Junction." ;
+            sh:name "Test for compatible declared Medium" ;
+            sh:path s223:hasMedium ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the associated Junction." ;
+                    sh:message "{$this} with Medium {?m2} is incompatible with {?cp} with Medium {?m1}." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
+                    sh:select """
+SELECT $this ?m2 ?cp ?m1
+WHERE {
+$this s223:cnx ?cp .
+?cp a/rdfs:subClassOf* s223:ConnectionPoint .
+?cp s223:hasMedium ?m1 .
+$this s223:hasMedium ?m2 .
+FILTER (?m1 != ?m2 ) .
+FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
+FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
+}
+""" ] ],
+        [ rdfs:comment "Ensure that the Medium identified by all the associated ConnectionPoints via the s223:hasMedium relation are compatible with one another." ;
+            sh:name "Test for compatible declared Medium" ;
+            sh:path s223:hasMedium ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "Ensure that the Medium identified by all the associated ConnectionPoints via the s223:hasMedium relation are compatible with one another." ;
+                    sh:message "{?cp1} with Medium {?m1} is incompatible with {?cp2} with Medium {?m2}." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
+                    sh:select """
+SELECT $this ?cp1 ?m1 ?cp2 ?m2
+WHERE {
+$this s223:cnx ?cp1 .
+?cp1 a/rdfs:subClassOf* s223:ConnectionPoint .
+?cp1 s223:hasMedium ?m1 .
+$this s223:cnx ?cp2 .
+?cp2 a/rdfs:subClassOf* s223:ConnectionPoint .
+?cp2 s223:hasMedium ?m2 .
+FILTER (?m1 != ?m2 ) .
+FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
+FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
+}
+""" ] ] .
 
 s223:Setpoint a s223:Class,
         sh:NodeShape ;
@@ -2858,6 +2854,47 @@ s223:Voltage-6600V a s223:Dimensioned-Voltage,
     qudt:hasQuantityKind qudtqk:Voltage ;
     qudt:hasUnit unit:V .
 
+s223:Zone a s223:Class,
+        sh:NodeShape ;
+    rdfs:label "Zone" ;
+    rdfs:comment "A Zone is a logical grouping (collection) of domain spaces for some functional or system reason, to identify a domain of control, such as a Lighting Zone, or a heating zone" ;
+    rdfs:subClassOf s223:Concept ;
+    sh:property [ rdfs:comment "A Zone must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
+            sh:class s223:EnumerationKind-Domain ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomain ],
+        [ rdfs:comment "A Zone must be associated with at least one DomainSpace using the relation hasDomainSpace." ;
+            sh:class s223:DomainSpace ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomainSpace ],
+        [ rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
+            sh:path s223:hasDomain ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
+                    sh:message "Zone {$this} has a Domain of {?domain}, but it contains a DomainSpace {?ds} which has a Domain of {?dsdomain}. These should be the same." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
+                    sh:select """
+SELECT DISTINCT $this ?domain ?ds ?dsdomain
+WHERE {
+$this a s223:Zone .
+$this s223:hasDomain ?domain .
+$this s223:contains ?ds .
+?ds s223:hasDomain ?dsdomain .
+FILTER (?domain != ?dsdomain)
+}
+""" ] ] ;
+    sh:rule [ a sh:TripleRule ;
+            rdfs:comment "Infer a hasDomain relation by checking any enclosed DomainSpaces to determine the domain." ;
+            sh:object [ sh:path ( s223:hasDomainSpace s223:hasDomain ) ] ;
+            sh:predicate s223:hasDomain ;
+            sh:subject sh:this ],
+        [ a sh:TripleRule ;
+            rdfs:comment "Infer a hasDomain relation by checking any enclosing ZoneGroup to determine the domain." ;
+            sh:object [ sh:path ( [ sh:inversePath s223:hasZone ] s223:hasDomain ) ] ;
+            sh:predicate s223:hasDomain ;
+            sh:subject sh:this ] .
+
 s223:actuates a rdf:Property ;
     rdfs:label "actuates" ;
     rdfs:comment "The relation actuates binds an Actuator to the Equipment that it actuates. The Equipment will have the ActuatableProperty that commands the actuator (see `s223:commandedByProperty`)." .
@@ -2874,17 +2911,9 @@ s223:hasAspect a rdf:Property ;
     rdfs:label "has aspect" ;
     rdfs:comment "hasAspect is used to establish the context of a Property. The value must be an instance of EnumerationKind. For example, if a Property has a Temperature value of 45.3, the hasAspect relation is used to state what that represents, such as a Temperature limit during working hours, etc. A Property can have any number of hasAspect relations, as needed to establish the context." .
 
-s223:hasConstant a rdf:Property ;
-    rdfs:label "has constant" ;
-    rdfs:comment "The relation hasConstant is used to relate a constant (see `s223:Constant`) to a function block (see `s223:FunctionBlock`)." .
-
 s223:hasDeadband a rdf:Property ;
     rdfs:label "has deadband" ;
     rdfs:comment "The relation hasDeadband associates a Setpoint with the range within which a system or controller does not respond or initiate an action." .
-
-s223:hasDomainSpace a rdf:Property ;
-    rdfs:label "has domain space" ;
-    rdfs:comment "The relation hasDomainSpace is used to associate a Zone with the DomainSpace(s) that make up that Zone." .
 
 s223:hasExternalReference a rdf:Property ;
     rdfs:label "has external reference" ;
@@ -2893,6 +2922,10 @@ s223:hasExternalReference a rdf:Property ;
 s223:hasFrequency a rdf:Property ;
     rdfs:label "has frequency" ;
     rdfs:comment "The relation hasFrequency is used to identify the frequency of an AC electricity enumeration kind. " .
+
+s223:hasInput a rdf:Property ;
+    rdfs:label "has function input" ;
+    rdfs:comment "The relation hasInput is used to relate a function input (see `s223:FunctionInput`) to a function block (see `s223:FunctionBlock`). " .
 
 s223:hasMeasurementResolution a rdf:Property ;
     rdfs:label "has measurement resolution" ;
@@ -2918,21 +2951,9 @@ s223:hasSetpoint a rdf:Property ;
     rdfs:label "has setpoint" ;
     rdfs:comment "This relation binds a control setpoint to the quantifiable property indicating the desired value which the control process is trying to maintain." .
 
-s223:hasZone a rdf:Property ;
-    rdfs:label "has zone" ;
-    rdfs:comment "The relation hasZone is used to associate a ZoneGroup with the Zones that make up that ZoneGroup." .
-
 s223:ofMedium a rdf:Property ;
     rdfs:label "of medium" ;
     rdfs:comment "The relation ofMedium is used to associate a Property with a specific Medium." .
-
-s223:ofSubstance a rdf:Property ;
-    rdfs:label "of substance" ;
-    rdfs:comment "The relation ofSubstance is used to associate a Property with a specific Substance." .
-
-s223:produces a rdf:Property ;
-    rdfs:label "produces" ;
-    rdfs:comment "The relation produces is used to relate a function output (see `s223:FunctionOutput`) to a property (see `s223:Property`). This allows one to specify that the value of this property is produced by the function block output, allowing the users of the model to understand that the value of the property is the result of the algorithm defined by the function block. " .
 
 s223:AbstractSensor a s223:Class,
         sh:NodeShape ;
@@ -2947,26 +2968,7 @@ s223:AbstractSensor a s223:Class,
             sh:class s223:ObservableProperty ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path s223:observes ],
-        [ rdfs:comment "Ensure that the Substance identified by a sensor via the s223:measuresSubstance relation is compatible with the Substance identified by the Property being measured via the s223:ofSubstance relation." ;
-            sh:name "Test for compatible declared Substances" ;
-            sh:path s223:measuresSubstance ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "Ensure that the Substance identified by a sensor via the s223:measuresSubstance relation is compatible with the Substance identified by the Property being measured via the s223:ofSubstance relation." ;
-                    sh:message "Sensor {$this} measures substance {?a}, but the measured Property identifies an incompatible substance of {?b} via the s223:ofSubstance relation." ;
-                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
-                    sh:select """
-SELECT DISTINCT $this ?a ?b
-WHERE {
-$this s223:measuresSubstance ?a .
-$this s223:observes/s223:ofSubstance ?b .
-?a a/rdfs:subClassOf* s223:EnumerationKind .
-?b a/rdfs:subClassOf* s223:EnumerationKind .
-FILTER (?a != ?b ) .
-FILTER (NOT EXISTS {?b a/rdfs:subClassOf* ?a}) .
-FILTER (NOT EXISTS {?a a/rdfs:subClassOf* ?b}) .
-}
-""" ] ] .
+            sh:path s223:observes ] .
 
 s223:Attribute-Effectiveness a s223:Attribute-Effectiveness,
         s223:Class,
@@ -3004,6 +3006,27 @@ s223:DCPositiveVoltage-6.0V a s223:Dimensioned-DCPositiveVoltage ;
     rdfs:label "DCPositiveVoltage-6.0V" ;
     s223:hasVoltage s223:Voltage-6V ;
     rdfs:comment "DCPositiveVoltage-6.0V" .
+
+s223:DomainSpace a s223:Class,
+        sh:NodeShape ;
+    rdfs:label "Domain Space" ;
+    rdfs:comment "A DomainSpace is a member (or component) of a Zone and is associated with a Domain such as Lighting, HVAC, PhysicalSecurity, etc. Physical spaces enclose Domain spaces." ;
+    rdfs:subClassOf s223:Connectable ;
+    sh:property [ rdfs:comment "A DomainSpace must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
+            sh:class s223:EnumerationKind-Domain ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomain ],
+        [ rdfs:comment "A DomainSpace must be enclosed by a PhysicalSpace." ;
+            sh:message "A DomainSpace must be enclosed by a PhysicalSpace." ;
+            sh:minCount 1 ;
+            sh:path [ sh:inversePath s223:encloses ] ;
+            sh:severity sh:Info ] ;
+    sh:rule [ a sh:TripleRule ;
+            rdfs:comment "Infer a hasDomain relation by checking any enclosing Zone to determine the domain." ;
+            sh:object [ sh:path ( [ sh:inversePath s223:hasDomainSpace ] s223:hasDomain ) ] ;
+            sh:predicate s223:hasDomain ;
+            sh:subject sh:this ] .
 
 s223:EnumerableProperty a s223:Class,
         sh:NodeShape ;
@@ -3086,28 +3109,13 @@ s223:Medium-NaturalGas a s223:Class,
         sh:NodeShape ;
     rdfs:label "Medium-NaturalGas" ;
     rdfs:comment "This class has enumerated instances of natural gas in various states." ;
-    rdfs:subClassOf s223:EnumerationKind-Medium .
+    rdfs:subClassOf s223:Substance-Medium .
 
 s223:MotorizedValve a s223:Class,
         sh:NodeShape ;
     rdfs:label "Motorized Valve" ;
     rdfs:comment "A Valve that is operated by a motor." ;
     rdfs:subClassOf s223:Valve .
-
-s223:Parameter a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Parameter" ;
-    rdfs:comment "A parameter belongs to exactly one Function Block." ;
-    rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "If the relation uses is present it must associate the Parameter with a Property." ;
-            sh:class s223:Property ;
-            sh:path s223:uses ],
-        [ rdfs:comment "A Parameter must be associated with exactly one FunctionBlock using the inverse relation hasParameter." ;
-            sh:class s223:FunctionBlock ;
-            sh:maxCount 1 ;
-            sh:message "This Parameter must be associated with exactly one FunctionBlock." ;
-            sh:minCount 1 ;
-            sh:path [ sh:inversePath s223:hasParameter ] ] .
 
 s223:Phase-Gas a s223:Class,
         s223:Phase-Gas,
@@ -3173,42 +3181,6 @@ s223:Voltage-3V a s223:Dimensioned-Voltage,
     qudt:hasQuantityKind qudtqk:Voltage ;
     qudt:hasUnit unit:V .
 
-s223:Zone a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Zone" ;
-    rdfs:comment "A Zone is a logical grouping (collection) of domain spaces for some functional or system reason, to identify a domain of control, such as a Lighting Zone, or a heating zone" ;
-    rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A Zone must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
-            sh:class s223:EnumerationKind-Domain ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomain ],
-        [ rdfs:comment "A Zone must be associated with at least one DomainSpace using the relation hasDomainSpace." ;
-            sh:class s223:DomainSpace ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomainSpace ],
-        [ rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
-            sh:path s223:hasDomain ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
-                    sh:message "Zone {$this} has a Domain of {?domain}, but it contains a DomainSpace {?ds} which has a Domain of {?dsdomain}. These should be the same." ;
-                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
-                    sh:select """
-SELECT DISTINCT $this ?domain ?ds ?dsdomain
-WHERE {
-$this a s223:Zone .
-$this s223:hasDomain ?domain .
-$this s223:contains ?ds .
-?ds s223:hasDomain ?dsdomain .
-FILTER (?domain != ?dsdomain)
-}
-""" ] ] ;
-    sh:rule [ a sh:TripleRule ;
-            rdfs:comment "Infer a hasDomain relations by traversing the contains hierarchy down to determine the domain." ;
-            sh:object [ sh:path ( [ sh:zeroOrMorePath s223:contains ] s223:hasDomain ) ] ;
-            sh:predicate s223:hasDomain ;
-            sh:subject sh:this ] .
-
 s223:commandedByProperty a rdf:Property ;
     rdfs:label "commanded by Property" ;
     rdfs:comment "The relation commandedByProperty binds an Actuator to the ActuatableProperty that it responds to. This Property will be owned by the equipment that it actuates (see `s223:actuates`)." .
@@ -3221,21 +3193,9 @@ s223:encloses a rdf:Property ;
     rdfs:label "encloses" ;
     rdfs:comment "The relation encloses is used to indicate that a domain space (see: `s223:DomainSpace`) can be found inside a physical space (see `s223:PhysicalSpace`). " .
 
-s223:hasInput a rdf:Property ;
-    rdfs:label "has function input" ;
-    rdfs:comment "The relation hasInput is used to relate a function input (see `s223:FunctionInput`) to a function block (see `s223:FunctionBlock`). " .
-
 s223:hasOutput a rdf:Property ;
     rdfs:label "has function output" ;
     rdfs:comment "The relation hasOutput is used to relate a function output (see `s223:FunctionOutput`) to a function block (see `s223:FunctionBlock`). " .
-
-s223:hasParameter a rdf:Property ;
-    rdfs:label "has parameter" ;
-    rdfs:comment "A Parameter (`s223:Parameter`) is associated to a function block (`s223:FunctionBlock`) using the relation hasParameter. " .
-
-s223:measuresSubstance a rdf:Property ;
-    rdfs:label "measures Substance" ;
-    rdfs:comment "The relation measuresSubstance is used to relate a sensor (see `s223:Sensor`) to a substance (see `s223:EnumerationKind-Substance`). Some sensors measure a specific property inside a medium and this substance can be defined by relating the sensor to it using the relation measuresSubstance (ex. Substance-CO2 in Medium-Air). " .
 
 rdfs:comment a rdf:Property ;
     rdfs:label "comment" ;
@@ -3322,28 +3282,25 @@ s223:DayOfWeek-Weekend a s223:Class,
     rdfs:comment "This class defines the EnumerationKind values of Saturday and Sunday" ;
     rdfs:subClassOf s223:Attribute-DayOfWeek .
 
-s223:DomainSpace a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Domain Space" ;
-    rdfs:comment "A DomainSpace is a member (or component) of a Zone and is associated with a Domain such as Lighting, HVAC, PhysicalSecurity, etc. Physical spaces enclose Domain spaces." ;
-    rdfs:subClassOf s223:Connectable ;
-    sh:property [ rdfs:comment "A DomainSpace must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
-            sh:class s223:EnumerationKind-Domain ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomain ],
-        [ rdfs:comment "A DomainSpace must be enclosed by a PhysicalSpace." ;
-            sh:message "A DomainSpace must be enclosed by a PhysicalSpace." ;
-            sh:minCount 1 ;
-            sh:path [ sh:inversePath s223:encloses ] ;
-            sh:severity sh:Info ] .
-
 s223:EnumeratedObservableProperty a s223:Class,
         sh:NodeShape ;
     rdfs:label "Enumerated observable property" ;
     rdfs:comment "An EnumeratedActuatableProperty is a property with an enumerated (fixed) set of possible values that can only be observed (not changed)" ;
     rdfs:subClassOf s223:EnumerableProperty,
         s223:ObservableProperty .
+
+s223:FunctionBlock a s223:Class,
+        sh:NodeShape ;
+    rdfs:label "Function block" ;
+    rdfs:comment "A FunctionBlock is used to model transfer and/or transformation of information (i.e. Property). It has relations to input Properties and output Properties. The actual algorithms that perform the transformations are described in CDL and are out of scope of the 223 standard." ;
+    rdfs:subClassOf s223:Concept ;
+    sh:or ( [ sh:property [ rdfs:comment "A Function block must be associated with at least one Property using the relation hasInput." ;
+                        sh:class s223:Property ;
+                        sh:minCount 1 ;
+                        sh:path s223:hasInput ] ] [ sh:property [ rdfs:comment "A Function block must be associated with at least one Property using the relation hasOutput." ;
+                        sh:class s223:Property ;
+                        sh:minCount 1 ;
+                        sh:path s223:hasOutput ] ] ) .
 
 s223:LightSensor a s223:Class,
         sh:NodeShape ;
@@ -3465,32 +3422,42 @@ s223:Water-GlycolSolution a s223:Class,
         s223:Water-GlycolSolution,
         sh:NodeShape ;
     rdfs:label "Water-GlycolSolution" ;
-    s223:hasProperty [ a s223:QuantifiableProperty ;
+    s223:hasConstituent [ a s223:QuantifiableProperty ;
             rdfs:label "Unspecified" ;
-            s223:hasAspect s223:Medium-Glycol ;
+            s223:ofSubstance s223:Medium-Glycol ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ],
         [ a s223:QuantifiableProperty ;
             rdfs:label "Unspecified" ;
-            s223:hasAspect s223:Medium-Water ;
+            s223:ofSubstance s223:Medium-Water ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ] ;
     rdfs:comment "This class has enumerated instances of water-glycol solutions in various concentrations." ;
     rdfs:subClassOf s223:Medium-Water ;
-    sh:property [ rdfs:comment "The water percentage." ;
-            sh:path s223:hasProperty ;
+    sh:property [ rdfs:comment "One of the constituents of a Water-GlycolSolution must be Medium-Water." ;
+            sh:path s223:hasConstituent ;
             sh:qualifiedMinCount 1 ;
             sh:qualifiedValueShape [ sh:class s223:QuantifiableProperty ;
-                    sh:node [ sh:property [ s223:hasAspect s223:Medium-Water ;
-                                    sh:hasValue qudtqk:VolumeFraction ;
-                                    sh:path qudt:hasQuantityKind ] ] ] ],
-        [ rdfs:comment "The glycol percentage." ;
-            sh:path s223:hasProperty ;
+                    sh:property [ rdfs:comment "One of the constituents of a Water-GlycolSolution must be Medium-Water." ;
+                            sh:hasValue s223:Medium-Water ;
+                            sh:path s223:ofSubstance ],
+                        [ rdfs:comment "The quantity kind of the constituent must be VolumeFraction." ;
+                            sh:hasValue qudtqk:VolumeFraction ;
+                            sh:path qudt:hasQuantityKind ] ] ],
+        [ rdfs:comment "There must be two QuantifiableProperties that characterize the constituents of a Water-GlycolSolution." ;
+            sh:class s223:QuantifiableProperty ;
+            sh:minCount 2 ;
+            sh:path s223:hasConstituent ],
+        [ rdfs:comment "One of the constituents of a Water-GlycolSolution must be Medium-Glycol." ;
+            sh:path s223:hasConstituent ;
             sh:qualifiedMinCount 1 ;
             sh:qualifiedValueShape [ sh:class s223:QuantifiableProperty ;
-                    sh:node [ sh:property [ s223:hasAspect s223:Medium-Glycol ;
-                                    sh:hasValue qudtqk:VolumeFraction ;
-                                    sh:path qudt:hasQuantityKind ] ] ] ] .
+                    sh:property [ rdfs:comment "One of the constituents of a Water-GlycolSolution must be Medium-Glycol." ;
+                            sh:hasValue s223:Medium-Glycol ;
+                            sh:path s223:ofSubstance ],
+                        [ rdfs:comment "The quantity kind of the constituent must be VolumeFraction." ;
+                            sh:hasValue qudtqk:VolumeFraction ;
+                            sh:path qudt:hasQuantityKind ] ] ] .
 
 s223:connected a s223:SymmetricProperty,
         rdf:Property ;
@@ -3501,6 +3468,10 @@ s223:executes a rdf:Property ;
     rdfs:label "executes" ;
     rdfs:comment "The relation executes is used to specify that a controller (see `s223:Controller`) is responsible for the execution of a function block (see `s223:FunctionBlock`). " .
 
+s223:hasDomainSpace a rdf:Property ;
+    rdfs:label "has domain space" ;
+    rdfs:comment "The relation hasDomainSpace is used to associate a Zone with the DomainSpace(s) that make up that Zone." .
+
 s223:hasEnumerationKind a rdf:Property ;
     rdfs:label "has enumeration kind" ;
     rdfs:comment "The relation hasEnumerationKind associates an EnumerableProperty with a class of enumeration values. This is used to, for example, identify what kind of substance is transported along a Connection or which day of the week a setpoint is active" .
@@ -3510,14 +3481,18 @@ s223:hasObservationLocationLow a rdf:Property ;
     rdfs:comment "The relation hasObservationLocationLow associates a differential sensor to one of the topological locations where a differential property is observed (see `s223:observes`)." ;
     rdfs:subPropertyOf s223:hasObservationLocation .
 
+s223:hasProperty a rdf:Property ;
+    rdfs:label "has Property" ;
+    rdfs:comment "The relation hasProperty associates any 223 Concept with a Property." .
+
+s223:hasZone a rdf:Property ;
+    rdfs:label "has zone" ;
+    rdfs:comment "The relation hasZone is used to associate a ZoneGroup with the Zones that make up that ZoneGroup." .
+
 s223:isConnectionPointOf a rdf:Property ;
     rdfs:label "is connection point of" ;
     s223:inverseOf s223:hasConnectionPoint ;
     rdfs:comment "The relation isConnectionPointOf is part of a pair of relations that bind a ConnectionPoint to a Connectable thing. It is the inverse of the relation hasConnectionPoint (see `s223:hasConnectionPoint`)." .
-
-s223:uses a rdf:Property ;
-    rdfs:label "uses" ;
-    rdfs:comment "The relation uses is used to relate a function block input (see `s223:FunctionInput`) to a property (see `s223:Property`). This allows one to specify that the value of this property is used by the function block. " .
 
 s223:ActuatableProperty a s223:Class,
         sh:NodeShape ;
@@ -3628,9 +3603,9 @@ s223:Medium-EM a s223:Class,
         sh:NodeShape ;
     rdfs:label "Electromagnetic Wave" ;
     rdfs:comment "This class has enumerated instances of electromagnetic energy at any frequency range." ;
-    rdfs:subClassOf s223:EnumerationKind-Medium .
+    rdfs:subClassOf s223:Substance-Medium .
 
-s223:Medium-Glycol a s223:EnumerationKind-Medium ;
+s223:Medium-Glycol a s223:Substance-Medium ;
     rdfs:label "Medium-Glycol" .
 
 s223:Occupancy-Motion a s223:Class,
@@ -3718,18 +3693,22 @@ s223:connectsAt a rdf:Property ;
     s223:inverseOf s223:connectsThrough ;
     rdfs:comment "The connectsAt relation binds a Connection to a specific ConnectionPoint. See Figure x.y." .
 
+s223:hasConstituent a rdf:Property ;
+    rdfs:label "has constituent" ;
+    rdfs:comment "The relation hasConstituent is used to indicate what substances constitute a material. The possible values are defined in EnumerationKind-Substance (see `s223:EnumerationKind-Substance`)." .
+
 s223:hasObservationLocationHigh a rdf:Property ;
     rdfs:label "has observation location high" ;
     rdfs:comment "The relation hasObservationLocationHigh associates a differential sensor to one of the topological locations where a differential property is observed (see `s223:observes`)." ;
     rdfs:subPropertyOf s223:hasObservationLocation .
 
-s223:hasProperty a rdf:Property ;
-    rdfs:label "has Property" ;
-    rdfs:comment "The relation hasProperty associates any 223 Concept with a Property." .
-
 s223:hasValue a rdf:Property ;
     rdfs:label "hasValue" ;
     rdfs:comment "hasValue is used to contain a fixed value that is part of a 223 model, rather than a computed, measured, or externally derived variable." .
+
+s223:ofSubstance a rdf:Property ;
+    rdfs:label "of substance" ;
+    rdfs:comment "The relation ofSubstance is used to associate a Property with a specific Substance." .
 
 qudt:hasUnit rdfs:comment "A reference to the unit of measure of a QuantifiableProperty of interest." .
 
@@ -3761,31 +3740,12 @@ s223:EnumerationKind-ThreeSpeedSetting a s223:Class,
     rdfs:comment "This class has enumerated instances of speed settings of High, Medium, Low (plus Off)." ;
     rdfs:subClassOf s223:EnumerationKind .
 
-s223:FunctionBlock a s223:Class,
-        sh:NodeShape ;
-    rdfs:label "Function block" ;
-    rdfs:comment "A FunctionBlock is used to model transfer and/or transformation of information (i.e. Property). It has relations to input properties and output properties. The actual algorithms that perform the transformations are described in CDL and are out of scope of the 223 standard." ;
-    rdfs:subClassOf s223:Concept ;
-    sh:or ( [ sh:property [ rdfs:comment "An instance of Function block can be associated with any number of Input instances using the relation 'has function input'." ;
-                        sh:class s223:FunctionInput ;
-                        sh:minCount 1 ;
-                        sh:path s223:hasInput ] ] [ sh:property [ rdfs:comment "An instance of Function block can be associated with any number of Output instances using the relation 'has function output'." ;
-                        sh:class s223:FunctionOutput ;
-                        sh:minCount 1 ;
-                        sh:path s223:hasOutput ] ] ) ;
-    sh:property [ rdfs:comment "If the relation hasConstant is present it must associate the FunctionBlock with a Constant." ;
-            sh:class s223:Constant ;
-            sh:path s223:hasConstant ],
-        [ rdfs:comment "If the relation hasParameter is present it must associate the FunctionBlock with a Parameter." ;
-            sh:class s223:Parameter ;
-            sh:path s223:hasParameter ] .
-
 s223:Medium-Refrigerant a s223:Class,
         s223:Medium-Refrigerant,
         sh:NodeShape ;
     rdfs:label "Medium-Refrigerant" ;
     rdfs:comment "This class has enumerated instances of commonly used refrigerants." ;
-    rdfs:subClassOf s223:EnumerationKind-Medium .
+    rdfs:subClassOf s223:Substance-Medium .
 
 s223:Substance-Particulate a s223:Class,
         s223:Substance-Particulate,
@@ -3855,13 +3815,6 @@ s223:EnumerationKind-Phase a s223:Class,
     rdfs:comment "This class has enumerated instances of thermodynamic phase, i.e. states of matter." ;
     rdfs:subClassOf s223:EnumerationKind .
 
-s223:EnumerationKind-Substance a s223:Class,
-        s223:EnumerationKind-Substance,
-        sh:NodeShape ;
-    rdfs:label "Substance" ;
-    rdfs:comment "This class has enumerated instances of the substances that are consumed, produced, transported, sensed, controlled or otherwise interacted with (e.g. water, air, etc.)." ;
-    rdfs:subClassOf s223:EnumerationKind .
-
 s223:LineNeutralVoltage-120V a s223:Dimensioned-LineNeutralVoltage ;
     rdfs:label "120V Line-Neutral Voltage" ;
     s223:hasVoltage s223:Voltage-120V .
@@ -3877,9 +3830,19 @@ s223:hasVoltage a rdf:Property ;
     rdfs:label "hasVoltage" ;
     rdfs:comment "The relation hasVoltage is used to identify the voltage of an electricity enumeration kind. " .
 
-s223:hasDomain a rdf:Property ;
-    rdfs:label "has domain" ;
-    rdfs:comment "The relation hasDomain is used to indicate what domain a Zone or DomainSpace pertains to (e.g. HVAC, lighting, electrical, etc.). Possible values are defined in EnumerationKind-Domain (see `s223:EnumerationKind-Domain`)." .
+s223:EnumerationKind-Substance a s223:Class,
+        s223:EnumerationKind-Substance,
+        sh:NodeShape ;
+    rdfs:label "Substance" ;
+    rdfs:comment "This class has enumerated instances of the substances that are consumed, produced, transported, sensed, controlled or otherwise interacted with (e.g. water, air, etc.)." ;
+    rdfs:subClassOf s223:EnumerationKind ;
+    sh:property [ rdfs:comment "If the relation hasConstituent is present, it must associate an EnumerationKind-Substance with one or more Properties that identify and characterize those constituents." ;
+            sh:class s223:Property ;
+            sh:path s223:hasConstituent ] .
+
+s223:contains a rdf:Property ;
+    rdfs:label "contains" ;
+    rdfs:comment "The relation contains associates a Zone, PhysicalSpace, or a piece of Equipment to a DomainSpace, PhysicalSpace, or Equipment respectively" .
 
 s223:Attribute-ElectricalPhaseIdentifier a s223:Attribute-ElectricalPhaseIdentifier,
         s223:Class,
@@ -3955,9 +3918,10 @@ UNION
 s223:Connection a s223:Class,
         sh:NodeShape ;
     rdfs:label "Connection" ;
-    rdfs:comment """A Connection is the modeling construct used to represent a physical thing (e.g., pipe, duct, or wire) that is used to convey some Medium (e.g., water, air, or electricity) between two connectable things. All Connections have two or more ConnectionPoints bound to either Equipment (see `s223:Equipment`) or DomainSpace (see `s223:DomainSpace`). If the direction of flow is constrained, that constraint is indicated by using one or more InletConnectionPoints (see `s223:InletConnectionPoint`) to represent the inflow points and OutletConnectionPoints (see `s223:OutletConnectionPoint`) to represent the outflow points.
+    rdfs:comment """A Connection is the modeling construct used to represent a physical thing (e.g., pipe, duct, or wire) that is used to convey some Medium (e.g., water, air, or electricity) between two connectable things. All Connections have two or more ConnectionPoints bound to either Equipment (see `s223:Equipment`), DomainSpace (see `s223:DomainSpace`), or Junction (see `s223:Junction`) See Figure . If the direction of flow is constrained, that constraint is indicated by using one or more InletConnectionPoints (see `s223:InletConnectionPoint`) to represent the inflow points and OutletConnectionPoints (see `s223:OutletConnectionPoint`) to represent the outflow points.
   
 A Connection may contain branches or intersections. These may be modeled using Junctions if it is necessary to identify a specific intersection. (see `s223:Junction`).
+![Graphical Depiction of Connection.](figures/Figure_5-3_Connection.svg)
 """ ;
     rdfs:subClassOf s223:Concept ;
     sh:property [ rdfs:comment "If the relation connectsAt is present it must associate the Connection with a ConnectionPoint." ;
@@ -3972,7 +3936,7 @@ A Connection may contain branches or intersections. These may be modeled using J
             sh:name "ConnectionToDownstreamConnectableShape" ;
             sh:path s223:connectsTo ],
         [ rdfs:comment "A Connection must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
-            sh:class s223:EnumerationKind-Medium ;
+            sh:class s223:Substance-Medium ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:name "Connection medium" ;
@@ -4015,6 +3979,27 @@ $this s223:cnx ?cp .
 ?cp a/rdfs:subClassOf* s223:ConnectionPoint .
 ?cp s223:hasMedium ?m1 .
 $this s223:hasMedium ?m2 .
+FILTER (?m1 != ?m2 ) .
+FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
+FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
+}
+""" ] ],
+        [ rdfs:comment "Ensure that the Medium identified by all the associated ConnectionPoints via the s223:hasMedium relation are compatible with one another." ;
+            sh:name "Test for compatible declared Medium" ;
+            sh:path s223:hasMedium ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "Ensure that the Medium identified by all the associated ConnectionPoints via the s223:hasMedium relation are compatible with one another." ;
+                    sh:message "{?cp1} with Medium {?m1} is incompatible with {?cp2} with Medium {?m2}." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
+                    sh:select """
+SELECT $this ?cp1 ?m1 ?cp2 ?m2
+WHERE {
+$this s223:cnx ?cp1 .
+?cp1 a/rdfs:subClassOf* s223:ConnectionPoint .
+?cp1 s223:hasMedium ?m1 .
+$this s223:cnx ?cp2 .
+?cp2 a/rdfs:subClassOf* s223:ConnectionPoint .
+?cp2 s223:hasMedium ?m2 .
 FILTER (?m1 != ?m2 ) .
 FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
 FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
@@ -4074,14 +4059,6 @@ s223:LineLineVoltage-240V a s223:Dimensioned-LineLineVoltage ;
     rdfs:label "240V Line-Line Voltage" ;
     s223:hasVoltage s223:Voltage-240V .
 
-s223:contains a rdf:Property ;
-    rdfs:label "contains" ;
-    rdfs:comment "The relation contains associates a Zone, PhysicalSpace, or a piece of Equipment to a DomainSpace, PhysicalSpace, or Equipment respectively" .
-
-s223:mapsTo a rdf:Property ;
-    rdfs:label "mapsTo" ;
-    rdfs:comment "The relation mapsTo is used to associate a ConnectionPoint of an Equipment to a corresponding ConnectionPoint of the Equipment containing it. The associated ConnectionPoints must have the same direction (see `s223:EnumerationKind-Direction`)." .
-
 s223:Context-Attribute a s223:Class,
         s223:Context-Attribute,
         sh:NodeShape ;
@@ -4111,14 +4088,15 @@ s223:Dimensioned-DCPositiveVoltage a s223:Class,
             sh:minCount 1 ;
             sh:path s223:hasVoltage ] .
 
+s223:mapsTo a rdf:Property ;
+    rdfs:label "mapsTo" ;
+    rdfs:comment "The relation mapsTo is used to associate a ConnectionPoint of an Equipment to a corresponding ConnectionPoint of the Equipment containing it. The associated ConnectionPoints must have the same direction (see `s223:EnumerationKind-Direction`)." .
+
 qudt:hasQuantityKind rdfs:comment "A reference to the QuantityKind of a QuantifiableProperty of interest, e.g. quantitykind:Temperature." .
 
-s223:EnumerationKind-Medium a s223:Class,
-        s223:EnumerationKind-Medium,
-        sh:NodeShape ;
-    rdfs:label "Medium" ;
-    rdfs:comment "This class has enumerated instances of a physical substance or anything that allows for the transfer of energy or information." ;
-    rdfs:subClassOf s223:EnumerationKind .
+s223:hasDomain a rdf:Property ;
+    rdfs:label "has domain" ;
+    rdfs:comment "The relation hasDomain is used to indicate what domain a Zone or DomainSpace pertains to (e.g. HVAC, lighting, electrical, etc.). Possible values are defined in EnumerationKind-Domain (see `s223:EnumerationKind-Domain`)." .
 
 s223:ConnectionPoint a s223:Class,
         sh:NodeShape ;
@@ -4157,7 +4135,7 @@ ConnectionPoints are represented graphically in this standard by a triangle with
             sh:path s223:connectsThrough ;
             sh:severity sh:Info ],
         [ rdfs:comment "A ConnectionPoint must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
-            sh:class s223:EnumerationKind-Medium ;
+            sh:class s223:Substance-Medium ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:name "ConnectionPoint medium" ;
@@ -4179,6 +4157,22 @@ ConnectionPoints are represented graphically in this standard by a triangle with
             sh:class s223:ConnectionPoint ;
             sh:maxCount 1 ;
             sh:path [ sh:inversePath s223:mapsTo ] ],
+        [ rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, and is not associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint probably needs an association with a Connection." ;
+            sh:path s223:connectsThrough ;
+            sh:severity sh:Info ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, and is not associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint probably needs an association with a Connection." ;
+                    sh:message "ConnectionPoint {$this} probably needs an association with a Connection." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
+                    sh:select """
+    SELECT $this 
+    WHERE {
+        FILTER NOT EXISTS {$this s223:connectsThrough ?anything1} .
+        FILTER NOT EXISTS {$this s223:mapsTo ?anything2} .
+        $this s223:isConnectionPointOf ?equipment .
+        FILTER NOT EXISTS {?containerEquipment s223:contains ?equipment} .
+        }
+        """ ] ],
         [ rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the entity identified by the mapsTo+ relation." ;
             sh:name "Test for compatible declared Medium" ;
             sh:path s223:hasMedium ;
@@ -4199,19 +4193,18 @@ FILTER (NOT EXISTS {?b a/rdfs:subClassOf* ?a}) .
 FILTER (NOT EXISTS {?a a/rdfs:subClassOf* ?b}) .
 }
 """ ] ],
-        [ rdfs:comment "If a ConnectionPoint mapsTo another ConnectionPoint, the respective Equipment should have a contains relation." ;
+        [ rdfs:comment "A ConnectionPoint must not have both a mapsTo and a connectsThrough relation." ;
             sh:path s223:mapsTo ;
             sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "If a ConnectionPoint mapsTo another ConnectionPoint, the respective Equipment should have a contains relation." ;
-                    sh:message "{?otherEquipment} should contain {?equipment} because ConnectionPoint {$this} has a mapsTo relation." ;
+                    rdfs:comment "A ConnectionPoint must not have both a mapsTo and a connectsThrough relation." ;
+                    sh:message "{$this} cannot have both a mapsTo {?uppercp} and a connectsThrough {?connection}." ;
                     sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
                     sh:select """
-SELECT $this ?equipment ?otherEquipment
+SELECT $this ?uppercp ?connection
 WHERE {
-$this s223:mapsTo ?otherCP .
-?equipment s223:hasConnectionPoint $this .
-?otherEquipment s223:hasConnectionPoint ?otherCP .
-FILTER NOT EXISTS {?otherEquipment s223:contains ?equipment}
+$this s223:mapsTo ?uppercp .
+$this s223:connectsThrough ?connection .
+?connection a/rdfs:subClassOf* s223:Connection .
 }
 """ ] ],
         [ rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, but is associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint might need a mapsTo relation to a ConnectionPoint of the containing Equipment." ;
@@ -4230,22 +4223,21 @@ FILTER NOT EXISTS {?otherEquipment s223:contains ?equipment}
         ?containerEquipment s223:contains ?equipment .
         }
         """ ] ],
-        [ rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, and is not associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint probably needs an association with a Connection." ;
-            sh:path s223:connectsThrough ;
-            sh:severity sh:Info ;
+        [ rdfs:comment "If a ConnectionPoint mapsTo another ConnectionPoint, the respective Equipment should have a contains relation." ;
+            sh:path s223:mapsTo ;
             sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, and is not associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint probably needs an association with a Connection." ;
-                    sh:message "ConnectionPoint {$this} probably needs an association with a Connection." ;
+                    rdfs:comment "If a ConnectionPoint mapsTo another ConnectionPoint, the respective Equipment should have a contains relation." ;
+                    sh:message "{?otherEquipment} should contain {?equipment} because ConnectionPoint {$this} has a mapsTo relation." ;
                     sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
                     sh:select """
-    SELECT $this 
-    WHERE {
-        FILTER NOT EXISTS {$this s223:connectsThrough ?anything1} .
-        FILTER NOT EXISTS {$this s223:mapsTo ?anything2} .
-        $this s223:isConnectionPointOf ?equipment .
-        FILTER NOT EXISTS {?containerEquipment s223:contains ?equipment} .
-        }
-        """ ] ] .
+SELECT $this ?equipment ?otherEquipment
+WHERE {
+$this s223:mapsTo ?otherCP .
+?equipment s223:hasConnectionPoint $this .
+?otherEquipment s223:hasConnectionPoint ?otherCP .
+FILTER NOT EXISTS {?otherEquipment s223:contains ?equipment}
+}
+""" ] ] .
 
 s223:Property a s223:Class,
         sh:NodeShape ;
@@ -4279,13 +4271,18 @@ Enumerable properties must be associated with an EnumerationKind.
             sh:maxCount 1 ;
             sh:path s223:hasValue ],
         [ rdfs:comment "A Property can be associated with at most one EnumerationKind-Medium using the relation ofMedium" ;
-            sh:class s223:EnumerationKind-Medium ;
+            sh:class s223:Substance-Medium ;
             sh:maxCount 1 ;
             sh:path s223:ofMedium ],
         [ rdfs:comment "A Property can be associated with at most one EnumerationKind-Substance using the relation ofSubstance" ;
             sh:class s223:EnumerationKind-Substance ;
             sh:maxCount 1 ;
-            sh:path s223:ofSubstance ] ;
+            sh:path s223:ofSubstance ],
+        [ rdfs:comment "A Property can be associated with at most one FunctionBlock using the inverse relation hasOutput." ;
+            sh:class s223:FunctionBlock ;
+            sh:maxCount 1 ;
+            sh:message "A Property can be associated with at most one FunctionBlock using the inverse relation hasOutput." ;
+            sh:path [ sh:inversePath s223:hasOutput ] ] ;
     sh:sparql [ a sh:SPARQLConstraint ;
             rdfs:comment "A Property instance cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
             sh:message "{$this} cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
@@ -4297,6 +4294,13 @@ $this a/rdfs:subClassOf* s223:ActuatableProperty .
 $this a/rdfs:subClassOf* s223:ObservableProperty .
 }
 """ ] .
+
+s223:Substance-Medium a s223:Class,
+        s223:Substance-Medium,
+        sh:NodeShape ;
+    rdfs:label "Medium" ;
+    rdfs:comment "This class has enumerated instances of a physical substance or anything that allows for the transfer of energy or information." ;
+    rdfs:subClassOf s223:EnumerationKind-Substance .
 
 s223:Voltage-0V a s223:Dimensioned-Voltage,
         s223:QuantifiableProperty ;
@@ -4447,24 +4451,6 @@ s223:EnumerationKind-Domain a s223:Class,
     rdfs:comment "A Domain represents a categorization of building services or specialization used to characterize equipment or spaces in a building. Example domains include HVAC, Lighting, and Plumbing." ;
     rdfs:subClassOf s223:EnumerationKind .
 
-s223:hasRole a rdf:Property ;
-    rdfs:label "hasRole" ;
-    rdfs:comment "The relation hasRole is used to indicate the role of an Equipment, Connection, ConnectionPoint, or System within a building (e.g., a heating coil will be associated with Role-Heating). Possible values are defined in EnumerationKind-Role (see `s223:EnumerationKind-Role`)." .
-
-s223:EnumerationKind a s223:Class,
-        s223:EnumerationKind,
-        sh:NodeShape ;
-    rdfs:label "Enumeration kind" ;
-    rdfs:comment """This is the encapsulating class for all EnumerationKinds. 
-  EnumerationKinds define the (closed) set of permissible values for a given purpose. 
-  For example, the DayOfWeek EnumerationKind enumerates the days of the week and allows no other values.
-  
-EnumeratinKinds are arranged in a tree hierarchy. 
-As you navigate down the tree each branch or leaf value is a more specific instance of the EnumerationKind. 
-Certain validation constraints exist in the standard that evaluate compatibility of EnumerationKinds. 
-Two values are deemed compatible if they are the same or if one is a direct ancestor (or descendant) of the other.""" ;
-    rdfs:subClassOf s223:Concept .
-
 s223:Concept a s223:Class,
         sh:NodeShape ;
     rdfs:label "Concept" ;
@@ -4472,11 +4458,29 @@ s223:Concept a s223:Class,
     rdfs:comment "All classes defined in the 223 standard are subclasses of s223:Concept." ;
     rdfs:subClassOf rdfs:Resource ;
     sh:property [ rdfs:comment "If the relation hasProperty is present, it must associate the concept with a Property." ;
+            sh:class s223:Property ;
             sh:path s223:hasProperty ],
-        [ rdfs:comment "A Concept must be associated with at least one label using the relation label" ;
+        [ rdfs:comment "A Concept must be associated with at least one label using the relation label." ;
             sh:minCount 1 ;
-            sh:path rdfs:label ] ;
+            sh:path rdfs:label ;
+            sh:severity sh:Warning ] ;
     sh:sparql [ a sh:SPARQLConstraint ;
+            rdfs:comment "Flag entities that have a hasMedium value which is incompatible with the ofMedium value of an associated Property." ;
+            sh:message "{$this} hasMedium of {?m1}, but is associated with property {?prop} that has ofMedium of {?m2}." ;
+            sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
+            sh:select """
+SELECT $this ?m1 ?prop ?m2
+WHERE {
+$this s223:hasMedium ?m1 .
+$this ?p ?prop .
+?prop a/rdfs:subClassOf* s223:Property .
+?prop s223:ofMedium ?m2 .
+FILTER (?m1 != ?m2 ) .
+FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
+FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
+}
+""" ],
+        [ a sh:SPARQLConstraint ;
             rdfs:comment "Ensure that any instance that is declared to be an instance of an abstract class must also be declared an instance of at least one subClass of that abstract class" ;
             sh:message "{$this} cannot be declared an instance of only abstract class {?class}." ;
             sh:prefixes <http://data.ashrae.org/standard223/1.0/validation/model> ;
@@ -4493,6 +4497,27 @@ FILTER (?class != ?otherClass) .
 FILTER (!bound (?otherClass)) .
 }
 """ ] .
+
+s223:hasRole a rdf:Property ;
+    rdfs:label "hasRole" ;
+    rdfs:comment "The relation hasRole is used to indicate the role of an Equipment, Connection, ConnectionPoint, or System within a building (e.g., a heating coil will be associated with Role-Heating). Possible values are defined in EnumerationKind-Role (see `s223:EnumerationKind-Role`)." .
+
+s223:EnumerationKind a s223:Class,
+        s223:EnumerationKind,
+        sh:NodeShape ;
+    rdfs:label "Enumeration kind" ;
+    rdfs:comment """This is the encapsulating class for all EnumerationKinds. 
+  EnumerationKinds define the (closed) set of permissible values for a given purpose. 
+  For example, the DayOfWeek EnumerationKind enumerates the days of the week and allows no other values.
+  
+EnumeratinKinds are arranged in a tree hierarchy. 
+As you navigate down the tree each branch or leaf value is a more specific instance of the EnumerationKind. 
+Certain validation constraints exist in the standard that evaluate compatibility of EnumerationKinds. 
+Two values are deemed compatible if they are the same or if one is a direct ancestor (or descendant) of the other.""" ;
+    rdfs:subClassOf s223:Concept ;
+    sh:property [ rdfs:comment "An EnumerationKind must not use the generalized hasProperty relation. Some EnumerationKinds have specifically-defined relations to Property." ;
+            sh:maxCount 0 ;
+            sh:path s223:hasProperty ] .
 
 s223:Dimensioned-LineLineVoltage a s223:Class,
         s223:Dimensioned-LineLineVoltage,
@@ -4521,7 +4546,7 @@ s223:Medium-Air a s223:Class,
         sh:NodeShape ;
     rdfs:label "Medium-Air" ;
     rdfs:comment "This class has enumerated instances of Air in various states." ;
-    rdfs:subClassOf s223:EnumerationKind-Medium .
+    rdfs:subClassOf s223:Substance-Medium .
 
 s223:Context-Dimensioned a s223:Class,
         s223:Context-Dimensioned,
@@ -4542,7 +4567,7 @@ s223:Medium-Electricity a s223:Class,
         sh:NodeShape ;
     rdfs:label "Electricity" ;
     rdfs:comment "This class has enumerated instances of all forms of electricity, including AC and DC." ;
-    rdfs:subClassOf s223:EnumerationKind-Medium .
+    rdfs:subClassOf s223:Substance-Medium .
 
 s223:Frequency-50Hz a s223:Dimensioned-Frequency,
         s223:QuantifiableProperty ;
@@ -4556,7 +4581,7 @@ s223:Medium-Water a s223:Class,
         sh:NodeShape ;
     rdfs:label "Medium-Water" ;
     rdfs:comment "This class has enumerated instances of water and aqueous solutions in various states." ;
-    rdfs:subClassOf s223:EnumerationKind-Medium .
+    rdfs:subClassOf s223:Substance-Medium .
 
 s223:NumberOfElectricalPhases-ThreePhase a s223:Dimensionless-NumberOfElectricalPhases ;
     rdfs:label "Three Phase AC Electricity" .
@@ -4616,26 +4641,11 @@ FILTER NOT EXISTS {$this s223:mapsTo ?anything} .
 s223:Equipment a s223:Class,
         sh:NodeShape ;
     rdfs:label "Equipment" ;
-    rdfs:comment "An Equipment is the modeling construct used to represent a mechanical device designed to accomplish a specific task that one might buy from a vendor. Examples of possible equipment include a pump, fan, heat exchanger, luminaire, temperature sensor, or flow meter." ;
+    rdfs:comment """An Equipment is the modeling construct used to represent a mechanical device designed to accomplish a specific task that one might buy from a vendor. Examples of possible equipment include a pump, fan, heat exchanger, luminaire, temperature sensor, or flow meter.
+  The Graphical depiction of Equipment used in this standard is a rounded cornered rectangle as show in Figure 5-1.
+  ![Graphical Depiction of Equipment.](figures/Figure_5-1Graphical_Depiciton_of_Equipment.svg)""" ;
     rdfs:subClassOf s223:Connectable ;
-    sh:property [ a sh:PropertyShape ;
-            rdfs:comment "If the relation contains is present it must associate the Equipment with either Equipment or Junction." ;
-            sh:name "device contains shape" ;
-            sh:or ( [ sh:class s223:Equipment ] [ sh:class s223:Junction ] ) ;
-            sh:path s223:contains ],
-        [ rdfs:comment "If the relation commandedByProperty is present it must associate the Equipment with a ActuatableProperty." ;
-            sh:class s223:ActuatableProperty ;
-            sh:path s223:commandedByProperty ],
-        [ rdfs:comment "If the relation executes is present it must associate the Equipment with a FunctionBlock." ;
-            sh:class s223:FunctionBlock ;
-            sh:path s223:executes ],
-        [ rdfs:comment "If the relation hasPhysicalLocation is present it must associate the Equipment with a PhysicalSpace." ;
-            sh:class s223:PhysicalSpace ;
-            sh:path s223:hasPhysicalLocation ],
-        [ rdfs:comment "If the relation hasRole is present it must associate the Equipment with a EnumerationKind-Role." ;
-            sh:class s223:EnumerationKind-Role ;
-            sh:path s223:hasRole ],
-        [ rdfs:comment "If a contained equipment has external connections, make sure that the containing equipment has the same external connections." ;
+    sh:property [ rdfs:comment "If a contained equipment has external connections, make sure that the containing equipment has the same external connections." ;
             sh:path s223:connectedFrom ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "If a contained equipment has external connections, make sure that the containing equipment has the same external connections." ;
@@ -4690,25 +4700,28 @@ UNION
 ?type1 rdfs:subClassOf* ?type2 .
 }
 }
-""" ] ] ;
+""" ] ],
+        [ a sh:PropertyShape ;
+            rdfs:comment "If the relation contains is present it must associate the Equipment with either Equipment or Junction." ;
+            sh:name "device contains shape" ;
+            sh:or ( [ sh:class s223:Equipment ] [ sh:class s223:Junction ] ) ;
+            sh:path s223:contains ],
+        [ rdfs:comment "If the relation commandedByProperty is present it must associate the Equipment with a ActuatableProperty." ;
+            sh:class s223:ActuatableProperty ;
+            sh:path s223:commandedByProperty ],
+        [ rdfs:comment "If the relation executes is present it must associate the Equipment with a FunctionBlock." ;
+            sh:class s223:FunctionBlock ;
+            sh:path s223:executes ],
+        [ rdfs:comment "If the relation hasPhysicalLocation is present it must associate the Equipment with a PhysicalSpace." ;
+            sh:class s223:PhysicalSpace ;
+            sh:path s223:hasPhysicalLocation ],
+        [ rdfs:comment "If the relation hasRole is present it must associate the Equipment with a EnumerationKind-Role." ;
+            sh:class s223:EnumerationKind-Role ;
+            sh:path s223:hasRole ] ;
     sh:rule [ a sh:SPARQLRule ;
-            rdfs:comment "For equipment containing another piece of equipment, use the mapsTo relation to infer a cnx and Medium from the contained equipment." ;
+            rdfs:comment "For equipment contained within another piece of equipment use the mapsTo relation to infer a Medium from the containing equipment." ;
             sh:construct """
-CONSTRUCT {?parentCp s223:cnx ?connection .
-    ?parentCp s223:hasMedium ?medium .
-}
-WHERE {
-  $this s223:hasConnectionPoint ?cp .
-  ?cp s223:mapsTo ?parentCp .
-  ?cp s223:connectsThrough ?connection .
-  ?cp s223:hasMedium ?medium .
-}
-""" ;
-            sh:prefixes <http://data.ashrae.org/standard223/1.0/inference/model-rules> ],
-        [ a sh:SPARQLRule ;
-            rdfs:comment "For equipment contained within another piece of equipment use the mapsTo relation to infer  a cnx and Medium from the containing equipment." ;
-            sh:construct """
-CONSTRUCT {?childCp s223:cnx ?connection .
+CONSTRUCT {
     ?childCp s223:hasMedium ?medium .
 }
 WHERE {
@@ -4716,6 +4729,22 @@ WHERE {
   ?childCp s223:mapsTo ?cp .
   ?cp s223:connectsThrough ?connection .
   ?cp s223:hasMedium ?medium .
+  FILTER NOT EXISTS {?childCp s223:hasMedium ?something} .
+}
+""" ;
+            sh:prefixes <http://data.ashrae.org/standard223/1.0/inference/model-rules> ],
+        [ a sh:SPARQLRule ;
+            rdfs:comment "For equipment containing another piece of equipment, use the mapsTo relation to infer a Medium from the contained equipment." ;
+            sh:construct """
+CONSTRUCT {
+    ?parentCp s223:hasMedium ?medium .
+}
+WHERE {
+  $this s223:hasConnectionPoint ?cp .
+  ?cp s223:mapsTo ?parentCp .
+  ?cp s223:connectsThrough ?connection .
+  ?cp s223:hasMedium ?medium .
+  FILTER NOT EXISTS {?parentCp s223:hasMedium ?something} .
 }
 """ ;
             sh:prefixes <http://data.ashrae.org/standard223/1.0/inference/model-rules> ] .
@@ -4843,22 +4872,6 @@ FILTER (?count > 1) .
 }
 """ ] .
 
-s223:Dimensioned-Voltage a s223:Class,
-        s223:Dimensioned-Voltage,
-        sh:NodeShape ;
-    rdfs:label "Dimensioned Voltage" ;
-    qudt:hasQuantityKind qudtqk:Voltage ;
-    qudt:hasUnit unit:V ;
-    rdfs:subClassOf s223:Context-Dimensioned,
-        s223:QuantifiableProperty .
-
-s223:Frequency-60Hz a s223:Dimensioned-Frequency,
-        s223:QuantifiableProperty ;
-    rdfs:label "60 Hertz" ;
-    s223:hasValue 60.0 ;
-    qudt:hasQuantityKind qudtqk:Frequency ;
-    qudt:hasUnit unit:HZ .
-
 rdf:Property a sh:NodeShape ;
     sh:property [ rdfs:comment "This Property must have a label" ;
             sh:path rdfs:label ;
@@ -4886,6 +4899,22 @@ FILTER (?prop = "http://data.ashrae.org/standard223") .
 FILTER (NOT EXISTS {$this rdfs:comment ?something}) .
 }
 """ ] ] .
+
+s223:Dimensioned-Voltage a s223:Class,
+        s223:Dimensioned-Voltage,
+        sh:NodeShape ;
+    rdfs:label "Dimensioned Voltage" ;
+    qudt:hasQuantityKind qudtqk:Voltage ;
+    qudt:hasUnit unit:V ;
+    rdfs:subClassOf s223:Context-Dimensioned,
+        s223:QuantifiableProperty .
+
+s223:Frequency-60Hz a s223:Dimensioned-Frequency,
+        s223:QuantifiableProperty ;
+    rdfs:label "60 Hertz" ;
+    s223:hasValue 60.0 ;
+    qudt:hasQuantityKind qudtqk:Frequency ;
+    qudt:hasUnit unit:HZ .
 
 s223:hasMedium a rdf:Property ;
     rdfs:label "has Medium" ;
