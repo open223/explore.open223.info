@@ -3929,10 +3929,7 @@ s223:EnumerationKind-Substance a s223:Class,
     rdfs:label "Substance" ;
     rdfs:comment "This class has enumerated instances of the substances that are consumed, produced, transported, sensed, controlled or otherwise interacted with (e.g. water, air, etc.)." ;
     rdfs:subClassOf s223:EnumerationKind ;
-    sh:property [ rdfs:comment "If the relation hasConstituent is present, it must associate an EnumerationKind-Substance with one or more Properties that identify and characterize those constituents." ;
-            sh:class s223:Property ;
-            sh:path s223:hasConstituent ],
-        [ rdfs:comment "A substance may only have atomic constituents, it may not have a constituent that also has constituents." ;
+    sh:property [ rdfs:comment "A substance may only have atomic constituents, it may not have a constituent that also has constituents." ;
             sh:path s223:hasConstituent ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "If a substance has a constituent, that constituent may not itself have constituents." ;
@@ -3944,7 +3941,10 @@ WHERE {
 $this s223:hasConstituent ?constituent .
 ?constituent s223:ofSubstance/s223:hasConstituent ?nextConstituent .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "If the relation hasConstituent is present, it must associate an EnumerationKind-Substance with one or more Properties that identify and characterize those constituents." ;
+            sh:class s223:Property ;
+            sh:path s223:hasConstituent ] .
 
 s223:contains a rdf:Property ;
     rdfs:label "contains" ;
