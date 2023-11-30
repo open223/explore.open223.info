@@ -1,5 +1,4 @@
 @prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix qudtqk: <http://qudt.org/vocab/quantitykind/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -2432,26 +2431,6 @@ s223:hasSetpoint a rdf:Property ;
 s223:inverseOf a rdf:Property ;
     rdfs:label "inverse of" ;
     rdfs:comment "The relation inverseOf is a modeling construct to associate relations that are inverses of one another, such as connectedTo and connectedFrom." .
-
-<http://data.ashrae.org/standard223/1.0/model/all> a owl:Ontology ;
-    sh:declare [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ],
-        [ ] .
 
 bacnet:device-identifier a rdf:Property ;
     rdfs:label "Device Identifier" ;
