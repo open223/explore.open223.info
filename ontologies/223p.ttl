@@ -1318,12 +1318,8 @@ s223:inverseOf a rdf:Property ;
 <http://data.ashrae.org/standard223/1.0/model/all> a owl:Ontology ;
     sh:declare [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
-            sh:prefix "quantitykind" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
         [ sh:namespace "http://data.ashrae.org/standard223/1.0/vocab/role#"^^xsd:anyURI ;
@@ -1338,6 +1334,20 @@ s223:inverseOf a rdf:Property ;
             sh:prefix "rdfs" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+            sh:prefix "sh" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
+            sh:prefix "quantitykind" ],
         [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
             sh:prefix "s223" ],
         [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
@@ -1347,17 +1357,7 @@ s223:inverseOf a rdf:Property ;
         [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
             sh:prefix "sh" ],
         [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-            sh:prefix "sh" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ] .
+            sh:prefix "qudt" ] .
 
 bacnet:device-identifier a rdf:Property ;
     rdfs:label "Device Identifier" ;
@@ -3914,21 +3914,21 @@ s223:Medium-NaturalGas a s223:Class,
         s223:Medium-NaturalGas,
         sh:NodeShape ;
     rdfs:label "Medium-NaturalGas" ;
-    rdfs:comment "This class has enumerated instances of natural gas in various states." ;
+    rdfs:comment "This class has enumerated subclasses of natural gas in various states." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:Phase-Gas a s223:Class,
         s223:Phase-Gas,
         sh:NodeShape ;
     rdfs:label "Phase-Gas" ;
-    rdfs:comment "This class has enumerated instances of gas in various thermodynamic states." ;
+    rdfs:comment "This class has enumerated subclasses of gas in various thermodynamic states." ;
     rdfs:subClassOf s223:EnumerationKind-Phase .
 
 s223:Phase-Liquid a s223:Class,
         s223:Phase-Liquid,
         sh:NodeShape ;
     rdfs:label "Phase-Liquid" ;
-    rdfs:comment "This class has enumerated instances of liquid in various thermodynamic states." ;
+    rdfs:comment "This class has enumerated subclasses of liquid in various thermodynamic states." ;
     rdfs:subClassOf s223:EnumerationKind-Phase .
 
 s223:QuantifiableObservableProperty a s223:Class,
@@ -4276,7 +4276,7 @@ s223:Aspect-DayOfWeek a s223:Aspect-DayOfWeek,
         s223:Class,
         sh:NodeShape ;
     rdfs:label "Day of Week" ;
-    rdfs:comment "This class has enumerated instances of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. The Weekend and Weekday EnumerationKinds define subsets of this EnumerationKind for Mon-Fri and Sat,Sun, respectively" ;
+    rdfs:comment "This class has enumerated subclasses of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. The Weekend and Weekday EnumerationKinds define subsets of this EnumerationKind for Mon-Fri and Sat,Sun, respectively" ;
     rdfs:subClassOf s223:EnumerationKind-Aspect .
 
 s223:Coil a s223:Class,
@@ -4417,7 +4417,7 @@ s223:Medium-Oil a s223:Class,
         s223:Medium-Oil,
         sh:NodeShape ;
     rdfs:label "Medium-Oil" ;
-    rdfs:comment "This class has enumerated instances of oil." ;
+    rdfs:comment "This class has enumerated subclasses of oil." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:ObservableProperty a s223:Class,
@@ -4455,7 +4455,7 @@ s223:Signal-Modulated a s223:Class,
         s223:Signal-Modulated,
         sh:NodeShape ;
     rdfs:label "Signal-Modulated" ;
-    rdfs:comment "This class has enumerated instances of electric signals at various voltage ranges." ;
+    rdfs:comment "This class has enumerated subclasses of electric signals at various voltage ranges." ;
     rdfs:subClassOf s223:Electricity-Signal .
 
 s223:Voltage-208V a s223:Class,
@@ -4516,7 +4516,7 @@ s223:Water-GlycolSolution a s223:Class,
             s223:ofSubstance s223:Medium-Water ;
             qudt:hasQuantityKind qudtqk:VolumeFraction ;
             qudt:hasUnit unit:PERCENT ] ;
-    rdfs:comment "This class has enumerated instances of water-glycol solutions in various concentrations." ;
+    rdfs:comment "This class has enumerated subclasses of water-glycol solutions in various concentrations." ;
     rdfs:subClassOf s223:Medium-Water ;
     sh:property [ rdfs:comment "One of the constituents of a Water-GlycolSolution must be Medium-Water." ;
             sh:path s223:hasConstituent ;
@@ -4646,28 +4646,28 @@ s223:EnumerationKind-Binary a s223:Class,
         s223:EnumerationKind-Binary,
         sh:NodeShape ;
     rdfs:label "EnumerationKind Binary" ;
-    rdfs:comment "This class has enumerated instances of True, False and Unknown used to describe the possible values of a binary property" ;
+    rdfs:comment "This class has enumerated subclasses of True, False and Unknown used to describe the possible values of a binary property" ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-Direction a s223:Class,
         s223:EnumerationKind-Direction,
         sh:NodeShape ;
     rdfs:label "Direction" ;
-    rdfs:comment "This class has enumerated instances of Bidirectional, Inlet and Outlet used to qualify ConnectionPoints." ;
+    rdfs:comment "This class has enumerated subclasses of Bidirectional, Inlet and Outlet used to qualify ConnectionPoints." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-OnOff a s223:Class,
         s223:EnumerationKind-OnOff,
         sh:NodeShape ;
     rdfs:label "OnOff enumeration" ;
-    rdfs:comment "This class has enumerated instances of states of either on or off." ;
+    rdfs:comment "This class has enumerated subclasses of states of either on or off." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-Position a s223:Class,
         s223:EnumerationKind-Position,
         sh:NodeShape ;
     rdfs:label "Position" ;
-    rdfs:comment "This class has enumerated instances of position such as closed or open." ;
+    rdfs:comment "This class has enumerated subclasses of position such as closed or open." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-RunStatus a s223:Class,
@@ -4821,21 +4821,21 @@ s223:Medium-EM a s223:Class,
         s223:Medium-EM,
         sh:NodeShape ;
     rdfs:label "Electromagnetic Wave" ;
-    rdfs:comment "This class has enumerated instances of electromagnetic energy at any frequency range." ;
+    rdfs:comment "This class has enumerated subclasses of electromagnetic energy at any frequency range." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:Occupancy-Motion a s223:Class,
         s223:Occupancy-Motion,
         sh:NodeShape ;
     rdfs:label "Occupancy Motion" ;
-    rdfs:comment "This class has enumerated instances indicating whether motion is detected or not." ;
+    rdfs:comment "This class has enumerated subclasses indicating whether motion is detected or not." ;
     rdfs:subClassOf s223:EnumerationKind-Occupancy .
 
 s223:Occupancy-Presence a s223:Class,
         s223:Occupancy-Presence,
         sh:NodeShape ;
     rdfs:label "Occupancy Presence" ;
-    rdfs:comment "This class has enumerated instances indicating whether physical presence is detected or not." ;
+    rdfs:comment "This class has enumerated subclasses indicating whether physical presence is detected or not." ;
     rdfs:subClassOf s223:EnumerationKind-Occupancy .
 
 s223:TerminalUnit a s223:Class,
@@ -4933,7 +4933,7 @@ s223:EnumerationKind-Speed a s223:Class,
         s223:EnumerationKind-Speed,
         sh:NodeShape ;
     rdfs:label "Speed" ;
-    rdfs:comment "This class has enumerated instances of speed settings of High, Medium, Low (plus Off)." ;
+    rdfs:comment "This class has enumerated subclasses of speed settings of High, Medium, Low (plus Off)." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:LineLineVoltage-10000V a s223:Class,
@@ -5087,7 +5087,7 @@ s223:Medium-Refrigerant a s223:Class,
         s223:Medium-Refrigerant,
         sh:NodeShape ;
     rdfs:label "Medium-Refrigerant" ;
-    rdfs:comment "This class has enumerated instances of commonly used refrigerants." ;
+    rdfs:comment "This class has enumerated subclasses of commonly used refrigerants." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:Numerical-DCVoltage a s223:Class,
@@ -5139,7 +5139,7 @@ s223:Substance-Particulate a s223:Class,
         s223:Substance-Particulate,
         sh:NodeShape ;
     rdfs:label "Particulate" ;
-    rdfs:comment "This class has enumerated instances of particulates in various size ranges." ;
+    rdfs:comment "This class has enumerated subclasses of particulates in various size ranges." ;
     rdfs:subClassOf s223:EnumerationKind-Substance .
 
 s223:Voltage-24V a s223:Class,
@@ -5205,35 +5205,35 @@ s223:Electricity-Signal a s223:Class,
         s223:Electricity-Signal,
         sh:NodeShape ;
     rdfs:label "Electricity Signal" ;
-    rdfs:comment "This class has enumerated instances of common communication protocols." ;
+    rdfs:comment "This class has enumerated subclasses of common communication protocols." ;
     rdfs:subClassOf s223:Medium-Electricity .
 
 s223:EnumerationKind-HVACOperatingMode a s223:Class,
         s223:EnumerationKind-HVACOperatingMode,
         sh:NodeShape ;
     rdfs:label "HVAC operating mode" ;
-    rdfs:comment "HVACOperatingMode has enumerated instances of the policy under which the HVAC system or equipment is operating." ;
+    rdfs:comment "HVACOperatingMode has enumerated subclasses of the policy under which the HVAC system or equipment is operating." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-HVACOperatingStatus a s223:Class,
         s223:EnumerationKind-HVACOperatingStatus,
         sh:NodeShape ;
     rdfs:label "HVAC operating status" ;
-    rdfs:comment "HVACOperatingStatus has enumerated instances of the HVAC system/equipment operating status." ;
+    rdfs:comment "HVACOperatingStatus has enumerated subclasses of the HVAC system/equipment operating status." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-Occupancy a s223:Class,
         s223:EnumerationKind-Occupancy,
         sh:NodeShape ;
     rdfs:label "Occupancy status" ;
-    rdfs:comment "This class has enumerated instances of occupancy status, i.e. the state of being used or occupied." ;
+    rdfs:comment "This class has enumerated subclasses of occupancy status, i.e. the state of being used or occupied." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:EnumerationKind-Phase a s223:Class,
         s223:EnumerationKind-Phase,
         sh:NodeShape ;
-    rdfs:label "EnumerationKind-Phase" ;
-    rdfs:comment "This class has enumerated instances of thermodynamic phase, i.e. states of matter." ;
+    rdfs:label "EnumerationKind Phase" ;
+    rdfs:comment "This class has enumerated subclasses of thermodynamic phase, i.e. states of matter." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:hasObservationLocation a rdf:Property ;
@@ -5245,10 +5245,10 @@ qudt:hasUnit rdfs:comment "A reference to the unit of measure of a QuantifiableP
 s223:EnumerationKind-Numerical a s223:Class,
         s223:EnumerationKind-Numerical,
         sh:NodeShape ;
-    rdfs:label "EnumerationKind-Numerical" ;
+    rdfs:label "EnumerationKind Numerical" ;
     qudt:hasQuantityKind qudtqk:Unknown ;
     qudt:hasUnit unit:UNKNOWN ;
-    rdfs:comment "This class has enumerated instances of contexts often used with the s223:hasAspect relation for a s223:Property with a numerical value, unit and quantitykind." ;
+    rdfs:comment "This class has enumerated subclasses of contexts often used with the s223:hasAspect relation for a s223:Property with a numerical value, unit and quantitykind." ;
     rdfs:subClassOf s223:EnumerationKind,
         s223:QuantifiableProperty .
 
@@ -5256,7 +5256,7 @@ s223:EnumerationKind-Substance a s223:Class,
         s223:EnumerationKind-Substance,
         sh:NodeShape ;
     rdfs:label "Substance" ;
-    rdfs:comment "This class has enumerated instances of the substances that are consumed, produced, transported, sensed, controlled or otherwise interacted with (e.g. water, air, etc.)." ;
+    rdfs:comment "This class has enumerated subclasses of the substances that are consumed, produced, transported, sensed, controlled or otherwise interacted with (e.g. water, air, etc.)." ;
     rdfs:subClassOf s223:EnumerationKind ;
     sh:property [ rdfs:comment "If the relation hasConstituent is present, it must associate an EnumerationKind-Substance with one or more Properties that identify and characterize those constituents." ;
             sh:class s223:Property ;
@@ -5510,7 +5510,7 @@ s223:EM-Light a s223:Class,
         s223:EM-Light,
         sh:NodeShape ;
     rdfs:label "EM-Light" ;
-    rdfs:comment "The EM-Light class has enumerated instances of what are considered visible or near-visible light." ;
+    rdfs:comment "The EM-Light class has enumerated subclasses of what are considered visible or near-visible light." ;
     rdfs:subClassOf s223:Medium-EM .
 
 s223:mapsTo a rdf:Property ;
@@ -5918,7 +5918,7 @@ s223:Substance-Medium a s223:Class,
         s223:Substance-Medium,
         sh:NodeShape ;
     rdfs:label "Medium" ;
-    rdfs:comment "This class has enumerated instances of a physical substance or anything that allows for the transfer of energy or information." ;
+    rdfs:comment "This class has enumerated subclasses of a physical substance or anything that allows for the transfer of energy or information." ;
     rdfs:subClassOf s223:EnumerationKind-Substance .
 
 s223:Electricity-DC a s223:Class,
@@ -6017,8 +6017,7 @@ s223:EnumerationKind a s223:Class,
   EnumerationKinds define the (closed) set of permissible values for a given purpose. 
   For example, the DayOfWeek EnumerationKind enumerates the days of the week and allows no other values.
   
-EnumerationKinds are arranged in a tree hierarchy. 
-As you navigate down the tree each branch or leaf value is a more specific class of the EnumerationKind. 
+EnumerationKinds are arranged in a tree hierarchy, with the root class named EnumerationKind. Each subclass is named starting with its immediate superclass, followed by a hyphen and a name that is unique among the sibling superclasses. 
 Certain validation constraints exist in the standard that evaluate compatibility of EnumerationKinds. 
 Two values are deemed compatible if they are the same or if one is a direct ancestor (or descendant) of the other.""" ;
     rdfs:subClassOf s223:Concept ;
@@ -6045,28 +6044,28 @@ s223:Medium-Air a s223:Class,
         s223:Medium-Air,
         sh:NodeShape ;
     rdfs:label "Medium-Air" ;
-    rdfs:comment "This class has enumerated instances of Air in various states." ;
+    rdfs:comment "This class has enumerated subclasses of Air in various states." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:EnumerationKind-Role a s223:Class,
         s223:EnumerationKind-Role,
         sh:NodeShape ;
     rdfs:label "Role" ;
-    rdfs:comment "This class has enumerated instances of roles played by entities, such as cooling, generator, relief, return." ;
+    rdfs:comment "This class has enumerated subclasses of roles played by entities, such as cooling, generator, relief, return." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:Medium-Water a s223:Class,
         s223:Medium-Water,
         sh:NodeShape ;
     rdfs:label "Medium-Water" ;
-    rdfs:comment "This class has enumerated instances of water and aqueous solutions in various states." ;
+    rdfs:comment "This class has enumerated subclasses of water and aqueous solutions in various states." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:Medium-Electricity a s223:Class,
         s223:Medium-Electricity,
         sh:NodeShape ;
     rdfs:label "Electricity" ;
-    rdfs:comment "This class has enumerated instances of all forms of electricity, including AC and DC." ;
+    rdfs:comment "This class has enumerated subclasses of all forms of electricity, including AC and DC." ;
     rdfs:subClassOf s223:Substance-Medium .
 
 s223:Frequency-50Hz a s223:Class,
@@ -6142,9 +6141,8 @@ FILTER NOT EXISTS {$this s223:mapsTo ?anything} .
 s223:EnumerationKind-Aspect a s223:Class,
         s223:EnumerationKind-Aspect,
         sh:NodeShape ;
-    rdfs:label "Enumeration Kind-Aspect",
-        "EnumerationKind-Aspect" ;
-    rdfs:comment "This class has enumerated instances to specify contexts used with the s223:hasAspect relation for a s223:Property with a non-numerical value." ;
+    rdfs:label "EnumerationKind Aspect" ;
+    rdfs:comment "This class has enumerated subclasses usually used to specify the context of a s223:Property." ;
     rdfs:subClassOf s223:EnumerationKind .
 
 s223:Equipment a s223:Class,
@@ -6265,8 +6263,7 @@ s223:Numerical-Voltage a s223:Class,
     rdfs:label "Dimensioned Voltage" ;
     qudt:hasQuantityKind qudtqk:Voltage ;
     qudt:hasUnit unit:V ;
-    rdfs:comment "Does this fix the error?",
-        "This class has enumerated instances of common voltages." ;
+    rdfs:comment "This class has enumerated instances of common voltages." ;
     rdfs:subClassOf s223:EnumerationKind-Numerical ;
     sh:property [ rdfs:comment "A Numerical-Voltage must have a Quantity Kind of Voltage" ;
             sh:hasValue qudtqk:Voltage ;
