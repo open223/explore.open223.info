@@ -1176,8 +1176,8 @@ qudt:BaseDimensionMagnitude a rdfs:Class,
     rdfs:label "Base Dimension Magnitude" ;
     qudt:informativeReference "http://en.wikipedia.org/wiki/Dimensional_analysis"^^xsd:anyURI,
         "http://web.mit.edu/2.25/www/pdf/DA_unified.pdf"^^xsd:anyURI ;
-    rdfs:comment """<p class=lm-para>A <em>Dimension</em> expresses a magnitude for a base quantiy kind such as mass, length and time.</p>
-<p class=lm-para>DEPRECATED - each exponent is expressed as a property. Keep until a validaiton of this has been done."""^^rdf:HTML ;
+    rdfs:comment """<p class="lm-para">A <em>Dimension</em> expresses a magnitude for a base quantiy kind such as mass, length and time.</p>
+<p class="lm-para">DEPRECATED - each exponent is expressed as a property. Keep until a validaiton of this has been done.</p>"""^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Concept ;
     sh:property qudt:BaseDimensionMagnitude-hasBaseQuantityKind,
@@ -1312,7 +1312,7 @@ qudt:CurrencyUnit a rdfs:Class,
 qudt:DataEncoding a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Data Encoding" ;
-    rdfs:comment "<p><em>Data Encoding</em> expresses the properties that specify how data is represented at the bit and byte level. These properties are applicable to describing raw data."^^rdf:HTML ;
+    rdfs:comment "<p><em>Data Encoding</em> expresses the properties that specify how data is represented at the bit and byte level. These properties are applicable to describing raw data.</p>"^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Aspect ;
     sh:property qudt:DataEncoding-bitOrder,
@@ -1419,7 +1419,7 @@ qudt:EnumeratedValue a rdfs:Class,
 
 <p>An enumeration is a set of literals from which a single value is selected. Each literal can have a tag as an integer within a standard encoding appropriate to the range of integer values. Consistency of enumeration types will allow them, and the enumerated values, to be referred to unambiguously either through symbolic name or encoding. Enumerated values are also controlled vocabularies and as such need to be standardized. Without this consistency enumeration literals can be stated differently and result in  data conflicts and misinterpretations.</p>
 
-<p>The tags are a set of positive whole numbers, not necessarily contiguous and having no numerical significance, each corresponding to the associated literal identifier. An order attribute can also be given on the enumeration elements. An enumeration can itself be a member of an enumeration. This allows enumerations to be enumerated in a selection. Enumerations are also subclasses of Scalar Datatype. This allows them to be used as the reference of a datatype specification."""^^rdf:HTML ;
+<p>The tags are a set of positive whole numbers, not necessarily contiguous and having no numerical significance, each corresponding to the associated literal identifier. An order attribute can also be given on the enumeration elements. An enumeration can itself be a member of an enumeration. This allows enumerations to be enumerated in a selection. Enumerations are also subclasses of Scalar Datatype. This allows them to be used as the reference of a datatype specification.</p>"""^^rdf:HTML ;
     qudt:informativeReference "http://en.wikipedia.org/wiki/Enumeration"^^xsd:anyURI ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Concept,
@@ -1437,7 +1437,7 @@ qudt:Enumeration a rdfs:Class,
         "http://en.wikipedia.org/wiki/Enumeration"^^xsd:anyURI ;
     rdfs:comment """<p>An enumeration is a set of literals from which a single value is selected. Each literal can have a tag as an integer within a standard encoding appropriate to the range of integer values. Consistency of enumeration types will allow them, and the enumerated values, to be referred to unambiguously either through symbolic name or encoding. Enumerated values are also controlled vocabularies and as such need to be standardized. Without this consistency enumeration literals can be stated differently and result in  data conflicts and misinterpretations.</p>
 
-<p>The tags are a set of positive whole numbers, not necessarily contiguous and having no numerical significance, each corresponding to the associated literal identifier. An order attribute can also be given on the enumeration elements. An enumeration can itself be a member of an enumeration. This allows enumerations to be enumerated in a selection. Enumerations are also subclasses of <em>Scalar Datatype</em>. This allows them to be used as the reference of a datatype specification."""^^rdf:HTML ;
+<p>The tags are a set of positive whole numbers, not necessarily contiguous and having no numerical significance, each corresponding to the associated literal identifier. An order attribute can also be given on the enumeration elements. An enumeration can itself be a member of an enumeration. This allows enumerations to be enumerated in a selection. Enumerations are also subclasses of <em>Scalar Datatype</em>. This allows them to be used as the reference of a datatype specification.</p>"""^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Concept,
         dtype:Enumeration ;
@@ -1492,7 +1492,7 @@ qudt:IntervalScale a rdfs:Class,
     rdfs:label "Interval scale" ;
     qudt:informativeReference "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
     rdfs:comment """<p>The interval type allows for the degree of difference between items, but not the ratio between them. Examples include temperature with the Celsius scale, which has two defined points (the freezing and boiling point of water at specific conditions) and then separated into 100 intervals, date when measured from an arbitrary epoch (such as AD), percentage such as a percentage return on a stock,[16] location in Cartesian coordinates, and direction measured in degrees from true or magnetic north. Ratios are not meaningful since 20 °C cannot be said to be "twice as hot" as 10 °C, nor can multiplication/division be carried out between any two dates directly. However, ratios of differences can be expressed; for example, one difference can be twice another. Interval type variables are sometimes also called "scaled variables", but the formal mathematical term is an affine space (in this case an affine line).</p>
-<p>Characteristics: median, percentile &amp; Monotonic increasing (order (&lt;) &amp; totally ordered set"""^^rdf:HTML ;
+<p>Characteristics: median, percentile &amp; Monotonic increasing (order (&lt;) &amp; totally ordered set</p>"""^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:seeAlso qudt:NominalScale,
         qudt:OrdinalScale,
@@ -1604,7 +1604,7 @@ qudt:Prefix a rdfs:Class,
 qudt:Quantifiable a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Quantifiable" ;
-    rdfs:comment "<p><em>Quantifiable</em> ascribes to some thing the capability of being measured, observed, or counted."^^rdf:HTML ;
+    rdfs:comment "<p><em>Quantifiable</em> ascribes to some thing the capability of being measured, observed, or counted.</p>"^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Aspect ;
     sh:property qudt:Quantifiable-dataEncoding,
@@ -1619,12 +1619,12 @@ qudt:Quantity a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Quantity" ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/Quantity"^^xsd:anyURI ;
-    rdfs:comment """<p class=lm-para>A <b>quantity</b> is the measurement of an observable property of a particular object, event, or physical system. A quantity is always associated with the context of measurement (i.e. the thing measured, the measured value, the accuracy of measurement, etc.) whereas the underlying <b>quantity kind</b> is independent of any particular measurement. Thus, length is a quantity kind while the height of a rocket is a specific quantity of length; its magnitude that may be expressed in meters, feet, inches, etc. Examples of physical quantities include physical constants, such as the speed of light in a vacuum, Planck's constant, the electric permittivity of free space, and the fine structure constant. </p>
+    rdfs:comment """<p class="lm-para">A <b>quantity</b> is the measurement of an observable property of a particular object, event, or physical system. A quantity is always associated with the context of measurement (i.e. the thing measured, the measured value, the accuracy of measurement, etc.) whereas the underlying <b>quantity kind</b> is independent of any particular measurement. Thus, length is a quantity kind while the height of a rocket is a specific quantity of length; its magnitude that may be expressed in meters, feet, inches, etc. Examples of physical quantities include physical constants, such as the speed of light in a vacuum, Planck's constant, the electric permittivity of free space, and the fine structure constant. </p>
 
-<p class=lm-para>In other words, quantities are quantifiable aspects of the world, such as the duration of a movie, the distance between two points, velocity of a car, the pressure of the atmosphere, and a person's weight; and units are used to describe their numerical measure. 
+<p class="lm-para">In other words, quantities are quantifiable aspects of the world, such as the duration of a movie, the distance between two points, velocity of a car, the pressure of the atmosphere, and a person's weight; and units are used to describe their numerical measure. 
 
-<p class=lm-para>Many <b>quantity kinds</b> are related to each other by various physical laws, and as a result, the associated units of some quantity kinds can be expressed as products (or ratios) of powers of other quantity kinds (e.g., momentum is mass times velocity and velocity is defined as distance divided by time). In this way, some quantities can be calculated from other measured quantities using their associations to the quantity kinds in these expressions. These quantity kind relationships are also discussed in dimensional analysis. Those that cannot be so expressed can be regarded as "fundamental" in this sense.</p>
-<p class=lm-para>A quantity is distinguished from a "quantity kind" in that the former carries a value and the latter is a type specifier."""^^rdf:HTML ;
+<p class="lm-para">Many <b>quantity kinds</b> are related to each other by various physical laws, and as a result, the associated units of some quantity kinds can be expressed as products (or ratios) of powers of other quantity kinds (e.g., momentum is mass times velocity and velocity is defined as distance divided by time). In this way, some quantities can be calculated from other measured quantities using their associations to the quantity kinds in these expressions. These quantity kind relationships are also discussed in dimensional analysis. Those that cannot be so expressed can be regarded as "fundamental" in this sense.</p>
+<p class="lm-para">A quantity is distinguished from a "quantity kind" in that the former carries a value and the latter is a type specifier.</p>"""^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Concept,
         qudt:Quantifiable ;
@@ -1667,11 +1667,11 @@ qudt:QuantityKindDimensionVector a rdfs:Class,
     rdfs:label "Quantity Kind Dimension Vector" ;
     qudt:informativeReference "http://en.wikipedia.org/wiki/Dimensional_analysis"^^xsd:anyURI,
         "http://web.mit.edu/2.25/www/pdf/DA_unified.pdf"^^xsd:anyURI ;
-    rdfs:comment """<p class=lm-para>A  <em>Quantity Kind Dimension Vector</em> describes the dimensionality of a quantity kind in the context of a system of units. In the SI system of units, the dimensions of a quantity kind are expressed as a product of the basic physical dimensions mass (\\(M\\)), length (\\(L\\)), time (\\(T\\)) current (\\(I\\)), amount of substance (\\(N\\)), luminous intensity (\\(J\\)) and absolute temperature (\\(\\theta\\)) as \\(dim \\, Q = L^{\\alpha} \\, M^{\\beta} \\, T^{\\gamma} \\, I ^{\\delta} \\, \\theta ^{\\epsilon} \\, N^{\\eta} \\, J ^{\\nu}\\).</p>
+    rdfs:comment """<p class="lm-para">A  <em>Quantity Kind Dimension Vector</em> describes the dimensionality of a quantity kind in the context of a system of units. In the SI system of units, the dimensions of a quantity kind are expressed as a product of the basic physical dimensions mass (\\(M\\)), length (\\(L\\)), time (\\(T\\)) current (\\(I\\)), amount of substance (\\(N\\)), luminous intensity (\\(J\\)) and absolute temperature (\\(\\theta\\)) as \\(dim \\, Q = L^{\\alpha} \\, M^{\\beta} \\, T^{\\gamma} \\, I ^{\\delta} \\, \\theta ^{\\epsilon} \\, N^{\\eta} \\, J ^{\\nu}\\).</p>
 
-<p class=lm-para>The rational powers of the dimensional exponents, \\(\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\eta, \\, \\nu\\), are positive, negative, or zero.</p>
+<p class="lm-para">The rational powers of the dimensional exponents, \\(\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\eta, \\, \\nu\\), are positive, negative, or zero.</p>
 
-<p class=lm-para>For example, the dimension of the physical quantity kind \\(\\it{speed}\\) is \\(\\boxed{length/time}\\), \\(L/T\\) or \\(LT^{-1}\\), and the dimension of the physical quantity kind force is \\(\\boxed{mass \\times acceleration}\\) or \\(\\boxed{mass \\times (length/time)/time}\\), \\(ML/T^2\\) or \\(MLT^{-2}\\) respectively."""^^rdf:HTML ;
+<p class="lm-para">For example, the dimension of the physical quantity kind \\(\\it{speed}\\) is \\(\\boxed{length/time}\\), \\(L/T\\) or \\(LT^{-1}\\), and the dimension of the physical quantity kind force is \\(\\boxed{mass \\times acceleration}\\) or \\(\\boxed{mass \\times (length/time)/time}\\), \\(ML/T^2\\) or \\(MLT^{-2}\\) respectively.</p>"""^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:subClassOf qudt:Concept ;
     sh:property qudt:QuantityKindDimensionVector-dimensionExponentForAmountOfSubstance,
@@ -15330,9 +15330,9 @@ quantitykind:ReactorTimeConstant a qudt:QuantityKind ;
 
 quantitykind:Reflectivity a qudt:QuantityKind ;
     rdfs:label "Reflectivity"@en ;
-    dcterms:description """<p>For homogeneous and semi-infinite materials, reflectivity is the same as reflectance. Reflectivity is the square of the magnitude of the Fresnel reflection coefficient, which is the ratio of the reflected to incident electric field; as such the reflection coefficient can be expressed as a complex number as determined by the Fresnel equations for a single layer, whereas the reflectance is always a positive real number.</p>
+    dcterms:description """<p>For homogeneous and semi-infinite materials, reflectivity is the same as reflectance. Reflectivity is the square of the magnitude of the Fresnel reflection coefficient, which is the ratio of the reflected to incident electric field;&nbsp;as such the reflection coefficient can be expressed as a complex number as determined by the Fresnel equations for a single layer, whereas the reflectance is always a positive real number.</p>
 
-<p>For layered and finite media, according to the CIE, <em>reflectivity</em> is distinguished from <em>reflectance</em> by the fact that reflectivity is a value that applies to <em>thick</em> reflecting objects.<span style=font-size:10.8333px> </span>When reflection occurs from thin layers of material, internal reflection effects can cause the reflectance to vary with surface thickness. Reflectivity is the limit value of reflectance as the sample becomes thick; it is the intrinsic reflectance of the surface, hence irrespective of other parameters such as the reflectance of the rear surface. Another way to interpret this is that the reflectance is the fraction of electromagnetic power reflected from a specific sample, while reflectivity is a property of the material itself, which would be measured on a perfect machine if the material filled half of all space."""^^rdf:HTML ;
+<p>For layered and finite media, according to the CIE,&nbsp;<em>reflectivity</em> is distinguished from <em>reflectance</em> by the fact that reflectivity is a value that applies to <em>thick</em> reflecting objects.<span style="font-size:10.8333px"> </span>When reflection occurs from thin layers of material, internal reflection effects can cause the reflectance to vary with surface thickness. Reflectivity is the limit value of reflectance as the sample becomes thick; it is the intrinsic reflectance of the surface, hence irrespective of other parameters such as the reflectance of the rear surface. Another way to interpret this is that the reflectance is the fraction of electromagnetic power reflected from a specific sample, while reflectivity is a property of the material itself, which would be measured on a perfect machine if the material filled half of all space.</p>"""^^rdf:HTML ;
     qudt:applicableUnit unit:FRACTION,
         unit:PERCENT,
         unit:UNITLESS ;
@@ -18711,6 +18711,16 @@ s223:AC-208VLL-3Ph-60Hz a s223:AC-208VLL-3Ph-60Hz,
     rdfs:comment "AC-208VLL-3Ph-60Hz" ;
     rdfs:subClassOf s223:Electricity-AC .
 
+s223:AC-208VLN-1Ph-60Hz a s223:AC-208VLN-1Ph-60Hz,
+        s223:Class,
+        sh:NodeShape ;
+    rdfs:label "AC-208VLN-1Ph-60Hz" ;
+    s223:hasFrequency s223:Frequency-60Hz ;
+    s223:hasNumberOfElectricalPhases s223:NumberOfElectricalPhases-SinglePhase ;
+    s223:hasVoltage s223:LineNeutralVoltage-208V ;
+    rdfs:comment "AC-208VLN-1Ph-60Hz" ;
+    rdfs:subClassOf s223:Electricity-AC .
+
 s223:AC-219VLN-1Ph-60Hz a s223:AC-219VLN-1Ph-60Hz,
         s223:Class,
         sh:NodeShape ;
@@ -20072,12 +20082,7 @@ s223:Junction a s223:Class,
                         sh:qualifiedMinCount 1 ;
                         sh:qualifiedValueShape [ sh:class s223:BidirectionalConnectionPoint ] ;
                         sh:qualifiedValueShapesDisjoint true ] ] ) ;
-    sh:property [ rdfs:comment "A Junction must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
-            sh:class s223:Substance-Medium ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasMedium ],
-        [ rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the associated Junction." ;
+    sh:property [ rdfs:comment "Ensure that the Medium identified by a ConnectionPoint via the s223:hasMedium relation is compatible with the Medium identified by the associated Junction." ;
             sh:name "Test for compatible declared Medium" ;
             sh:path s223:hasMedium ;
             sh:sparql [ a sh:SPARQLConstraint ;
@@ -20116,7 +20121,12 @@ FILTER (?m1 != ?m2 ) .
 FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
 FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "A Junction must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
+            sh:class s223:Substance-Medium ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasMedium ] .
 
 s223:Light-Infrared a s223:Class,
         s223:Light-Infrared,
@@ -21080,7 +21090,7 @@ qudt:LongUnsignedIntegerEncoding a qudt:IntegerEncodingType ;
 qudt:Narratable a qudt:AspectClass,
         sh:NodeShape ;
     rdfs:label "Narratable" ;
-    rdfs:comment "<p><em>Narratable</em> specifies properties that provide for documentation and references."^^rdf:HTML ;
+    rdfs:comment "<p><em>Narratable</em> specifies properties that provide for documentation and references.</p>"^^rdf:HTML ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/overlay/qudt> ;
     rdfs:subClassOf qudt:Aspect .
 
@@ -32695,7 +32705,7 @@ unit:Ci a qudt:Unit ;
 unit:DARCY a qudt:DerivedUnit,
         qudt:Unit ;
     rdfs:label "Darcy"@en ;
-    dcterms:description "<p>The <strong>darcy</strong> (d) is a unit of permeability named after Henry Darcy. It is not an SI unit, but it is widely used in petroleum engineering and geology. The unit has also been used in biophysics and biomechanics, where the flow of fluids such as blood through capillary beds and cerebrospinal fluid through the brain interstitial space is being examined. A darcy has dimensional units of length<sup>2</sup>."^^rdf:HTML ;
+    dcterms:description "<p>The <strong>darcy</strong> (d) is a unit of permeability named after Henry Darcy. It is not an SI unit, but it is widely used in petroleum engineering and geology. The unit has also been used in biophysics and biomechanics, where the flow of fluids such as blood through capillary beds and cerebrospinal fluid through the brain interstitial space is being examined. A darcy has dimensional units of length<sup>2</sup>.</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:CGS,
         sou:SI ;
     qudt:conversionMultiplier 0.0000000000009869233 ;
@@ -33949,7 +33959,7 @@ unit:IU-PER-L a qudt:DerivedUnit,
 <p><strong>International Unit per Liter</strong> is a unit for  'Serum Or Plasma Level' expressed as <strong>IU/L</strong>.
 The magnitude of one <strong>IU/L</strong> depends on the material, so there is no single conversion multiplier.
 (See <a href="http://qudt.org/vocab/unit/IU"><strong>IU</strong></a> for more information).
-"""^^rdf:HTML ;
+</p>"""^^rdf:HTML ;
     qudt:expression "\\(IU/L\\)"^^qudt:LatexString ;
     qudt:hasDimensionVector qkdv:A1E0L-3I0M0H0T0D0 ;
     qudt:hasQuantityKind quantitykind:SerumOrPlasmaLevel ;
@@ -33967,7 +33977,7 @@ unit:IU-PER-MilliGM a qudt:Unit ;
 <p>International Unit per milligramme.
 The magnitude of one <strong>IU/L</strong> depends on the material, so there is no single conversion multiplier.
 (See <a href="http://qudt.org/vocab/unit/IU)"><strong>IU</strong></a> for more information).
-"""^^rdf:HTML ;
+</p>"""^^rdf:HTML ;
     qudt:conversionMultiplier 1e-06 ;
     qudt:conversionOffset 0e+00 ;
     qudt:hasDimensionVector qkdv:A1E0L0I0M-1H0T0D0 ;
@@ -33984,7 +33994,7 @@ unit:IU-PER-MilliL a qudt:DerivedUnit,
 <p><strong>International Unit per Milliliter</strong> is a unit for  'Serum Or Plasma Level' expressed as <strong>IU/mL</strong>.
 The magnitude of one <strong>IU/L</strong> depends on the material, so there is no single conversion multiplier.
 (See <a href="http://qudt.org/vocab/unit/IU)"><strong>IU</strong></a> for more information).
-"""^^rdf:HTML ;
+</p>"""^^rdf:HTML ;
     qudt:expression "\\(IU/mL\\)"^^qudt:LatexString ;
     qudt:hasDimensionVector qkdv:A1E0L-3I0M0H0T0D0 ;
     qudt:hasQuantityKind quantitykind:SerumOrPlasmaLevel ;
@@ -34176,7 +34186,7 @@ unit:K-PER-W a qudt:DerivedUnit,
     rdfs:label "Kelvin je Watt"@de,
         "kelvin per watt"@en,
         "kelvin al watt"@it ;
-    dcterms:description "<p>Thermal resistance is a heat property and a measure of a temperature difference by which an object or material resists a heat flow (heat per time unit or thermal resistance). Thermal resistance is the reciprocal thermal conductance. Absolute thermal resistance is the temperature difference across a structure when a unit of heat energy flows through it in unit time. It is the reciprocal of thermal conductance. The SI units of thermal resistance are kelvins per watt or the equivalent degrees Celsius per watt (the two are the same since as intervals)."^^rdf:HTML ;
+    dcterms:description "<p>Thermal resistance is a heat property and a measure of a temperature difference by which an object or material resists a heat flow (heat per time unit or thermal resistance). Thermal resistance is the reciprocal thermal conductance. Absolute thermal resistance is the temperature difference across a structure when a unit of heat energy flows through it in unit time. It is the reciprocal of thermal conductance. The SI units of thermal resistance are kelvins per watt or the equivalent degrees Celsius per watt (the two are the same since as intervals).</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:SI ;
     qudt:conversionMultiplier 1.0 ;
     qudt:definedUnitOfSystem sou:SI ;
@@ -36943,7 +36953,7 @@ unit:MilliCi a qudt:Unit ;
 unit:MilliDARCY a qudt:DerivedUnit,
         qudt:Unit ;
     rdfs:label "Millidarcy"@en ;
-    dcterms:description "<p>The <strong>millidarcy</strong> (md) is a unit of permeability named after Henry Darcy. It is not an SI unit, but it is widely used in petroleum engineering and geology. The unit has also been used in biophysics and biomechanics, where the flow of fluids such as blood through capillary beds and cerebrospinal fluid through the brain interstitial space is being examined. A millidarcy has dimensional units of length<sup>2</sup>."^^rdf:HTML ;
+    dcterms:description "<p>The <strong>millidarcy</strong> (md) is a unit of permeability named after Henry Darcy. It is not an SI unit, but it is widely used in petroleum engineering and geology. The unit has also been used in biophysics and biomechanics, where the flow of fluids such as blood through capillary beds and cerebrospinal fluid through the brain interstitial space is being examined. A millidarcy has dimensional units of length<sup>2</sup>.</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:CGS,
         sou:SI ;
     qudt:conversionMultiplier 0.0000000000000009869233 ;
@@ -40321,12 +40331,7 @@ s223:EnumerableProperty a s223:Class,
     rdfs:label "Enumerable Property" ;
     rdfs:comment "An EnumerableProperty is a property with an enumerated (fixed) set of possible values." ;
     rdfs:subClassOf s223:Property ;
-    sh:property [ rdfs:comment "An EnumerableProperty must be associated with exactly one EnumerationKind using the relation hasEnumerationKind." ;
-            sh:class s223:EnumerationKind ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasEnumerationKind ],
-        [ rdfs:comment "Checks for valid enumeration value consistent with the stated EnumerationKind." ;
+    sh:property [ rdfs:comment "Checks for valid enumeration value consistent with the stated EnumerationKind." ;
             sh:path s223:hasValue ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Checks for valid enumeration value consistent with the stated EnumerationKind." ;
@@ -40339,7 +40344,12 @@ $this s223:hasValue ?value .
 $this s223:hasEnumerationKind ?kind .
 FILTER (NOT EXISTS {?value a/rdfs:subClassOf* ?kind}) .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "An EnumerableProperty must be associated with exactly one EnumerationKind using the relation hasEnumerationKind." ;
+            sh:class s223:EnumerationKind ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasEnumerationKind ] .
 
 s223:ExternalReference a s223:Class,
         sh:NodeShape ;
@@ -44273,7 +44283,7 @@ unit:IU a qudt:Unit ;
     dcterms:description """
 <p><strong>International Unit</strong> is a unit for <em>Amount Of Substance</em> expressed as <strong>IU</strong>.
 Note that the magnitude depends on the substance, thus there is no fixed conversion multiplier.
-"""^^rdf:HTML ;
+</p>"""^^rdf:HTML ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/International_unit"^^xsd:anyURI ;
     qudt:hasDimensionVector qkdv:A1E0L0I0M0H0T0D0 ;
     qudt:hasQuantityKind quantitykind:AmountOfSubstance ;
@@ -46843,16 +46853,6 @@ s223:LightSensor a s223:Class,
     rdfs:label "Light sensor" ;
     rdfs:comment "A LightSensor is a specialization of a Sensor that observes a QuantifiableObservableProperty that represents a luminance measurement." ;
     rdfs:subClassOf s223:Sensor .
-
-s223:LineNeutralVoltage-208V a s223:Class,
-        s223:LineNeutralVoltage-208V,
-        sh:NodeShape ;
-    rdfs:label "208V Line-Neutral Voltage" ;
-    s223:hasVoltage s223:Voltage-208V ;
-    qudt:hasQuantityKind quantitykind:Voltage ;
-    qudt:hasUnit unit:V ;
-    rdfs:comment "208V Line-Neutral Voltage" ;
-    rdfs:subClassOf s223:Numerical-LineNeutralVoltage .
 
 s223:LineNeutralVoltage-24V a s223:Class,
         s223:LineNeutralVoltage-24V,
@@ -53866,6 +53866,16 @@ s223:LineNeutralVoltage-1900V a s223:Class,
     rdfs:comment "1900V Line-Neutral Voltage" ;
     rdfs:subClassOf s223:Numerical-LineNeutralVoltage .
 
+s223:LineNeutralVoltage-208V a s223:Class,
+        s223:LineNeutralVoltage-208V,
+        sh:NodeShape ;
+    rdfs:label "208V Line-Neutral Voltage" ;
+    s223:hasVoltage s223:Voltage-208V ;
+    qudt:hasQuantityKind quantitykind:Voltage ;
+    qudt:hasUnit unit:V ;
+    rdfs:comment "208V Line-Neutral Voltage" ;
+    rdfs:subClassOf s223:Numerical-LineNeutralVoltage .
+
 s223:LineNeutralVoltage-219V a s223:Class,
         s223:LineNeutralVoltage-219V,
         sh:NodeShape ;
@@ -54064,16 +54074,7 @@ s223:Zone a s223:Class,
     rdfs:label "Zone" ;
     rdfs:comment "A Zone is a logical grouping (collection) of domain spaces for some functional or system reason, to identify a domain of control, such as a Lighting Zone, or a heating zone" ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A Zone must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
-            sh:class s223:EnumerationKind-Domain ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomain ],
-        [ rdfs:comment "A Zone must be associated with at least one DomainSpace using the relation hasDomainSpace." ;
-            sh:class s223:DomainSpace ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomainSpace ],
-        [ rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
+    sh:property [ rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
             sh:path s223:hasDomain ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "The associated Domain of a Zone and the Domain of the DomainSpaces it contains must be the same." ;
@@ -54088,7 +54089,16 @@ $this s223:contains ?ds .
 ?ds s223:hasDomain ?dsdomain .
 FILTER (?domain != ?dsdomain)
 }
-""" ] ] ;
+""" ] ],
+        [ rdfs:comment "A Zone must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
+            sh:class s223:EnumerationKind-Domain ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomain ],
+        [ rdfs:comment "A Zone must be associated with at least one DomainSpace using the relation hasDomainSpace." ;
+            sh:class s223:DomainSpace ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomainSpace ] ;
     sh:rule [ a sh:TripleRule ;
             rdfs:comment "Infer a hasDomain relation by checking any enclosed DomainSpaces to determine the domain." ;
             sh:object [ sh:path ( s223:hasDomainSpace s223:hasDomain ) ] ;
@@ -57187,7 +57197,7 @@ qudt:symbol a rdf:Property ;
 
 qudt:ucumCode a rdf:Property ;
     rdfs:label "ucum code" ;
-    dcterms:description "<p><em>ucumCode</em> associates a QUDT unit with its UCUM code (case-sensitive). <p>In SHACL the values are derived from specific ucum properties using 'sh:values'."^^rdf:HTML ;
+    dcterms:description "<p><em>ucumCode</em> associates a QUDT unit with its UCUM code (case-sensitive). </p><p>In SHACL the values are derived from specific ucum properties using 'sh:values'.</p>"^^rdf:HTML ;
     dcterms:source "https://ucum.org/ucum.html"^^xsd:anyURI ;
     rdfs:isDefinedBy <http://qudt.org/2.1/schema/shacl/qudt> ;
     rdfs:seeAlso <https://ucum.org/ucum.html> ;
@@ -59830,16 +59840,16 @@ s223:DomainSpace a s223:Class,
     rdfs:label "Domain Space" ;
     rdfs:comment "A DomainSpace is a member (or component) of a Zone and is associated with a Domain such as Lighting, HVAC, PhysicalSecurity, etc. Physical spaces enclose Domain spaces." ;
     rdfs:subClassOf s223:Connectable ;
-    sh:property [ rdfs:comment "A DomainSpace must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
-            sh:class s223:EnumerationKind-Domain ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path s223:hasDomain ],
-        [ rdfs:comment "A DomainSpace must be enclosed by a PhysicalSpace." ;
+    sh:property [ rdfs:comment "A DomainSpace must be enclosed by a PhysicalSpace." ;
             sh:message "A DomainSpace must be enclosed by a PhysicalSpace." ;
             sh:minCount 1 ;
             sh:path [ sh:inversePath s223:encloses ] ;
-            sh:severity sh:Info ] ;
+            sh:severity sh:Info ],
+        [ rdfs:comment "A DomainSpace must be associated with exactly one EnumerationKind-Domain using the relation hasDomain." ;
+            sh:class s223:EnumerationKind-Domain ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path s223:hasDomain ] ;
     sh:rule [ a sh:TripleRule ;
             rdfs:comment "Infer a hasDomain relation by checking any enclosing Zone to determine the domain." ;
             sh:object [ sh:path ( [ sh:inversePath s223:hasDomainSpace ] s223:hasDomain ) ] ;
@@ -59869,10 +59879,7 @@ s223:EnumerationKind-Substance a s223:Class,
     rdfs:label "Substance" ;
     rdfs:comment "This class has enumerated subclasses of the substances that are consumed, produced, transported, sensed, controlled or otherwise interacted with (e.g. water, air, etc.)." ;
     rdfs:subClassOf s223:EnumerationKind ;
-    sh:property [ rdfs:comment "If the relation hasConstituent is present, it must associate an EnumerationKind-Substance with one or more Properties that identify and characterize those constituents." ;
-            sh:class s223:Property ;
-            sh:path s223:hasConstituent ],
-        [ rdfs:comment "A substance may only have atomic constituents, it may not have a constituent that also has constituents." ;
+    sh:property [ rdfs:comment "A substance may only have atomic constituents, it may not have a constituent that also has constituents." ;
             sh:path s223:hasConstituent ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "If a substance has a constituent, that constituent may not itself have constituents." ;
@@ -59884,7 +59891,10 @@ WHERE {
 $this s223:hasConstituent ?constituent .
 ?constituent s223:ofSubstance/s223:hasConstituent ?nextConstituent .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "If the relation hasConstituent is present, it must associate an EnumerationKind-Substance with one or more Properties that identify and characterize those constituents." ;
+            sh:class s223:Property ;
+            sh:path s223:hasConstituent ] .
 
 s223:LineNeutralVoltage-120V a s223:Class,
         s223:LineNeutralVoltage-120V,
@@ -61706,37 +61716,7 @@ A Connection may contain branches or intersections. These may be modeled using J
                         sh:qualifiedMinCount 1 ;
                         sh:qualifiedValueShape [ sh:class s223:BidirectionalConnectionPoint ] ;
                         sh:qualifiedValueShapesDisjoint true ] ] ) ;
-    sh:property [ rdfs:comment "If the relation connectsAt is present it must associate the Connection with a ConnectionPoint." ;
-            sh:class s223:ConnectionPoint ;
-            sh:path s223:connectsAt ],
-        [ rdfs:comment "If the relation connectsFrom is present it must associate the Connection with a Connectable." ;
-            sh:class s223:Connectable ;
-            sh:name "ConnectionToUpstreamConnectableShape" ;
-            sh:path s223:connectsFrom ],
-        [ rdfs:comment "If the relation connectsTo is present it must associate the Connection with a Connectable." ;
-            sh:class s223:Connectable ;
-            sh:name "ConnectionToDownstreamConnectableShape" ;
-            sh:path s223:connectsTo ],
-        [ rdfs:comment "A Connection must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
-            sh:class s223:Substance-Medium ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:name "Connection medium" ;
-            sh:path s223:hasMedium ],
-        [ rdfs:comment "If the relation hasRole is present it must associate the Connection with an EnumerationKind-Role." ;
-            sh:class s223:EnumerationKind-Role ;
-            sh:path s223:hasRole ],
-        [ rdfs:comment "If the relation hasThermodynamicPhase is present it must associate the Connection with an EnumerationKind-Phase." ;
-            sh:class s223:EnumerationKind-Phase ;
-            sh:maxCount 1 ;
-            sh:path s223:hasThermodynamicPhase ],
-        [ rdfs:comment "A Connection must have two or more cnx relations to ConnectionPoints" ;
-            sh:class s223:ConnectionPoint ;
-            sh:message "A Connection must have two or more cnx relations to ConnectionPoints" ;
-            sh:minCount 2 ;
-            sh:path s223:cnx ;
-            sh:severity sh:Info ],
-        [ rdfs:comment "A Connection must only have a cnx relation with a ConnectionPoint" ;
+    sh:property [ rdfs:comment "A Connection must only have a cnx relation with a ConnectionPoint" ;
             sh:path s223:cnx ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "A Connection must only have a cnx relation with a ConnectionPoint" ;
@@ -61786,7 +61766,37 @@ FILTER (?m1 != ?m2 ) .
 FILTER (NOT EXISTS {?m2 a/rdfs:subClassOf* ?m1}) .
 FILTER (NOT EXISTS {?m1 a/rdfs:subClassOf* ?m2}) .
 }
-""" ] ] ;
+""" ] ],
+        [ rdfs:comment "If the relation connectsAt is present it must associate the Connection with a ConnectionPoint." ;
+            sh:class s223:ConnectionPoint ;
+            sh:path s223:connectsAt ],
+        [ rdfs:comment "If the relation connectsFrom is present it must associate the Connection with a Connectable." ;
+            sh:class s223:Connectable ;
+            sh:name "ConnectionToUpstreamConnectableShape" ;
+            sh:path s223:connectsFrom ],
+        [ rdfs:comment "If the relation connectsTo is present it must associate the Connection with a Connectable." ;
+            sh:class s223:Connectable ;
+            sh:name "ConnectionToDownstreamConnectableShape" ;
+            sh:path s223:connectsTo ],
+        [ rdfs:comment "A Connection must be associated with exactly one EnumerationKind-Medium using the relation hasMedium." ;
+            sh:class s223:Substance-Medium ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "Connection medium" ;
+            sh:path s223:hasMedium ],
+        [ rdfs:comment "If the relation hasRole is present it must associate the Connection with an EnumerationKind-Role." ;
+            sh:class s223:EnumerationKind-Role ;
+            sh:path s223:hasRole ],
+        [ rdfs:comment "If the relation hasThermodynamicPhase is present it must associate the Connection with an EnumerationKind-Phase." ;
+            sh:class s223:EnumerationKind-Phase ;
+            sh:maxCount 1 ;
+            sh:path s223:hasThermodynamicPhase ],
+        [ rdfs:comment "A Connection must have two or more cnx relations to ConnectionPoints" ;
+            sh:class s223:ConnectionPoint ;
+            sh:message "A Connection must have two or more cnx relations to ConnectionPoints" ;
+            sh:minCount 2 ;
+            sh:path s223:cnx ;
+            sh:severity sh:Info ] ;
     sh:rule [ a sh:SPARQLRule ;
             rdfs:comment "Infer the connectsFrom relation using connectsAt" ;
             sh:construct """
@@ -62920,8 +62930,8 @@ unit:DEG_C a qudt:DerivedUnit,
     qudt:conversionOffset 273.15 ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/Celsius"^^xsd:anyURI ;
     qudt:expression "\\(degC\\)"^^qudt:LatexString ;
-    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec04.html#4.2.1.1\">SP811 section 4.2.1.1</a>"^^rdf:HTML,
-        "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec06.html#6.2.8\">SP811 section 6.2.8</a>"^^rdf:HTML ;
+    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec04.html#4.2.1.1\">SP811 section 4.2.1.1</a></p>"^^rdf:HTML,
+        "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec06.html#6.2.8\">SP811 section 6.2.8</a></p>"^^rdf:HTML ;
     qudt:hasDimensionVector qkdv:A0E0L0I0M0H1T0D0 ;
     qudt:hasQuantityKind quantitykind:BoilingPoint,
         quantitykind:FlashPoint,
@@ -63295,8 +63305,8 @@ unit:MilliDEG_C a qudt:DerivedUnit,
     qudt:conversionMultiplier 0.001 ;
     qudt:conversionOffset 273.15 ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/Celsius"^^xsd:anyURI ;
-    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec04.html#4.2.1.1\">SP811 section 4.2.1.1</a>"^^rdf:HTML,
-        "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec06.html#6.2.8\">SP811 section 6.2.8</a>"^^rdf:HTML ;
+    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec04.html#4.2.1.1\">SP811 section 4.2.1.1</a></p>"^^rdf:HTML,
+        "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec06.html#6.2.8\">SP811 section 6.2.8</a></p>"^^rdf:HTML ;
     qudt:hasDimensionVector qkdv:A0E0L0I0M0H1T0D0 ;
     qudt:hasQuantityKind quantitykind:BoilingPoint,
         quantitykind:FlashPoint,
@@ -64171,7 +64181,7 @@ unit:MicroRAD a qudt:DerivedUnit,
         sou:CGS-GAUSS,
         sou:SI ;
     qudt:conversionMultiplier 1e-06 ;
-    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec07.html#7.10\">SP811 section7.10</a>"^^rdf:HTML ;
+    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec07.html#7.10\">SP811 section7.10</a></p>"^^rdf:HTML ;
     qudt:hasDimensionVector qkdv:A0E0L0I0M0H0T0D1 ;
     qudt:hasQuantityKind quantitykind:Angle,
         quantitykind:PlaneAngle ;
@@ -64190,7 +64200,7 @@ unit:MilliRAD a qudt:DerivedUnit,
         sou:CGS-GAUSS,
         sou:SI ;
     qudt:conversionMultiplier 0.001 ;
-    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec07.html#7.10\">SP811 section7.10</a>"^^rdf:HTML ;
+    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec07.html#7.10\">SP811 section7.10</a></p>"^^rdf:HTML ;
     qudt:hasDimensionVector qkdv:A0E0L0I0M0H0T0D1 ;
     qudt:hasQuantityKind quantitykind:Angle,
         quantitykind:PlaneAngle ;
@@ -64503,7 +64513,7 @@ unit:W-PER-M2 a qudt:DerivedUnit,
 
 unit:YR_TROPICAL a qudt:Unit ;
     rdfs:label "Tropical Year"@en ;
-    dcterms:description "<p>A tropical year (also known as a solar year), for general purposes, is the length of time that the Sun takes to return to the same position in the cycle of seasons, as seen from Earth; for example, the time from vernal equinox to vernal equinox, or from summer solstice to summer solstice. Because of the precession of the equinoxes, the seasonal cycle does not remain exactly synchronised with the position of the Earth in its orbit around the Sun. As a consequence, the tropical year is about 20 minutes shorter than the time it takes Earth to complete one full orbit around the Sun as measured with respect to the fixed stars. Since antiquity, astronomers have progressively refined the definition of the tropical year, and currently define it as the time required for the mean Sun's tropical longitude (longitudinal position along the ecliptic relative to its position at the vernal equinox) to increase by 360 degrees (that is, to complete one full seasonal circuit)."^^rdf:HTML ;
+    dcterms:description "<p>A tropical year (also known as a solar year), for general purposes, is the length of time that the Sun takes to return to the same position in the cycle of seasons, as seen from Earth; for example, the time from vernal equinox to vernal equinox, or from summer solstice to summer solstice. Because of the precession of the equinoxes, the seasonal cycle does not remain exactly synchronised with the position of the Earth in its orbit around the Sun. As a consequence, the tropical year is about 20 minutes shorter than the time it takes Earth to complete one full orbit around the Sun as measured with respect to the fixed stars. Since antiquity, astronomers have progressively refined the definition of the tropical year, and currently define it as the time required for the mean Sun's tropical longitude (longitudinal position along the ecliptic relative to its position at the vernal equinox) to increase by 360 degrees (that is, to complete one full seasonal circuit).</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:CGS,
         sou:CGS-EMU,
         sou:CGS-GAUSS,
@@ -64543,7 +64553,20 @@ A QuantifiableProperty (or subClass thereof) must always be associated with a Un
 Enumerable properties must be associated with an EnumerationKind.
 """ ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "If the relation hasAspect is present, it must associate the Property with an EnumerationKind." ;
+    sh:property [ rdfs:comment "" ;
+            sh:path s223:ofSubstance ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "If an incoming relation hasConstituent exists, then the Property must have a declared substance using the relation ofSubstance." ;
+                    sh:message "Property {$this} is referred to by {?something} with s223:hasConstituent, but the Property has no value for s223:ofSubstance." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
+                    sh:select """
+SELECT $this ?something
+WHERE {
+?something s223:hasConstituent $this .
+FILTER NOT EXISTS {$this s223:ofSubstance ?someSubstance} .
+}
+""" ] ],
+        [ rdfs:comment "If the relation hasAspect is present, it must associate the Property with an EnumerationKind." ;
             sh:class s223:EnumerationKind ;
             sh:path s223:hasAspect ],
         [ rdfs:comment "If the relation hasExternalReference is present it must associate the Property with an ExternalReference." ;
@@ -64564,20 +64587,7 @@ Enumerable properties must be associated with an EnumerationKind.
             sh:class s223:FunctionBlock ;
             sh:maxCount 1 ;
             sh:message "A Property can be associated with at most one FunctionBlock using the inverse relation hasOutput." ;
-            sh:path [ sh:inversePath s223:hasOutput ] ],
-        [ rdfs:comment "" ;
-            sh:path s223:ofSubstance ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "If an incoming relation hasConstituent exists, then the Property must have a declared substance using the relation ofSubstance." ;
-                    sh:message "Property {$this} is referred to by {?something} with s223:hasConstituent, but the Property has no value for s223:ofSubstance." ;
-                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
-                    sh:select """
-SELECT $this ?something
-WHERE {
-?something s223:hasConstituent $this .
-FILTER NOT EXISTS {$this s223:ofSubstance ?someSubstance} .
-}
-""" ] ] ;
+            sh:path [ sh:inversePath s223:hasOutput ] ] ;
     sh:sparql [ a sh:SPARQLConstraint ;
             rdfs:comment "A Property instance cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
             sh:message "{$this} cannot be declared an instance of both an ActuatableProperty and an ObservableProperty." ;
@@ -64979,7 +64989,7 @@ unit:RAD a qudt:DerivedUnit,
     qudt:dbpediaMatch "http://dbpedia.org/resource/Radian"^^xsd:anyURI ;
     qudt:definedUnitOfSystem sou:SI ;
     qudt:exactMatch unit:MilliARCSEC ;
-    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec07.html#7.10\">SP811 section7.10</a>"^^rdf:HTML ;
+    qudt:guidance "<p>See NIST section <a href=\"http://physics.nist.gov/Pubs/SP811/sec07.html#7.10\">SP811 section7.10</a></p>"^^rdf:HTML ;
     qudt:hasDimensionVector qkdv:A0E0L0I0M0H0T0D1 ;
     qudt:hasQuantityKind quantitykind:Angle,
         quantitykind:PlaneAngle ;
@@ -65015,7 +65025,21 @@ s223:Connectable a s223:Class,
     s223:abstract true ;
     rdfs:comment "Connectable is an abstract class representing a thing such as, Equipment (see `s223:Equipment`), DomainSpace (see `s223:DomainSpace`), or Junction (see `s223:Junction`) that can be connected via ConnectionPoints and Connections." ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "If the relation cnx is present it must associate the Connectable with a ConnectionPoint." ;
+    sh:property [ rdfs:comment "If a Connectable has s223:connected or s223:connectedTo (i.e. high-level connection specification), it must also have the supporting cnx relations (low-level connection specification)." ;
+            sh:path s223:cnx ;
+            sh:severity sh:Warning ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "If a Connectable has s223:connected or s223:connectedTo (i.e. high-level connection specification), it must also have the supporting cnx relations (low-level connection specification)." ;
+                    sh:message "{$this} is s223:connected (high-level) to {?otherC} but not connected at the cnx-level." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
+                    sh:select """
+SELECT $this ?otherC
+WHERE {
+$this s223:connected ?otherC .
+FILTER NOT EXISTS {$this s223:cnx+ ?otherC}
+}
+""" ] ],
+        [ rdfs:comment "If the relation cnx is present it must associate the Connectable with a ConnectionPoint." ;
             sh:class s223:ConnectionPoint ;
             sh:path s223:cnx ],
         [ rdfs:comment "If the relation connected is present it must associate the Connectable with a Connectable." ;
@@ -65036,32 +65060,7 @@ s223:Connectable a s223:Class,
         [ rdfs:comment "If the relation hasConnectionPoint is present it must associate the Connectable with a ConnectionPoint." ;
             sh:class s223:ConnectionPoint ;
             sh:name "EquipmentToConnectionPointShape" ;
-            sh:path s223:hasConnectionPoint ],
-        [ rdfs:comment "For a Connectable, cnx relation must associate the Connectable to a ConnectionPoint" ;
-            sh:path s223:cnx ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "A Connectable should only have a s223:cnx relation with a ConnectionPoint" ;
-                    sh:message "{$this} cannot have a s223:cnx relation to {?something}, because {?something} is not a ConnectionPoint." ;
-                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
-                    sh:select """SELECT $this ?something
-WHERE {
-$this s223:cnx ?something .
-FILTER NOT EXISTS {?something a/rdfs:subClassOf* s223:ConnectionPoint} .
-}""" ] ],
-        [ rdfs:comment "If a Connectable has s223:connected or s223:connectedTo (i.e. high-level connection specification), it must also have the supporting cnx relations (low-level connection specification)." ;
-            sh:path s223:cnx ;
-            sh:severity sh:Warning ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "If a Connectable has s223:connected or s223:connectedTo (i.e. high-level connection specification), it must also have the supporting cnx relations (low-level connection specification)." ;
-                    sh:message "{$this} is s223:connected (high-level) to {?otherC} but not connected at the cnx-level." ;
-                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
-                    sh:select """
-SELECT $this ?otherC
-WHERE {
-$this s223:connected ?otherC .
-FILTER NOT EXISTS {$this s223:cnx+ ?otherC}
-}
-""" ] ] ;
+            sh:path s223:hasConnectionPoint ] ;
     sh:rule [ a sh:SPARQLRule ;
             rdfs:comment "Infer the connected relation for BiDirectional connections" ;
             sh:construct """
@@ -65153,52 +65152,7 @@ ConnectionPoints are represented graphically in this standard by a triangle with
 
  """ ;
     rdfs:subClassOf s223:Concept ;
-    sh:property [ rdfs:comment "A ConnectionPoint must be associated with at most one Connectable using the cnx relation." ;
-            sh:message "A ConnectionPoint must be associated with at most one Connectable using the cnx relation." ;
-            sh:path s223:cnx ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:Connectable ] ;
-            sh:qualifiedValueShapesDisjoint true ],
-        [ rdfs:comment "A ConnectionPoint must be associated with at most one Connection using the cnx relation" ;
-            sh:message "A ConnectionPoint must be associated with at most one Connection using the cnx relation" ;
-            sh:path s223:cnx ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:class s223:Connection ] ;
-            sh:qualifiedValueShapesDisjoint true ],
-        [ rdfs:comment "A ConnectionPoint must be associated with at most one Connection using the relation connectsThrough." ;
-            sh:class s223:Connection ;
-            sh:maxCount 1 ;
-            sh:message "This ConnectionPoint must be associated with at most one Connection." ;
-            sh:name "ConnectionPointToConnectionShape" ;
-            sh:path s223:connectsThrough ;
-            sh:severity sh:Info ],
-        [ rdfs:comment "If the relation hasElectricalPhase is present it must associate the ConnectionPoint with an ElectricalPhaseIdentifier or ElectricalVoltagePhases." ;
-            sh:or ( [ sh:class s223:Aspect-ElectricalPhaseIdentifier ] [ sh:class s223:Aspect-ElectricalVoltagePhases ] ) ;
-            sh:path s223:hasElectricalPhase ],
-        [ rdfs:comment "A ConnectionPoint must be associated with exactly one Substance-Medium using the relation hasMedium." ;
-            sh:class s223:Substance-Medium ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:name "ConnectionPoint medium" ;
-            sh:path s223:hasMedium ],
-        [ rdfs:comment "If the relation hasRole is present it must associate the ConnectionPoint with an EnumerationKind-Role." ;
-            sh:class s223:EnumerationKind-Role ;
-            sh:path s223:hasRole ],
-        [ rdfs:comment "A ConnectionPoint must be associated with exactly one Connectable using the relation isConnectionPointOf." ;
-            sh:class s223:Connectable ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:name "ConnectionPointToEquipmentShape" ;
-            sh:path s223:isConnectionPointOf ],
-        [ rdfs:comment "A ConnectionPoint can be associated with at most one other ConnectionPoint using the relation mapsTo" ;
-            sh:class s223:ConnectionPoint ;
-            sh:maxCount 1 ;
-            sh:path s223:mapsTo ],
-        [ rdfs:comment "A ConnectionPoint can be associated with at most one other ConnectionPoint using the inverse of relation mapsTo" ;
-            sh:class s223:ConnectionPoint ;
-            sh:maxCount 1 ;
-            sh:path [ sh:inversePath s223:mapsTo ] ],
-        [ rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, and is not associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint probably needs an association with a Connection." ;
+    sh:property [ rdfs:comment "If a ConnectionPoint lacks a connectsThrough and mapsTo relation, and is not associated with a Junction or Equipment that is contained by an Equipment, then suggest that the ConnectionPoint probably needs an association with a Connection." ;
             sh:path s223:connectsThrough ;
             sh:severity sh:Info ;
             sh:sparql [ a sh:SPARQLConstraint ;
@@ -65278,7 +65232,52 @@ $this s223:mapsTo ?otherCP .
 ?otherEquipment s223:hasConnectionPoint ?otherCP .
 FILTER NOT EXISTS {?otherEquipment s223:contains ?equipment}
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "A ConnectionPoint must be associated with at most one Connectable using the cnx relation." ;
+            sh:message "A ConnectionPoint must be associated with at most one Connectable using the cnx relation." ;
+            sh:path s223:cnx ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:class s223:Connectable ] ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ rdfs:comment "A ConnectionPoint must be associated with at most one Connection using the cnx relation" ;
+            sh:message "A ConnectionPoint must be associated with at most one Connection using the cnx relation" ;
+            sh:path s223:cnx ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:class s223:Connection ] ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ rdfs:comment "A ConnectionPoint must be associated with at most one Connection using the relation connectsThrough." ;
+            sh:class s223:Connection ;
+            sh:maxCount 1 ;
+            sh:message "This ConnectionPoint must be associated with at most one Connection." ;
+            sh:name "ConnectionPointToConnectionShape" ;
+            sh:path s223:connectsThrough ;
+            sh:severity sh:Info ],
+        [ rdfs:comment "If the relation hasElectricalPhase is present it must associate the ConnectionPoint with an ElectricalPhaseIdentifier or ElectricalVoltagePhases." ;
+            sh:or ( [ sh:class s223:Aspect-ElectricalPhaseIdentifier ] [ sh:class s223:Aspect-ElectricalVoltagePhases ] ) ;
+            sh:path s223:hasElectricalPhase ],
+        [ rdfs:comment "A ConnectionPoint must be associated with exactly one Substance-Medium using the relation hasMedium." ;
+            sh:class s223:Substance-Medium ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "ConnectionPoint medium" ;
+            sh:path s223:hasMedium ],
+        [ rdfs:comment "If the relation hasRole is present it must associate the ConnectionPoint with an EnumerationKind-Role." ;
+            sh:class s223:EnumerationKind-Role ;
+            sh:path s223:hasRole ],
+        [ rdfs:comment "A ConnectionPoint must be associated with exactly one Connectable using the relation isConnectionPointOf." ;
+            sh:class s223:Connectable ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "ConnectionPointToEquipmentShape" ;
+            sh:path s223:isConnectionPointOf ],
+        [ rdfs:comment "A ConnectionPoint can be associated with at most one other ConnectionPoint using the relation mapsTo" ;
+            sh:class s223:ConnectionPoint ;
+            sh:maxCount 1 ;
+            sh:path s223:mapsTo ],
+        [ rdfs:comment "A ConnectionPoint can be associated with at most one other ConnectionPoint using the inverse of relation mapsTo" ;
+            sh:class s223:ConnectionPoint ;
+            sh:maxCount 1 ;
+            sh:path [ sh:inversePath s223:mapsTo ] ] .
 
 s223:DCVoltage-DCZeroVoltage a s223:Class,
         s223:DCVoltage-DCZeroVoltage,
@@ -66421,6 +66420,10 @@ FILTER (!bound (?otherClass)) .
 }
 """ ] .
 
+s223:cnx a s223:SymmetricProperty ;
+    rdfs:label "cnx" ;
+    rdfs:comment "The cnx relation is a symmetric property used to associate adjacent entities in a connection path (comprised of Equipment-ConnectionPoint-Connection-ConnectionPoint-Equipment sequences)." .
+
 qkdv:A0E0L-1I0M1H0T-1D0 a qudt:QuantityKindDimensionVector_CGS,
         qudt:QuantityKindDimensionVector_ISO,
         qudt:QuantityKindDimensionVector_Imperial,
@@ -66868,10 +66871,6 @@ unit:MilliM2 a qudt:Unit ;
     qudt:ucumCode "mm2"^^qudt:UCUMcs ;
     qudt:uneceCommonCode "MMK" ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> .
-
-s223:cnx a s223:SymmetricProperty ;
-    rdfs:label "cnx" ;
-    rdfs:comment "The cnx relation is a symmetric property used to associate adjacent entities in a connection path (comprised of Equipment-ConnectionPoint-Connection-ConnectionPoint-Equipment sequences)." .
 
 s223:observes a rdf:Property ;
     rdfs:label "observes" ;
@@ -68985,7 +68984,7 @@ unit:PlanckPressure a qudt:Unit ;
 
 unit:TORR a qudt:Unit ;
     rdfs:label "Torr"@en ;
-    dcterms:description "<p>The \\textit{torr} is a non-SI unit of pressure with the ratio of 760 to 1 standard atmosphere, chosen to be roughly equal to the fluid pressure exerted by a millimeter of mercury, i.e. , a pressure of 1 torr is approximately equal to one millimeter of mercury. Note that the symbol (Torr) is spelled exactly the same as the unit (torr), but the letter case differs. The unit is written lower-case, while the symbol of the unit (Torr) is capitalized (as upper-case), as is customary in metric units derived from names. Thus, it is correctly written either way, and is only incorrect when specification is first made that the word is being used as a unit, or else a symbol of the unit, and then the incorrect letter case for the specified use is employed."^^rdf:HTML ;
+    dcterms:description "<p>The \\textit{torr} is a non-SI unit of pressure with the ratio of 760 to 1 standard atmosphere, chosen to be roughly equal to the fluid pressure exerted by a millimeter of mercury, i.e. , a pressure of 1 torr is approximately equal to one millimeter of mercury. Note that the symbol (Torr) is spelled exactly the same as the unit (torr), but the letter case differs. The unit is written lower-case, while the symbol of the unit (Torr) is capitalized (as upper-case), as is customary in metric units derived from names. Thus, it is correctly written either way, and is only incorrect when specification is first made that the word is being used as a unit, or else a symbol of the unit, and then the incorrect letter case for the specified use is employed.</p>"^^rdf:HTML ;
     qudt:conversionMultiplier 133.322 ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/Torr"^^xsd:anyURI ;
     qudt:hasDimensionVector qkdv:A0E0L-1I0M1H0T-2D0 ;
@@ -69134,7 +69133,7 @@ unit:BARAD a qudt:Unit ;
 
 unit:BARYE a qudt:Unit ;
     rdfs:label "Barye"@en ;
-    dcterms:description "<p>The barye, or sometimes barad, barrie, bary, baryd, baryed, or barie, is the centimetre-gram-second (CGS) unit of pressure. It is equal to 1 dyne per square centimetre."^^rdf:HTML ;
+    dcterms:description "<p>The barye, or sometimes barad, barrie, bary, baryd, baryed, or barie, is the centimetre-gram-second (CGS) unit of pressure. It is equal to 1 dyne per square centimetre.</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:CGS ;
     qudt:conversionMultiplier 0.1 ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/Barye"^^xsd:anyURI ;
@@ -70567,7 +70566,7 @@ unit:TONNE a qudt:Unit ;
 unit:TON_LONG a qudt:Unit ;
     rdfs:label "Long Ton"@en ;
     dcterms:description """<p>Long ton (weight ton or imperial ton) is the name for the unit called the "ton" in the avoirdupois or Imperial system of measurements, as used in the United Kingdom and several other Commonwealth countries. One long ton is equal to 2,240 pounds (1,016 kg), 1.12 times as much as a short ton, or 35 cubic feet (0.9911 m3) of salt water with a density of 64 lb/ft3 (1.025 g/ml).</p>
-<p>It has some limited use in the United States, most commonly in measuring the displacement of ships, and was the unit prescribed for warships by the Washington Naval Treaty 1922-for example battleships were limited to a mass of 35,000 long tons (36,000 t; 39,000 short tons)."""^^rdf:HTML ;
+<p>It has some limited use in the United States, most commonly in measuring the displacement of ships, and was the unit prescribed for warships by the Washington Naval Treaty 1922-for example battleships were limited to a mass of 35,000 long tons (36,000 t; 39,000 short tons).</p>"""^^rdf:HTML ;
     qudt:applicableSystem sou:IMPERIAL ;
     qudt:conversionMultiplier 1016.0469088 ;
     qudt:definedUnitOfSystem sou:IMPERIAL ;
@@ -70602,7 +70601,7 @@ unit:TON_Metric a qudt:Unit ;
 
 unit:TON_SHORT a qudt:Unit ;
     rdfs:label "Short Ton"@en ;
-    dcterms:description "<p>The short ton is a unit of mass equal to 2,000 pounds (907.18474 kg). In the United States it is often called simply ton without distinguishing it from the metric ton (tonne, 1,000 kilograms / 2,204.62262 pounds) or the long ton (2,240 pounds / 1,016.0469088 kilograms); rather, the other two are specifically noted. There are, however, some U.S. applications for which unspecified tons normally means long tons."^^rdf:HTML ;
+    dcterms:description "<p>The short ton is a unit of mass equal to 2,000 pounds (907.18474 kg). In the United States it is often called simply ton without distinguishing it from the metric ton (tonne, 1,000 kilograms / 2,204.62262 pounds) or the long ton (2,240 pounds / 1,016.0469088 kilograms); rather, the other two are specifically noted. There are, however, some U.S. applications for which unspecified tons normally means long tons.</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:CGS,
         sou:USCS ;
     qudt:conversionMultiplier 907.18474 ;
@@ -71028,7 +71027,7 @@ unit:KiloW-HR a qudt:Unit ;
 unit:MegaTOE a qudt:Unit ;
     rdfs:label "Megaton of Oil Equivalent"@en ;
     dcterms:description """<p>The tonne of oil equivalent (toe) is a unit of energy: the amount of energy released by burning one tonne of crude oil, approximately 42 GJ (as different crude oils have different calorific values, the exact value of the toe is defined by convention; unfortunately there are several slightly different definitions as discussed below). The toe is sometimes used for large amounts of energy, as it can be more intuitive to visualise, say, the energy released by burning 1000 tonnes of oil than 42,000 billion joules (the SI unit of energy).</p>
-<p>Multiples of the toe are used, in particular the megatoe (Mtoe, one million toe) and the gigatoe (Gtoe, one billion toe)."""^^rdf:HTML ;
+<p>Multiples of the toe are used, in particular the megatoe (Mtoe, one million toe) and the gigatoe (Gtoe, one billion toe).</p>"""^^rdf:HTML ;
     qudt:applicableSystem sou:USCS ;
     qudt:conversionMultiplier 4.1868e+16 ;
     qudt:hasDimensionVector qkdv:A0E0L2I0M1H0T-2D0 ;
@@ -71165,7 +71164,7 @@ unit:QUAD a qudt:Unit ;
 
 unit:TOE a qudt:Unit ;
     rdfs:label "Ton of Oil Equivalent"@en ;
-    dcterms:description "<p>The tonne of oil equivalent (toe) is a unit of energy: the amount of energy released by burning one tonne of crude oil, approximately 42 GJ (as different crude oils have different calorific values, the exact value of the toe is defined by convention; unfortunately there are several slightly different definitions as discussed below). The toe is sometimes used for large amounts of energy, as it can be more intuitive to visualise, say, the energy released by burning 1000 tonnes of oil than 42,000 billion joules (the SI unit of energy). Multiples of the toe are used, in particular the megatoe (Mtoe, one million toe) and the gigatoe (Gtoe, one billion toe)."^^rdf:HTML ;
+    dcterms:description "<p>The tonne of oil equivalent (toe) is a unit of energy: the amount of energy released by burning one tonne of crude oil, approximately 42 GJ (as different crude oils have different calorific values, the exact value of the toe is defined by convention; unfortunately there are several slightly different definitions as discussed below). The toe is sometimes used for large amounts of energy, as it can be more intuitive to visualise, say, the energy released by burning 1000 tonnes of oil than 42,000 billion joules (the SI unit of energy). Multiples of the toe are used, in particular the megatoe (Mtoe, one million toe) and the gigatoe (Gtoe, one billion toe).</p>"^^rdf:HTML ;
     qudt:applicableSystem sou:USCS ;
     qudt:conversionMultiplier 4.1868e+10 ;
     qudt:definedUnitOfSystem sou:USCS ;
@@ -71888,10 +71887,7 @@ s223:InletConnectionPoint a s223:Class,
     rdfs:label "Inlet Connection Point" ;
     rdfs:comment "An InletConnectionPoint indicates that a substance must flow into the equipment or domain space at this connection point and cannot flow the other direction. An IntletConnectionPoint is a subclass of ConnectionPoint." ;
     rdfs:subClassOf s223:ConnectionPoint ;
-    sh:property [ rdfs:comment "If the relation mapsTo is present it must associate the InletConnectionPoint with an InletConnectionPoint." ;
-            sh:class s223:InletConnectionPoint ;
-            sh:path s223:mapsTo ],
-        [ rdfs:comment "Ensure an InletConnectionPoint has a mapsTo relation to its containing Equipment if it has an external Connection" ;
+    sh:property [ rdfs:comment "Ensure an InletConnectionPoint has a mapsTo relation to its containing Equipment if it has an external Connection" ;
             sh:path s223:mapsTo ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Ensure an InletConnectionPoint has a mapsTo relation to its containing Equipment if it has an external Connection" ;
@@ -71906,7 +71902,10 @@ $this s223:connectsThrough/s223:connectsFrom ?sourceEquipment .
 FILTER NOT EXISTS {?parentEquipment s223:contains ?sourceEquipment} .
 FILTER NOT EXISTS {$this s223:mapsTo ?anything} .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "If the relation mapsTo is present it must associate the InletConnectionPoint with an InletConnectionPoint." ;
+            sh:class s223:InletConnectionPoint ;
+            sh:path s223:mapsTo ] .
 
 unit:MegaEV a qudt:DerivedUnit,
         qudt:Unit ;
@@ -71933,10 +71932,7 @@ s223:OutletConnectionPoint a s223:Class,
     rdfs:label "Outlet Connection Point" ;
     rdfs:comment "An OutletConnectionPoint indicates that a substance must flow out of a Connectable (see 's223:Connectable') at this connection point and cannot flow in the other direction. An OutletConnectionPoint is a predefined subclass of ConnectionPoint." ;
     rdfs:subClassOf s223:ConnectionPoint ;
-    sh:property [ rdfs:comment "If the relation mapsTo is present it must associate the OutletConnectionPoint with an OutletConnectionPoint." ;
-            sh:class s223:OutletConnectionPoint ;
-            sh:path s223:mapsTo ],
-        [ rdfs:comment "Ensure an OutletConnectionPoint has a mapsTo relation to its containing Equipment if it has an external Connection" ;
+    sh:property [ rdfs:comment "Ensure an OutletConnectionPoint has a mapsTo relation to its containing Equipment if it has an external Connection" ;
             sh:path s223:mapsTo ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "Ensure an OutletConnectionPoint has a mapsTo relation to its containing Equipment if it has an external Connection" ;
@@ -71951,7 +71947,10 @@ $this s223:connectsThrough/s223:connectsTo ?destinationEquipment .
 FILTER NOT EXISTS {?parentEquipment s223:contains ?destinationEquipment} .
 FILTER NOT EXISTS {$this s223:mapsTo ?anything} .
 }
-""" ] ] .
+""" ] ],
+        [ rdfs:comment "If the relation mapsTo is present it must associate the OutletConnectionPoint with an OutletConnectionPoint." ;
+            sh:class s223:OutletConnectionPoint ;
+            sh:path s223:mapsTo ] .
 
 unit:U a qudt:Unit ;
     rdfs:label "Unified Atomic Mass Unit"@en ;
@@ -72051,12 +72050,15 @@ quantitykind:Volume a qudt:QuantityKind ;
 s223:Equipment a s223:Class,
         sh:NodeShape ;
     rdfs:label "Equipment" ;
-    rdfs:comment """An Equipment is the modeling construct used to represent a mechanical device designed to accomplish a specific task, 
-  or a complex device that contains component pieces of Equipment. Unlike a System, Equipment can have ConnectionPoints and participate 
-  in the flow of one or more kinds of Medium. Examples of possible equipment include a Pump, Fan, HeatExchanger, Luminaire, 
-  TemperatureSensor, FlowSensor or more complex examples such as a chilled water plant.
-  The graphical depiction of Equipment used in this standard is a rounded cornered rectangle as show in Figure 5-1.
-  ![Graphical Depiction of Equipment.](figures/Figure_5-1Graphical_Depiciton_of_Equipment.svg)""" ;
+    rdfs:comment """
+An Equipment is the modeling construct used to represent a mechanical device designed to accomplish a specific task, 
+or a complex device that contains component pieces of Equipment. Unlike a System, Equipment can have ConnectionPoints and participate 
+in the flow of one or more kinds of Medium. Examples of possible equipment include a Pump, Fan, HeatExchanger, Luminaire, 
+TemperatureSensor, FlowSensor or more complex examples such as a chilled water plant.
+The graphical depiction of Equipment used in this standard is a rounded cornered rectangle as show in Figure 5-1.
+
+![Graphical Depiction of Equipment.](figures/Figure_5-1Graphical_Depiciton_of_Equipment.svg)
+  """ ;
     rdfs:subClassOf s223:Connectable ;
     sh:property [ a sh:PropertyShape ;
             rdfs:comment "If the relation contains is present it must associate the Equipment with either Equipment or Junction." ;
@@ -72181,38 +72183,7 @@ s223:QuantifiableProperty a s223:Class,
     rdfs:comment "This class is for quantifiable values that describe an object (System, Equipment, etc.) that are typically static (hasValue). That is, they are neither measured nor specified in the course of operations." ;
     rdfs:subClassOf s223:Property,
         qudt:Quantity ;
-    sh:property [ rdfs:comment "A QuantifiableProperty can be associated with a decimal value using the relation hasValue." ;
-            sh:datatype xsd:decimal ;
-            sh:path s223:hasValue ],
-        [ rdfs:comment "A QuantifiableProperty must be associated with at least one QuantityKind using the relation hasQuantityKind." ;
-            sh:class qudt:QuantityKind ;
-            sh:minCount 1 ;
-            sh:path qudt:hasQuantityKind ],
-        [ rdfs:comment "A QuantifiableProperty must be associated with at least one Unit using the relation hasUnit." ;
-            sh:class qudt:Unit ;
-            sh:minCount 1 ;
-            sh:path qudt:hasUnit ;
-            sh:severity sh:Info ],
-        [ rdfs:comment "This QuantifiableProperty uses a different Unit than the Setpoint associated with it." ;
-            sh:path qudt:hasUnit ;
-            sh:severity sh:Info ;
-            sh:sparql [ a sh:SPARQLConstraint ;
-                    rdfs:comment "This QuantifiableProperty uses a different Unit than the Setpoint associated with it." ;
-                    sh:message "{$this} uses Unit {?punit}, while Setpoint {?setpoint} uses Unit {?sunit}. Be careful." ;
-                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
-                    sh:select """
-SELECT $this ?setpoint ?punit ?sunit
-WHERE {
-$this qudt:hasUnit ?punit .
-$this s223:hasSetpoint ?setpoint .
-?setpoint qudt:hasUnit ?sunit .
-?punit qudt:hasDimensionVector ?pdv .
-?sunit qudt:hasDimensionVector ?sdv .
-FILTER (?punit != ?sunit) .
-FILTER (?pdv = ?sdv) .
-}
-""" ] ],
-        [ rdfs:comment "This QuantifiableProperty and the Setpoint associated with it have non-commensurate QuantityKinds." ;
+    sh:property [ rdfs:comment "This QuantifiableProperty and the Setpoint associated with it have non-commensurate QuantityKinds." ;
             sh:path qudt:hasQuantityKind ;
             sh:sparql [ a sh:SPARQLConstraint ;
                     rdfs:comment "This QuantifiableProperty and the Setpoint associated with it have non-commensurate QuantityKinds." ;
@@ -72247,7 +72218,38 @@ $this s223:hasSetpoint ?setpoint .
 FILTER (?punit != ?sunit) .
 FILTER (?pdv != ?sdv) .
 }
-""" ] ] ;
+""" ] ],
+        [ rdfs:comment "This QuantifiableProperty uses a different Unit than the Setpoint associated with it." ;
+            sh:path qudt:hasUnit ;
+            sh:severity sh:Info ;
+            sh:sparql [ a sh:SPARQLConstraint ;
+                    rdfs:comment "This QuantifiableProperty uses a different Unit than the Setpoint associated with it." ;
+                    sh:message "{$this} uses Unit {?punit}, while Setpoint {?setpoint} uses Unit {?sunit}. Be careful." ;
+                    sh:prefixes <http://data.ashrae.org/standard223/1.0/model/all> ;
+                    sh:select """
+SELECT $this ?setpoint ?punit ?sunit
+WHERE {
+$this qudt:hasUnit ?punit .
+$this s223:hasSetpoint ?setpoint .
+?setpoint qudt:hasUnit ?sunit .
+?punit qudt:hasDimensionVector ?pdv .
+?sunit qudt:hasDimensionVector ?sdv .
+FILTER (?punit != ?sunit) .
+FILTER (?pdv = ?sdv) .
+}
+""" ] ],
+        [ rdfs:comment "A QuantifiableProperty can be associated with a decimal value using the relation hasValue." ;
+            sh:datatype xsd:decimal ;
+            sh:path s223:hasValue ],
+        [ rdfs:comment "A QuantifiableProperty must be associated with at least one QuantityKind using the relation hasQuantityKind." ;
+            sh:class qudt:QuantityKind ;
+            sh:minCount 1 ;
+            sh:path qudt:hasQuantityKind ],
+        [ rdfs:comment "A QuantifiableProperty must be associated with at least one Unit using the relation hasUnit." ;
+            sh:class qudt:Unit ;
+            sh:minCount 1 ;
+            sh:path qudt:hasUnit ;
+            sh:severity sh:Info ] ;
     sh:rule [ a sh:SPARQLRule ;
             rdfs:comment "Infer the hasQuantityKind relation if it is unambiguous." ;
             sh:construct """
@@ -72374,16 +72376,6 @@ quantitykind:Power a qudt:QuantityKind ;
         "p" ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/quantitykind> .
 
-s223:NumberOfElectricalPhases-SinglePhase a s223:Class,
-        s223:NumberOfElectricalPhases-SinglePhase,
-        sh:NodeShape ;
-    rdfs:label "Single Phase AC Electricity" ;
-    s223:hasValue 1.0 ;
-    qudt:hasQuantityKind quantitykind:Dimensionless ;
-    qudt:hasUnit unit:NUM ;
-    rdfs:comment "Single Phase AC Electricity" ;
-    rdfs:subClassOf s223:Numerical-NumberOfElectricalPhases .
-
 quantitykind:Time a qudt:QuantityKind ;
     rdfs:label "زمن"@ar,
         "Време"@bg,
@@ -72449,6 +72441,16 @@ quantitykind:Time a qudt:QuantityKind ;
     qudt:plainTextDescription "Time is a basic component of the measuring system used to sequence events, to compare the durations of events and the intervals between them, and to quantify the motions of objects." ;
     qudt:symbol "t" ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/quantitykind> .
+
+s223:NumberOfElectricalPhases-SinglePhase a s223:Class,
+        s223:NumberOfElectricalPhases-SinglePhase,
+        sh:NodeShape ;
+    rdfs:label "Single Phase AC Electricity" ;
+    s223:hasValue 1.0 ;
+    qudt:hasQuantityKind quantitykind:Dimensionless ;
+    qudt:hasUnit unit:NUM ;
+    rdfs:comment "Single Phase AC Electricity" ;
+    rdfs:subClassOf s223:Numerical-NumberOfElectricalPhases .
 
 unit:KiloGM a qudt:Unit ;
     rdfs:label "كيلوغرام"@ar,
@@ -73076,16 +73078,6 @@ unit:YD a qudt:Unit ;
     qudt:uneceCommonCode "YRD" ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> .
 
-s223:Frequency-60Hz a s223:Class,
-        s223:Frequency-60Hz,
-        sh:NodeShape ;
-    rdfs:label "60 Hertz" ;
-    s223:hasValue 60.0 ;
-    qudt:hasQuantityKind quantitykind:Frequency ;
-    qudt:hasUnit unit:HZ ;
-    rdfs:comment "60 Hertz" ;
-    rdfs:subClassOf s223:Numerical-Frequency .
-
 unit:FM a qudt:Unit ;
     rdfs:label "fermi"@en ;
     dcterms:description "The \\(\\textit{fermi}\\), or \\(\\textit{femtometer}\\) (other spelling \\(femtometre\\), symbol \\(fm\\)) is an SI unit of length equal to \\(10^{-15} metre\\). This distance is often encountered in nuclear physics as a characteristic of this scale. The symbol for the fermi is also \\(fm\\)."^^qudt:LatexString ;
@@ -73133,6 +73125,16 @@ unit:PlanckLength a qudt:Unit ;
     qudt:latexSymbol "\\(\\ell_P\\)"^^qudt:LatexString ;
     qudt:symbol "plancklength" ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> .
+
+s223:Frequency-60Hz a s223:Class,
+        s223:Frequency-60Hz,
+        sh:NodeShape ;
+    rdfs:label "60 Hertz" ;
+    s223:hasValue 60.0 ;
+    qudt:hasQuantityKind quantitykind:Frequency ;
+    qudt:hasUnit unit:HZ ;
+    rdfs:comment "60 Hertz" ;
+    rdfs:subClassOf s223:Numerical-Frequency .
 
 quantitykind:ForcePerArea a qudt:QuantityKind ;
     rdfs:label "Force Per Area"@en ;
@@ -73316,6 +73318,78 @@ unit:CentiM a qudt:DerivedUnit,
     qudt:uneceCommonCode "CMT" ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> .
 
+<http://data.ashrae.org/standard223/1.0/model/all> a owl:Ontology ;
+    owl:versionInfo "Created with TopBraid Composer" ;
+    sh:declare [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://data.ashrae.org/standard223/1.0/vocab/role#"^^xsd:anyURI ;
+            sh:prefix "role" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace "http://qudt.org/vocab/unit/"^^xsd:anyURI ;
+            sh:prefix "unit" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
+            sh:prefix "dcterms" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://qudt.org/vocab/dimensionvector/"^^xsd:anyURI ;
+            sh:prefix "qkdv" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
+            sh:prefix "quantitykind" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://qudt.org/vocab/unit/"^^xsd:anyURI ;
+            sh:prefix "unit" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+            sh:prefix "rdf" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+            sh:prefix "owl" ],
+        [ a sh:PrefixDeclaration ;
+            sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+            sh:prefix "skos" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
+            sh:prefix "quantitykind" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+            sh:prefix "rdf" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+            sh:prefix "sh" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ],
+        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
+            sh:prefix "qudt" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+            sh:prefix "sh" ],
+        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
+            sh:prefix "s223" ] .
+
 unit:NUM a qudt:CountingUnit,
         qudt:Unit ;
     rdfs:label "Number"@en ;
@@ -73353,78 +73427,6 @@ unit:NUM a qudt:CountingUnit,
     qudt:ucumCode "1"^^qudt:UCUMcs,
         "{#}"^^qudt:UCUMcs ;
     rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> .
-
-<http://data.ashrae.org/standard223/1.0/model/all> a owl:Ontology ;
-    owl:versionInfo "Created with TopBraid Composer" ;
-    sh:declare [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
-            sh:prefix "dcterms" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://qudt.org/vocab/dimensionvector/"^^xsd:anyURI ;
-            sh:prefix "qkdv" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
-            sh:prefix "quantitykind" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://qudt.org/vocab/unit/"^^xsd:anyURI ;
-            sh:prefix "unit" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
-            sh:prefix "rdf" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
-            sh:prefix "owl" ],
-        [ a sh:PrefixDeclaration ;
-            sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
-            sh:prefix "skos" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-            sh:prefix "sh" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
-            sh:prefix "quantitykind" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://data.ashrae.org/standard223/1.0/vocab/role#"^^xsd:anyURI ;
-            sh:prefix "role" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ],
-        [ sh:namespace "http://qudt.org/vocab/quantitykind/"^^xsd:anyURI ;
-            sh:prefix "qudtqk" ],
-        [ sh:namespace "http://qudt.org/vocab/unit/"^^xsd:anyURI ;
-            sh:prefix "unit" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://data.ashrae.org/standard223#"^^xsd:anyURI ;
-            sh:prefix "s223" ],
-        [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
-            sh:prefix "rdf" ],
-        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-            sh:prefix "sh" ],
-        [ sh:namespace "http://qudt.org/schema/qudt/"^^xsd:anyURI ;
-            sh:prefix "qudt" ] .
 
 unit:J a qudt:DerivedUnit,
         qudt:Unit ;
@@ -74838,7 +74840,7 @@ sou:CGS-GAUSS a qudt:SystemOfUnits ;
 
 sou:CGS a qudt:SystemOfUnits ;
     rdfs:label "CGS System of Units"@en ;
-    dcterms:description "<p>The centimetre-gram-second system (abbreviated CGS or cgs) is a variant of the metric system of physical units based on centimetre as the unit of length, gram as a unit of mass, and second as a unit of time. All CGS mechanical units are unambiguously derived from these three base units, but there are several different ways of extending the CGS system to cover electromagnetism. The CGS system has been largely supplanted by the MKS system, based on metre, kilogram, and second. Note that the term cgs is ambiguous, since there are several variants with conflicting definitions of electromagnetic quantities and units. The unqualified term is generally associated with the Gaussian system of units, so this more precise URI is preferred."^^rdf:HTML ;
+    dcterms:description "<p>The centimetre-gram-second system (abbreviated CGS or cgs) is a variant of the metric system of physical units based on centimetre as the unit of length, gram as a unit of mass, and second as a unit of time. All CGS mechanical units are unambiguously derived from these three base units, but there are several different ways of extending the CGS system to cover electromagnetism. The CGS system has been largely supplanted by the MKS system, based on metre, kilogram, and second. Note that the term cgs is ambiguous, since there are several variants with conflicting definitions of electromagnetic quantities and units. The unqualified term is generally associated with the Gaussian system of units, so this more precise URI is preferred.</p>"^^rdf:HTML ;
     qudt:abbreviation "CGS" ;
     qudt:dbpediaMatch "http://dbpedia.org/resource/Centimetre_gram_second_system_of_units"^^xsd:anyURI ;
     qudt:hasBaseUnit unit:CentiM,
