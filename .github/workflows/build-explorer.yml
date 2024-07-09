@@ -24,7 +24,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Clone RDF toolkit
-        run: git clone https://github.com/ektrah/rdf-toolkit
+        #run: git clone https://github.com/ektrah/rdf-toolkit
+        run: git clone https://github.com/KrishnanN27/rdf-toolkit
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
