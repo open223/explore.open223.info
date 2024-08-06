@@ -27,6 +27,9 @@
       "https://www.w3.org/2002/07/owl#Thing",
       "http://www.w3.org/2004/02/skos/core#Concept",
       "https://brickschema.org/schema/Brick#EntityProperty"
+    ],
+    "expand": [
+        "http://data.ashrae.org/standard223#Concept"
     ]
   }
 }
